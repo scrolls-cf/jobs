@@ -10,6 +10,10 @@ This directory holds **short, durable notes for AI coding agents** working in th
 2. **Open `goldpath/`** for vetted snippets and constraints tied to this codebase.
 3. **Prefer upstream `docs/`** for full references; use `patterns/` for **decisions already made here**.
 
+## Branding and product look-and-feel
+
+When the task is **branding**, **marketing UI**, **visual identity**, **design tokens**, or a **`DESIGN.md`** workflow, read **[`../docs/design-md-for-agents.md`](../docs/design-md-for-agents.md)** and **[`goldpath/design-md-brand-ui.md`](./goldpath/design-md-brand-ui.md)** before implementing user-visible chrome. This is mandatory agent context: [`.cursor/rules/consult-design-md-for-branding.mdc`](../.cursor/rules/consult-design-md-for-branding.mdc).
+
 ## Layout
 
 | Path | Agent use |
