@@ -45,7 +45,7 @@ Plain-text spec for this package’s **public HTML** (`public/index.html`) and *
 ## 7. Depth and motion
 
 - **Elevation:** `shadow-xl` on the shell; inner detail card uses `shadow-lg` + border for separation from the list.
-- **Motion:** `md+` uses short transitions on list **max-width / flex** when opening detail (see `src/styles/app.css` §master–detail). Respect **`prefers-reduced-motion`**: transitions disabled there. Any future GSAP must follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`.
+- **Motion:** `md+` uses short transitions on list **max-width / flex** when opening detail (see `.job-shell` rules in `src/styles/app.css`). Respect **`prefers-reduced-motion`**: transitions disabled there. Any future GSAP must follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`.
 
 ## 8. Do and do not
 
