@@ -2,6 +2,8 @@
 
 **Audience:** AI coding agents and maintainers. These files are what agents should **avoid** repeating. For the full tree map, read [`../README.md`](../README.md).
 
+**Rule:** after fixing a non-trivial bug or CI failure, add or update an entry here (paired with `../goldpath/`) per [`.cursor/rules/document-fixes-in-patterns.mdc`](../../.cursor/rules/document-fixes-in-patterns.mdc).
+
 Append entries when you encounter **incorrect, fragile, or misleading code** in this codebase or in examples you almost copied.
 
 ## Entry format

@@ -24,3 +24,5 @@ Content under `docs/` exists so **coding agents** (and humans) can **open the sm
 ## After substantive edits
 
 If the change implies reusable code shapes, follow `docs-derived-patterns.mdc` and add or update entries under `patterns/`.
+
+If you **fixed a bug, CI failure, or deploy issue** (even when `docs/` did not change), follow **`document-fixes-in-patterns.mdc`**: add paired **`patterns/errors/`** (what went wrong) and **`patterns/goldpath/`** (the fix other agents should follow).

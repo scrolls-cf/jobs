@@ -7,6 +7,8 @@ alwaysApply: true
 
 The `patterns/` tree is **not** general project documentation. It is a **compact playbook for AI agents** (and humans who edit agent context): **prefer / follow** in `patterns/goldpath/`, **reject / avoid** in `patterns/errors/`.
 
+**Mandatory:** when you fix a non-trivial bug or CI/deploy failure, log **both** the mistake (`patterns/errors/`) and the fix (`patterns/goldpath/`) per [`document-fixes-in-patterns.mdc`](../document-fixes-in-patterns.mdc).
+
 ## Before adding or editing pattern files
 
 1. Read [`patterns/README.md`](../../patterns/README.md) for layout, naming, and frontmatter.

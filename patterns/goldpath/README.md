@@ -2,6 +2,8 @@
 
 **Audience:** AI coding agents and maintainers. These files are what agents should **follow** (preferred stack, snippets, and repo-specific constraints). For the full tree map, read [`../README.md`](../README.md).
 
+**Rule:** when you land the fix for a non-trivial bug or CI failure, add or update the **solution** here (paired with `../errors/`) per [`.cursor/rules/document-fixes-in-patterns.mdc`](../../.cursor/rules/document-fixes-in-patterns.mdc).
+
 Append entries when you find **recommended patterns, canonical examples, or doc-aligned snippets** worth reusing in this project.
 
 ## Entry format

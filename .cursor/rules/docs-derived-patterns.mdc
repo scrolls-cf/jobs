@@ -12,3 +12,5 @@ Whenever you **add, generate, or materially update** content under `docs/` (pack
 3. **Write short pattern entries** under `patterns/goldpath/` or `patterns/errors/` when the lesson is likely to help future work—not every one-off snippet. Follow [`patterns/README.md`](../../patterns/README.md), the README in the target subfolder, and [`patterns-directory-for-agents.mdc`](./patterns-directory-for-agents.mdc); cite the source file under `docs/` and keep entries concise so other agents benefit without rereading long docs.
 
 This complements reading `docs/` for dependencies: documentation is the working surface; `patterns/` is the durable, agent-oriented index of **gold path** (follow) and **errors** (avoid) code patterns.
+
+Bug fixes, CI failures, and deploy issues **without** a `docs/` change still require the same promotion: follow [`document-fixes-in-patterns.mdc`](./document-fixes-in-patterns.mdc) and add paired **`patterns/errors/`** + **`patterns/goldpath/`** entries when the lesson is reusable.

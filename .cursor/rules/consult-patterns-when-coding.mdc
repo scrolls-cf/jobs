@@ -5,10 +5,12 @@ alwaysApply: true
 
 # Consult `patterns/` when coding
 
+**Mandatory rule:** after you fix a non-trivial bug or CI/deploy failure, add paired **`patterns/errors/`** + **`patterns/goldpath/`** entries — see [`document-fixes-in-patterns.mdc`](./document-fixes-in-patterns.mdc).
+
 When writing or editing application code in this directory, or when using packages declared for this project:
 
 0. Read [`patterns/README.md`](../../patterns/README.md) once per task if you have not recently — it defines **follow** (`goldpath/`) vs **avoid** (`errors/`) and naming conventions.
 1. Check `patterns/errors/` for known anti-patterns to avoid duplicating past mistakes (skim filenames and optional `topics:` frontmatter when present).
 2. Check `patterns/goldpath/` for preferred examples and doc-aligned snippets before inventing new patterns.
 
-After resolving a non-trivial bug or adopting a vetted pattern, add paired **`patterns/errors/`** + **`patterns/goldpath/`** entries when the lesson is reusable — see [`document-fixes-in-patterns.mdc`](./document-fixes-in-patterns.mdc) and [`patterns-directory-for-agents.mdc`](./patterns-directory-for-agents.mdc).
+When the lesson is reusable, follow [`patterns-directory-for-agents.mdc`](./patterns-directory-for-agents.mdc) and the **mandatory** logging rule in [`document-fixes-in-patterns.mdc`](./document-fixes-in-patterns.mdc).
