@@ -9,6 +9,7 @@
 | Goal | Read first |
 |------|------------|
 | JWT / JWE / JWKS on Workers (`jose`) | [jose-for-agents.md](./jose-for-agents.md) · [panva/jose](https://github.com/panva/jose) |
+| GSAP (animation, ScrollTrigger, timelines; client-side) | [gsap-for-agents.md](./gsap-for-agents.md) · skill index [gsap-skills-llms.txt](./gsap-skills-llms.txt) · [greensock/gsap-skills](https://github.com/greensock/gsap-skills) · [GSAP docs](https://gsap.com/docs/v3/) |
 | HTTP routing / middleware on Workers (`src/index.ts`) | [hono-for-agents.md](./hono-for-agents.md) · [hono.dev](https://hono.dev/) |
 | Wrangler / Workers (dev, deploy, bindings, typegen) | [cloudflare-workers-for-agents.md](./cloudflare-workers-for-agents.md) · [Get started — CLI](https://developers.cloudflare.com/workers/get-started/guide/) · [Workers llms.txt](https://developers.cloudflare.com/workers/llms.txt) |
 | Tailwind v4, Typography (`@tailwindcss/typography`, `prose`) | [tailwind-typography-for-agents.md](./tailwind-typography-for-agents.md) · [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography) · [npm](https://www.npmjs.com/package/@tailwindcss/typography) |
@@ -28,6 +29,7 @@ Start from [tailwind-typography-for-agents.md](./tailwind-typography-for-agents.
 ## Stack reference (short)
 
 - **Hono** — HTTP on Workers  
+- **GSAP** — browser animation (`gsap`) for `public/` client scripts; Cursor skills under `.cursor/skills/gsap-*`; [agent guide](./gsap-for-agents.md) · [greensock/gsap-skills](https://github.com/greensock/gsap-skills) · [GSAP docs](https://gsap.com/docs/v3/) · [greensock/GSAP](https://github.com/greensock/GSAP)  
 - **jose** — JWT / JWE / JWKS on Workers; [agent guide](./jose-for-agents.md) · [panva/jose](https://github.com/panva/jose)  
 - **Wrangler / Cloudflare Workers** — local dev, deploy, typegen, bindings; [agent guide](./cloudflare-workers-for-agents.md) · [CLI getting started](https://developers.cloudflare.com/workers/get-started/guide/) · [Workers llms.txt](https://developers.cloudflare.com/workers/llms.txt)  
 - **Tailwind + Vite, DaisyUI** — optional styling stack; [Typography agent guide](./tailwind-typography-for-agents.md) · [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography) · [npm](https://www.npmjs.com/package/@tailwindcss/typography)  

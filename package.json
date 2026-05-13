@@ -15,6 +15,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
+    "gsap": "^3.15.0",
     "hono": "^4.12.18",
     "jose": "^6.2.3"
   },
