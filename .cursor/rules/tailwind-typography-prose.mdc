@@ -1,0 +1,18 @@
+---
+description: Use Tailwind Typography prose for long-form HTML in public pages (dim theme)
+globs: public/**/*.html
+alwaysApply: false
+---
+
+# Tailwind Typography (`@tailwindcss/typography`)
+
+When adding or editing **multi-sentence** or **article-style** user-facing copy in `public/**/*.html` (modals, articles, help panels):
+
+1. Wrap that copy in **`prose prose-invert`** so the Typography plugin controls measure, rhythm, and element defaults. This package ships DaisyUI **`dim`** by default; **`prose-invert`** matches dark surfaces.
+2. Prefer **`prose-sm`** for modals and dense UI; use base **`prose`** or **`prose-lg`** only when the layout is intentionally reading-first.
+3. Add **`max-w-none`** when an outer container (for example a `modal-box` or `max-w-*` wrapper) already sets the line length, so `prose` does not introduce a conflicting max width.
+4. Adjust rhythm with Typography modifiers (for example **`prose-p:leading-relaxed`**, **`prose-p:text-base-content/90`**) instead of stacking ad-hoc `text-sm` / `leading-*` on every paragraph.
+5. Any **new** `prose-*` combination you introduce in HTML must be discoverable by the Tailwind CLI: extend **`src/styles/app.css`** with an **`@source inline("…")`** literal listing those classes, then run **`npm run build:css`**. See **`docs/tailwind-typography-for-agents.md`** and **`patterns/goldpath/tailwind-typography-v4-cli.md`**.
+6. Prefer semantic markup inside the prose region (**`<p>`**, **`<ul>`**, headings) so plugin defaults apply. A single long string is acceptable only for a true single paragraph.
+
+Short labels, buttons, and nav items **outside** a prose wrapper do not need the `prose` family.
