@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 
-import { type Job, JOBS } from './jobs-data'
+import { JOBS } from './jobs-data'
 
 const app = new Hono<{ Bindings: CloudflareBindings }>()
 
@@ -22,9 +22,8 @@ app.get('/api/jobs', (c) => {
  * - `{}` — all jobs
  * - `{ "id": "geo" }` — one job (404 if missing)
  * - `{ "ids": ["geo", "stripe"] }` — jobs with those ids (subset, order follows data)
- * - `{ "tags": ["rng", "billing"] }` — jobs that match any listed tag
  *
- * Priority when multiple fields are present: `id` → `ids` → `tags` → all.
+ * Priority when multiple fields are present: `id` → `ids` → all.
  */
 app.post('/api/jobs', async (c) => {
   const raw = await c.req.text()
@@ -60,25 +59,8 @@ app.post('/api/jobs', async (c) => {
     return c.json({ jobs })
   }
 
-  if (body.tags !== undefined) {
-    if (!Array.isArray(body.tags) || !body.tags.every((x) => typeof x === 'string')) {
-      return c.json({ error: 'tags must be an array of strings' }, 400)
-    }
-    const tags = body.tags as string[]
-    if (tags.length === 0) {
-      return c.json({ jobs: JOBS })
-    }
-    const jobs = JOBS.filter((j) => jobMatchesAnyTag(j, tags))
-    return c.json({ jobs })
-  }
-
   return c.json({ jobs: JOBS })
 })
-
-function jobMatchesAnyTag(job: Job, tags: string[]): boolean {
-  const jt = job.tags ?? []
-  return tags.some((t) => jt.includes(t))
-}
 
 /** Required: accepts a JSON request body. */
 app.post('/json/in', async (c) => {

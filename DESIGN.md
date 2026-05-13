@@ -12,7 +12,7 @@ Plain-text spec for this package’s **public HTML** (`public/index.html`) and *
 
 - **Theme:** `data-theme="dim"` on `<html>` (DaisyUI). Default palette = dim; `corporate` is registered for potential toggle, not used in shipped HTML unless explicitly added.
 - **Surfaces:** `bg-base-100` page, `bg-base-200` / `bg-base-200/80` cards and list; borders `border-base-content/5`–`/15`; rings `ring-primary/15`–`/40` for focus and modal frame.
-- **Accent:** `primary` for labels, spinner, badges, modal border/ring, radial hero wash (`color-mix` with primary).
+- **Accent:** `primary` for labels, spinner, job count badge outline, modal border/ring, radial hero wash (`color-mix` with primary).
 - **Content:** `text-base-content` hierarchy with opacity steps (`/60`, `/65`, `/75`, `/80`, `/90`) — no raw hex in new markup unless extending this file first.
 
 ## 3. Typography
@@ -25,9 +25,9 @@ Plain-text spec for this package’s **public HTML** (`public/index.html`) and *
 
 - **Splash / header:** centered logo cage `rounded-3xl`, dual ring visual (outer `border-primary/55`, inner `border-base-content/10` on board). Logo decorative `alt=""` with visible text in header.
 - **Job board:** `max-w-3xl` column; inner list `rounded-box`, `divide-y`, subtle `ring-1`.
-- **Job row:** full-row hit target; `focus-visible:ring-2`; tag overflow via “+N tags” control with `aria-expanded` / `aria-controls`.
-- **Modal:** native `<dialog id="job-detail">` + Daisy `modal` / `modal-box` / `modal-backdrop`; title `#job-detail-title`; close via dialog form + backdrop click outside box.
-- **Badges:** `badge-*` for tier and counts; keep tier → class mapping in one place (script), not scattered magic strings.
+- **Job row:** full-row hit target; `focus-visible:ring-2`; title + two-line summary only.
+- **Modal:** native `<dialog id="job-detail">` + Daisy `modal` / `modal-box` / `modal-backdrop`; title `#job-detail-title`; body `#job-detail-prose`; close via dialog form + backdrop click outside box.
+- **Job count:** `badge badge-neutral badge-outline` for the “N jobs” label only.
 
 ## 5. Layout and spacing
 
@@ -49,7 +49,7 @@ Plain-text spec for this package’s **public HTML** (`public/index.html`) and *
 
 ## 8. Responsive behavior
 
-- **Breakpoints:** `sm:` used for padding, gaps, logo size, tag column `sm:max-w-[min(100%,14rem)]`.
+- **Breakpoints:** `sm:` used for padding, gaps, and logo size on the hero.
 - **Modal:** usable on small viewports; `max-h` / `overflow-y-auto` on `modal-box` from Daisy defaults.
 
 ## 9. Agent prompt hints
