@@ -1,0 +1,13 @@
+---
+description: When designing branding, marketing UI, or product look-and-feel, read design-md digest and goldpath first
+alwaysApply: true
+---
+
+# Consult `design-md` guidance for branding work
+
+When the task involves **branding**, **marketing UI**, **visual identity**, **design tokens**, **DESIGN.md**, or **cohesive look-and-feel** (not only default Tailwind/DaisyUI wiring):
+
+1. Read **`docs/design-md-for-agents.md`** in this package.
+2. Read **`patterns/goldpath/design-md-brand-ui.md`** for the checklist (copy `DESIGN.md`, map tokens to CSS/Tailwind).
+
+Do not invent full palettes and type hierarchies from memory when the user expects reference-based or industry-aligned UI; follow the digest’s links and copy a `DESIGN.md` into the project when appropriate.
