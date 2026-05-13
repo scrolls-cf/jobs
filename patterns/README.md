@@ -12,7 +12,7 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 ## Branding and product look-and-feel
 
-When the task is **branding**, **marketing UI**, **visual identity**, **design tokens**, or a **`DESIGN.md`** workflow, read **[`../docs/design-md-for-agents.md`](../docs/design-md-for-agents.md)** and **[`goldpath/design-md-brand-ui.md`](./goldpath/design-md-brand-ui.md)** before implementing user-visible chrome. This is mandatory agent context: [`.cursor/rules/consult-design-md-for-branding.mdc`](../.cursor/rules/consult-design-md-for-branding.mdc).
+When the task is **branding**, **marketing UI**, **visual identity**, **design tokens**, or a **`DESIGN.md`** workflow, read repo-root **[`DESIGN.md`](../DESIGN.md)** (this app), then **[`../docs/design-md-for-agents.md`](../docs/design-md-for-agents.md)** and **[`goldpath/design-md-brand-ui.md`](./goldpath/design-md-brand-ui.md)** before implementing user-visible chrome. This is mandatory agent context: [`.cursor/rules/consult-design-md-for-branding.mdc`](../.cursor/rules/consult-design-md-for-branding.mdc).
 
 ## Layout
 

@@ -8,6 +8,7 @@
 
 | Goal | Read first |
 |------|------------|
+| **This app’s visual spec (jobs UI)** | [DESIGN.md](../DESIGN.md) · [design-md-for-agents.md](./design-md-for-agents.md) |
 | JWT / JWE / JWKS on Workers (`jose`) | [jose-for-agents.md](./jose-for-agents.md) · [panva/jose](https://github.com/panva/jose) |
 | GSAP (animation, ScrollTrigger, timelines; client-side) | [gsap-for-agents.md](./gsap-for-agents.md) · skill index [gsap-skills-llms.txt](./gsap-skills-llms.txt) · [greensock/gsap-skills](https://github.com/greensock/gsap-skills) · [GSAP docs](https://gsap.com/docs/v3/) |
 | HTTP routing / middleware on Workers (`src/index.ts`) | [hono-for-agents.md](./hono-for-agents.md) · [hono.dev](https://hono.dev/) |
@@ -34,6 +35,7 @@ Start from [tailwind-typography-for-agents.md](./tailwind-typography-for-agents.
 - **jose** — JWT / JWE / JWKS on Workers; [agent guide](./jose-for-agents.md) · [panva/jose](https://github.com/panva/jose)  
 - **Wrangler / Cloudflare Workers** — local dev, deploy, typegen, bindings; [agent guide](./cloudflare-workers-for-agents.md) · [CLI getting started](https://developers.cloudflare.com/workers/get-started/guide/) · [Workers llms.txt](https://developers.cloudflare.com/workers/llms.txt)  
 - **Tailwind + Vite, DaisyUI** — optional styling stack; [Typography agent guide](./tailwind-typography-for-agents.md) · [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography) · [npm](https://www.npmjs.com/package/@tailwindcss/typography)  
+- **Jobs surface / branding** — repo-root [DESIGN.md](../DESIGN.md); external references in [design-md-for-agents.md](./design-md-for-agents.md); motion and modal overrides in `src/styles/app.css`  
 
 When behavior depends on a dependency, **read or extend the matching `docs/` file before guessing APIs from memory.**
 

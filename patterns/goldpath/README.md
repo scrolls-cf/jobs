@@ -6,7 +6,7 @@
 
 Append entries when you find **recommended patterns, canonical examples, or doc-aligned snippets** worth reusing in this project.
 
-**Branding / marketing UI:** start from [`design-md-brand-ui.md`](./design-md-brand-ui.md) and the digest [`../../docs/design-md-for-agents.md`](../../docs/design-md-for-agents.md) (see [`.cursor/rules/consult-design-md-for-branding.mdc`](../../.cursor/rules/consult-design-md-for-branding.mdc)).
+**Branding / marketing UI:** start from repo-root [`DESIGN.md`](../../DESIGN.md) (this app), then [`design-md-brand-ui.md`](./design-md-brand-ui.md) and [`../../docs/design-md-for-agents.md`](../../docs/design-md-for-agents.md) (see [`.cursor/rules/consult-design-md-for-branding.mdc`](../../.cursor/rules/consult-design-md-for-branding.mdc)).
 
 ## Entry format
 
