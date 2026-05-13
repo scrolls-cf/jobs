@@ -1,0 +1,20 @@
+---
+description: When fixing bugs or CI failures, record lessons in patterns/errors and patterns/goldpath for other agents
+alwaysApply: true
+---
+
+# Document fixes in `patterns/` for other agents
+
+When you **diagnose and fix** a non-trivial bug, failed build, deploy issue, or integration mistake in **this package**, leave a trail so the next agent does not repeat it.
+
+## Do this in the same change set when practical
+
+1. **`patterns/errors/`** — Add or extend an entry for the **bad pattern or failure mode**: what broke, **why** (symptom, log class, or doc quote), and what **not** to do. No secrets, tokens, or PII.
+2. **`patterns/goldpath/`** — Add or extend an entry for the **preferred fix**: commands, config shape, or checklist agents should follow. Link the error entry from here (and vice versa) when they are a pair.
+
+Use **kebab-case** filenames, optional YAML frontmatter (`kind`, `topics`, `date`), and the bullet fields in [`patterns/errors/README.md`](../../patterns/errors/README.md) and [`patterns/goldpath/README.md`](../../patterns/goldpath/README.md). Follow [`patterns-directory-for-agents.mdc`](./patterns-directory-for-agents.mdc).
+
+## Skip pattern logging when
+
+- The fix is a trivial typo, formatting-only, or a one-off with no reusable lesson.
+- The insight belongs only in `docs/` as narrative prose with no agent decision — prefer `patterns/` when another agent at coding time would search for “how do we avoid X again?”.

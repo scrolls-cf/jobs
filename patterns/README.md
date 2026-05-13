@@ -1,6 +1,6 @@
 # Patterns (agent-oriented)
 
-This directory holds **short, durable notes for AI coding agents** working in this repo: what to **follow** (`goldpath/`) and what to **avoid** (`errors/`). Humans maintain it; agents should **read it before inventing** stack-specific setup or repeating fixed bugs.
+This directory holds **short, durable notes for AI coding agents** working in this repo: what to **follow** (`goldpath/`) and what to **avoid** (`errors/`). Humans maintain it; agents should **read it before inventing** stack-specific setup or repeating fixed bugs. When you fix a non-trivial error, capture it here (see [`.cursor/rules/document-fixes-in-patterns.mdc`](../.cursor/rules/document-fixes-in-patterns.mdc)).
 
 ## Navigate in three steps
 
