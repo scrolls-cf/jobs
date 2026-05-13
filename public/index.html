@@ -3,30 +3,326 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="scaffold worker" />
-    <title>scaffold</title>
+    <meta name="description" content="jobs board" />
+    <title>jobs</title>
     <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/app.css" />
   </head>
   <body class="bg-base-100 text-base-content antialiased">
     <main
-      class="relative flex min-h-screen flex-col items-center justify-center gap-12 overflow-hidden px-6 py-20"
+      class="relative flex min-h-screen flex-col items-center gap-10 overflow-hidden px-6 py-16 sm:py-20"
     >
       <div
         class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_oklab,var(--color-primary)_22%,transparent),transparent_55%)]"
         aria-hidden="true"
       ></div>
 
-      <div class="relative flex flex-col items-center gap-10">
+      <div class="relative z-10 flex w-full max-w-3xl flex-col items-center gap-8">
         <img
           src="/assets/logo.svg"
-          alt="scaffold"
+          alt="jobs"
           width="112"
           height="112"
           class="size-28 drop-shadow-lg sm:size-32"
           decoding="async"
         />
+
+        <section
+          id="job-board"
+          class="card card-border bg-base-100/80 w-full border-base-content/10 shadow-xl backdrop-blur-sm"
+          aria-label="Jobs"
+        >
+          <div class="card-body gap-4 p-5 sm:p-8">
+            <div class="flex justify-end">
+              <span id="job-count" class="badge badge-neutral badge-outline">…</span>
+            </div>
+
+            <div id="job-list-wrap">
+              <ul
+                id="job-list"
+                class="list-none divide-y divide-base-content/5 overflow-hidden rounded-box bg-base-200/80 ring-1 ring-base-content/5"
+                role="list"
+                hidden
+              ></ul>
+              <div
+                id="job-list-loading"
+                class="flex flex-col items-center justify-center gap-3 py-16"
+                aria-live="polite"
+              >
+                <span class="loading loading-spinner loading-lg text-primary"></span>
+                <p class="text-base-content/60 text-sm">Loading jobs…</p>
+              </div>
+              <div id="job-list-error" class="alert alert-error hidden text-sm" role="alert"></div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
+
+    <dialog id="job-detail" class="modal" aria-labelledby="job-detail-title">
+      <div class="modal-box relative max-w-lg border border-base-content/10 bg-base-200 shadow-xl">
+        <form method="dialog">
+          <button
+            type="submit"
+            class="btn btn-sm btn-circle btn-ghost text-base-content/70 absolute right-3 top-3"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </form>
+        <h2
+          id="job-detail-title"
+          class="pr-10 text-lg font-semibold uppercase leading-snug tracking-wide text-base-content"
+        ></h2>
+        <div
+          id="job-detail-reward"
+          class="mt-3 flex flex-wrap items-center gap-2 border-b border-base-content/10 pb-3"
+          hidden
+        ></div>
+        <div
+          id="job-detail-prose"
+          class="prose prose-invert prose-sm mt-4 max-w-none prose-p:leading-relaxed prose-p:text-base-content/90"
+        ></div>
+        <div id="job-detail-tags" class="mt-5 flex flex-wrap gap-1 border-t border-base-content/10 pt-4"></div>
+      </div>
+      <form method="dialog" class="modal-backdrop bg-base-content/50">
+        <button type="submit" class="absolute inset-0 cursor-default opacity-0" tabindex="-1">
+          Close
+        </button>
+      </form>
+    </dialog>
+
+    <template id="job-row-template">
+      <li
+        class="group list-none px-4 py-4 hover:bg-base-100/40 focus-visible:bg-base-100/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+        role="button"
+        tabindex="0"
+        data-job-row
+      >
+        <div class="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
+        <div class="flex min-w-0 flex-1 flex-col gap-1.5">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
+            <p
+              class="min-w-0 text-sm font-semibold uppercase leading-snug tracking-wide text-base-content"
+              data-title
+            ></p>
+            <div class="flex shrink-0 items-center gap-1" data-reward-wrap></div>
+          </div>
+          <p class="text-base-content/65 line-clamp-2 text-sm leading-snug" data-summary></p>
+        </div>
+          <div class="min-w-0 shrink-0 sm:max-w-[min(100%,14rem)] sm:pt-0.5" data-tags-wrap></div>
+        </div>
+      </li>
+    </template>
+
+    <script type="module">
+      const listEl = document.getElementById('job-list')
+      const countEl = document.getElementById('job-count')
+      const loadingEl = document.getElementById('job-list-loading')
+      const errorEl = document.getElementById('job-list-error')
+      const template = document.getElementById('job-row-template')
+      const dialogEl = document.getElementById('job-detail')
+      const modalTitle = document.getElementById('job-detail-title')
+      const modalReward = document.getElementById('job-detail-reward')
+      const modalProse = document.getElementById('job-detail-prose')
+      const modalTags = document.getElementById('job-detail-tags')
+
+      const MAX_INLINE_TAGS = 4
+
+      function showError(message) {
+        loadingEl.classList.add('hidden')
+        errorEl.textContent = message
+        errorEl.classList.remove('hidden')
+      }
+
+      function tierBadgeClass(tier) {
+        if (tier === 'critical') return 'badge-secondary'
+        if (tier === 'priority') return 'badge-primary badge-outline'
+        return 'badge-ghost'
+      }
+
+      function tierCaption(tier) {
+        if (tier === 'critical') return 'Critical path'
+        if (tier === 'priority') return 'Priority queue'
+        return 'Standard queue'
+      }
+
+      /**
+       * @param {HTMLElement} wrap
+       * @param {{ scrolls: number, tier: string } | undefined} reward
+       */
+      function mountRewardRow(wrap, reward) {
+        wrap.replaceChildren()
+        if (!reward || typeof reward.scrolls !== 'number') return
+        const s = document.createElement('span')
+        s.className = `badge badge-sm tabular-nums font-semibold ${tierBadgeClass(reward.tier)}`
+        s.textContent = String(reward.scrolls)
+        s.title = `${reward.scrolls} scrolls · ${tierCaption(reward.tier)}`
+        wrap.appendChild(s)
+      }
+
+      /**
+       * @param {HTMLElement} wrap
+       * @param {{ scrolls: number, tier: string } | undefined} reward
+       */
+      function mountRewardModal(wrap, reward) {
+        wrap.replaceChildren()
+        if (!reward || typeof reward.scrolls !== 'number') {
+          wrap.hidden = true
+          return
+        }
+        wrap.hidden = false
+        const main = document.createElement('span')
+        main.className = `badge badge-lg tabular-nums font-semibold ${tierBadgeClass(reward.tier)}`
+        main.textContent = `${reward.scrolls} scrolls`
+        const sub = document.createElement('span')
+        sub.className =
+          'text-xs font-medium uppercase tracking-wider text-base-content/60'
+        sub.textContent = tierCaption(reward.tier)
+        wrap.appendChild(main)
+        wrap.appendChild(sub)
+      }
+
+      /**
+       * @param {HTMLElement} wrap
+       * @param {string} text
+       */
+      function fillJobDetailProse(wrap, text) {
+        wrap.replaceChildren()
+        const body = (text ?? '').trim()
+        if (!body) return
+        const chunks = body.split(/\n\n+/).filter(Boolean)
+        for (const chunk of chunks.length ? chunks : [body]) {
+          const p = document.createElement('p')
+          p.textContent = chunk.trim()
+          wrap.appendChild(p)
+        }
+      }
+
+      function tagChip(label, extraClass = '') {
+        const el = document.createElement('span')
+        el.className =
+          `inline-flex max-w-full truncate rounded-md border border-base-content/12 bg-base-100/50 px-1.5 py-0.5 text-[0.6875rem] font-medium leading-tight text-base-content/75 ${extraClass}`.trim()
+        el.textContent = label
+        return el
+      }
+
+      /**
+       * @param {HTMLElement} wrap
+       * @param {string[]} tags
+       */
+      function mountTags(wrap, tags) {
+        wrap.replaceChildren()
+        const list = tags ?? []
+        if (list.length === 0) return
+
+        const row = document.createElement('div')
+        row.className = 'flex flex-wrap items-center gap-1'
+
+        const shown = list.slice(0, MAX_INLINE_TAGS)
+        const hidden = list.slice(MAX_INLINE_TAGS)
+        for (const t of shown) {
+          row.appendChild(tagChip(t))
+        }
+
+        if (hidden.length === 0) {
+          wrap.appendChild(row)
+          return
+        }
+
+        const panelId = `tag-panel-${Math.random().toString(36).slice(2, 9)}`
+        const moreBtn = document.createElement('button')
+        moreBtn.type = 'button'
+        moreBtn.dataset.tagToggle = ''
+        moreBtn.className =
+          'badge badge-sm h-6 shrink-0 border-0 bg-base-content/10 font-medium text-base-content/80 hover:bg-base-content/18'
+        moreBtn.setAttribute('aria-expanded', 'false')
+        moreBtn.setAttribute('aria-controls', panelId)
+        moreBtn.textContent = `+${hidden.length} tags`
+
+        const panel = document.createElement('div')
+        panel.id = panelId
+        panel.hidden = true
+        panel.className = 'mt-1.5 flex w-full flex-wrap gap-1 border-l-2 border-primary/35 pl-2'
+        for (const t of hidden) {
+          panel.appendChild(tagChip(t))
+        }
+
+        moreBtn.addEventListener('click', (e) => {
+          e.stopPropagation()
+          const open = panel.hidden
+          panel.hidden = !open
+          moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false')
+          moreBtn.textContent = open ? 'Hide tags' : `+${hidden.length} tags`
+        })
+
+        row.appendChild(moreBtn)
+        wrap.appendChild(row)
+        wrap.appendChild(panel)
+      }
+
+      /** @param {{ title: string, summary: string, detail?: string, tags?: string[], reward?: { scrolls: number, tier: string } }} job */
+      function openJobModal(job) {
+        modalTitle.textContent = job.title
+        mountRewardModal(modalReward, job.reward)
+        const longText = job.detail?.trim() ? job.detail : job.summary
+        fillJobDetailProse(modalProse, longText)
+        modalTags.replaceChildren()
+        for (const t of job.tags ?? []) {
+          modalTags.appendChild(tagChip(t, 'text-xs'))
+        }
+        dialogEl.showModal()
+      }
+
+      dialogEl.addEventListener('click', (e) => {
+        const box = dialogEl.querySelector('.modal-box')
+        if (box && !box.contains(e.target)) {
+          dialogEl.close()
+        }
+      })
+
+      function wireRow(li, job) {
+        const open = () => openJobModal(job)
+        li.addEventListener('click', (e) => {
+          if (e.target.closest('[data-tag-toggle]')) return
+          open()
+        })
+        li.addEventListener('keydown', (e) => {
+          if (e.target.closest('[data-tag-toggle]')) return
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            open()
+          }
+        })
+      }
+
+      try {
+        const res = await fetch('/api/jobs')
+        if (!res.ok) throw new Error(`Could not load jobs (${res.status})`)
+        const data = await res.json()
+        const jobs = data.jobs
+        if (!Array.isArray(jobs)) throw new Error('Invalid response')
+
+        countEl.textContent = `${jobs.length} jobs`
+        listEl.innerHTML = ''
+
+        for (const job of jobs) {
+          const node = template.content.cloneNode(true)
+          const li = node.querySelector('[data-job-row]')
+          li.dataset.jobId = job.id
+          node.querySelector('[data-title]').textContent = job.title
+          node.querySelector('[data-summary]').textContent = job.summary
+          mountRewardRow(node.querySelector('[data-reward-wrap]'), job.reward)
+          mountTags(node.querySelector('[data-tags-wrap]'), job.tags ?? [])
+          wireRow(li, job)
+          listEl.appendChild(li)
+        }
+
+        loadingEl.classList.add('hidden')
+        listEl.hidden = false
+      } catch (e) {
+        showError(e instanceof Error ? e.message : 'Something went wrong')
+      }
+    </script>
   </body>
 </html>
