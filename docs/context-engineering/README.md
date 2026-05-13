@@ -8,7 +8,7 @@ Context engineering is the discipline of curating what enters the model’s atte
 
 ## Refresh upstream content
 
-To update vendored skills, copy or download `SKILL.md` from [Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) (`skills/<skill-id>/SKILL.md`) into **both** `matrix/.cursor/skills/` and `scaffold/.cursor/skills/`, keeping the same directory layout.
+To update vendored skills, copy or download `SKILL.md` from [Agent-Skills-for-Context-Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) (`skills/<skill-id>/SKILL.md`) into **both** `scrollsmatrix/.cursor/skills/` and `scaffold/.cursor/skills/`, keeping the same directory layout.
 
 ## Skill index (progressive disclosure)
 

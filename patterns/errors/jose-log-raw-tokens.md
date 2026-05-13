@@ -7,7 +7,7 @@ date: "2026-05-13"
 # Do not log raw JWTs
 
 - **Date:** 2026-05-13  
-- **Source:** [docs/jose-for-agents.md](../../docs/jose-for-agents.md); see also [`../../../matrix/patterns/errors/jose-log-raw-tokens.md`](../../../matrix/patterns/errors/jose-log-raw-tokens.md)  
+- **Source:** [docs/jose-for-agents.md](../../docs/jose-for-agents.md); see also [`../../../scrollsmatrix/patterns/errors/jose-log-raw-tokens.md`](../../../scrollsmatrix/patterns/errors/jose-log-raw-tokens.md)  
 - **Topic:** jose, security  
 - **Wrong:** Logging full `Authorization` values, `Cf-Access-Jwt-Assertion`, or decoded claims blobs in production logs.  
 - **Why it fails:** Tokens are credentials; log aggregation widens blast radius.  

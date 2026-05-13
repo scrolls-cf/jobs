@@ -13,7 +13,7 @@ Use the upstream repo for API details; this file maps **this package** only.
 | Dependency | `package.json` → `jose` |
 | Application usage | *Not wired in `src/` yet* — add verification or signing where needed (e.g. Hono middleware). |
 
-For a **working Worker example** of Access-style JWT verification with `createRemoteJWKSet` + `jwtVerify`, see the sibling **Matrix** package: [`../../matrix/src/access.js`](../../matrix/src/access.js) and [`../../matrix/docs/jose-for-agents.md`](../../matrix/docs/jose-for-agents.md).
+For a **working Worker example** of Access-style JWT verification with `createRemoteJWKSet` + `jwtVerify`, see the sibling **scrollsmatrix** package: [`../../scrollsmatrix/src/access.js`](../../scrollsmatrix/src/access.js) and [`../../scrollsmatrix/docs/jose-for-agents.md`](../../scrollsmatrix/docs/jose-for-agents.md).
 
 ## Typical Worker usage
 

@@ -13,7 +13,7 @@ Content under `docs/` exists so **coding agents** (and humans) can **open the sm
 1. **`docs/README.md` is the hub** — task → doc table, short stack bullets, links only. Do not bury the only map inside a long page.
 2. **Subfolders need their own `README.md`** — 2–5 lines of “agent navigation” (parent link + what to open next), then detail.
 3. **Progressive disclosure** — index points to digests; digests point to upstream or huge mirrors; avoid duplicating the same API list in two files.
-4. **Stable relative links** — prefer `./file.md` and `../README.md` from the same package (`matrix/` or `scaffold/`).
+4. **Stable relative links** — prefer `./file.md` and `../README.md` from the same package (`scrollsmatrix/` or `scaffold/`).
 
 ## New files
 
