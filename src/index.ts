@@ -1,6 +1,11 @@
 import { Hono } from 'hono'
 
-import { JOBS } from './jobs-data'
+import { JOBS, WORKER_PLATFORM_CONTRACT } from './jobs-data'
+
+const jobsBoardPayload = () => ({
+  jobs: JOBS,
+  workerPlatformContract: WORKER_PLATFORM_CONTRACT,
+})
 
 const app = new Hono<{ Bindings: CloudflareBindings }>()
 
@@ -12,13 +17,14 @@ app.get('/health', (c) => {
   })
 })
 
-/** Full job board as JSON (same shape as POST with an empty filter). */
+/** Jobs plus `workerPlatformContract` (JSON I/O, /health, single-purpose, deploy gate, CI note). */
 app.get('/api/jobs', (c) => {
-  return c.json({ jobs: JOBS })
+  return c.json(jobsBoardPayload())
 })
 
 /**
- * JSON query for jobs. Body examples:
+ * JSON query for jobs. Response always includes `workerPlatformContract` (shared Worker rules).
+ * Body examples:
  * - `{}` — all jobs
  * - `{ "id": "geo" }` — one job (404 if missing)
  * - `{ "ids": ["geo", "stripe"] }` — jobs with those ids (subset, order follows data)
@@ -46,8 +52,10 @@ app.post('/api/jobs', async (c) => {
       return c.json({ error: 'id must be a non-empty string' }, 400)
     }
     const job = JOBS.find((j) => j.id === body.id)
-    if (!job) return c.json({ error: 'not_found', jobs: [] }, 404)
-    return c.json({ jobs: [job] })
+    if (!job) {
+      return c.json({ error: 'not_found', jobs: [], workerPlatformContract: WORKER_PLATFORM_CONTRACT }, 404)
+    }
+    return c.json({ jobs: [job], workerPlatformContract: WORKER_PLATFORM_CONTRACT })
   }
 
   if (body.ids !== undefined) {
@@ -56,10 +64,10 @@ app.post('/api/jobs', async (c) => {
     }
     const want = new Set(body.ids as string[])
     const jobs = JOBS.filter((j) => want.has(j.id))
-    return c.json({ jobs })
+    return c.json({ jobs, workerPlatformContract: WORKER_PLATFORM_CONTRACT })
   }
 
-  return c.json({ jobs: JOBS })
+  return c.json(jobsBoardPayload())
 })
 
 /** Required: accepts a JSON request body. */

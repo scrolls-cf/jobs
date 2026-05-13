@@ -100,7 +100,6 @@
 
     <script type="module">
       const shell = document.getElementById('job-shell')
-      const listColumn = document.getElementById('job-list-column')
       const listEl = document.getElementById('job-list')
       const countEl = document.getElementById('job-count')
       const loadingEl = document.getElementById('job-list-loading')
@@ -111,6 +110,9 @@
       const detailProse = document.getElementById('job-detail-prose')
       const closeBtn = document.getElementById('job-detail-close')
 
+      /** @type {Record<string, string> | null} */
+      let workerPlatformContract = null
+
       /** @type {HTMLElement | null} */
       let selectedRow = null
 
@@ -120,19 +122,129 @@
         errorEl.classList.remove('hidden')
       }
 
+      const CONTRACT_ORDER = ['jsonIO', 'health', 'singlePurpose', 'deployGate', 'ciNote']
+      const CONTRACT_TITLES = {
+        jsonIO: 'JSON in / JSON out',
+        health: 'Health endpoint',
+        singlePurpose: 'One Worker, one job',
+        deployGate: 'Deploy gate',
+        ciNote: 'Where tests run (TBD)',
+      }
+
+      /**
+       * @param {HTMLElement} el
+       * @param {string} text
+       */
+      function appendInlineWithBold(el, text) {
+        const parts = text.split(/\*\*(.+?)\*\*/g)
+        for (let i = 0; i < parts.length; i++) {
+          if (i % 2 === 1) {
+            const s = document.createElement('strong')
+            s.className = 'font-semibold text-base-content'
+            s.textContent = parts[i]
+            el.appendChild(s)
+          } else if (parts[i]) {
+            el.appendChild(document.createTextNode(parts[i]))
+          }
+        }
+      }
+
+      /**
+       * @param {HTMLElement} parent
+       * @param {string} text
+       */
+      function appendFormattedParagraph(parent, text) {
+        const p = document.createElement('p')
+        appendInlineWithBold(p, text)
+        parent.appendChild(p)
+      }
+
       /**
        * @param {HTMLElement} wrap
        * @param {string} text
        */
-      function fillJobDetailProse(wrap, text) {
-        wrap.replaceChildren()
+      function fillParagraphsFromDetail(wrap, text) {
         const body = (text ?? '').trim()
         if (!body) return
         const chunks = body.split(/\n\n+/).filter(Boolean)
         for (const chunk of chunks.length ? chunks : [body]) {
-          const p = document.createElement('p')
-          p.textContent = chunk.trim()
-          wrap.appendChild(p)
+          appendFormattedParagraph(wrap, chunk.trim())
+        }
+      }
+
+      /**
+       * @param {HTMLElement} container
+       * @param {{
+       *   title: string
+       *   summary: string
+       *   detail?: string
+       *   workerPurpose?: string
+       *   acceptanceTests?: { id: string; name: string; description: string }[]
+       * }} job
+       * @param {Record<string, string> | null} contract
+       */
+      function renderJobDetail(container, job, contract) {
+        container.replaceChildren()
+
+        const h3 = (label) => {
+          const el = document.createElement('h3')
+          el.className =
+            'mt-6 border-b border-base-content/10 pb-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-primary/90 first:mt-0'
+          el.textContent = label
+          return el
+        }
+
+        container.appendChild(h3('Worker purpose'))
+        appendFormattedParagraph(container, job.workerPurpose || job.summary)
+
+        if (contract && typeof contract === 'object') {
+          container.appendChild(h3('Platform contract (every Worker)'))
+          const ul = document.createElement('ul')
+          ul.className = 'list-disc space-y-2 pl-4 text-base-content/85'
+          for (const key of CONTRACT_ORDER) {
+            const raw = contract[key]
+            if (typeof raw !== 'string') continue
+            const li = document.createElement('li')
+            const title = CONTRACT_TITLES[key] || key
+            const lead = document.createElement('span')
+            lead.className = 'font-semibold text-base-content'
+            lead.textContent = `${title}. `
+            li.appendChild(lead)
+            appendInlineWithBold(li, raw)
+            ul.appendChild(li)
+          }
+          container.appendChild(ul)
+        }
+
+        container.appendChild(h3('Description'))
+        fillParagraphsFromDetail(container, job.detail || job.summary)
+
+        const tests = job.acceptanceTests
+        if (Array.isArray(tests) && tests.length > 0) {
+          container.appendChild(h3('Acceptance tests (must pass before deploy)'))
+          appendFormattedParagraph(
+            container,
+            'These are **mock** checks aligned to this job—wire them into CI before promoting any build that ships this Worker.',
+          )
+          const ol = document.createElement('ol')
+          ol.className = 'list-decimal space-y-3 pl-5 text-base-content/90'
+          for (const t of tests) {
+            const li = document.createElement('li')
+            li.className = 'marker:font-mono marker:text-base-content/50'
+            const name = document.createElement('span')
+            name.className = 'font-semibold text-base-content'
+            name.textContent = `${t.name}. `
+            li.appendChild(name)
+            appendInlineWithBold(li, t.description || '')
+            if (t.id) {
+              const id = document.createElement('div')
+              id.className = 'mt-1 font-mono text-[0.65rem] text-base-content/50'
+              id.textContent = `test id: ${t.id}`
+              li.appendChild(id)
+            }
+            ol.appendChild(li)
+          }
+          container.appendChild(ol)
         }
       }
 
@@ -149,7 +261,7 @@
         prev?.focus()
       }
 
-      /** @param {{ title: string, summary: string, detail?: string }} job @param {HTMLElement} li */
+      /** @param {object} job @param {HTMLElement} li */
       function openJobDetail(job, li) {
         if (selectedRow && selectedRow !== li) {
           selectedRow.setAttribute('aria-selected', 'false')
@@ -158,8 +270,7 @@
         li.setAttribute('aria-selected', 'true')
 
         detailTitle.textContent = job.title
-        const longText = job.detail?.trim() ? job.detail : job.summary
-        fillJobDetailProse(detailProse, longText)
+        renderJobDetail(detailProse, job, workerPlatformContract)
         panel.classList.remove('hidden')
         shell.dataset.detailOpen = 'true'
         detailTitle.focus({ preventScroll: false })
@@ -191,6 +302,11 @@
         const data = await res.json()
         const jobs = data.jobs
         if (!Array.isArray(jobs)) throw new Error('Invalid response')
+
+        workerPlatformContract =
+          data.workerPlatformContract && typeof data.workerPlatformContract === 'object'
+            ? data.workerPlatformContract
+            : null
 
         countEl.textContent = `${jobs.length} jobs`
         listEl.innerHTML = ''

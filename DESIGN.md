@@ -33,7 +33,7 @@ Plain-text spec for this package’s **public HTML** (`public/index.html`) and *
 - **Shell (`#job-shell`):** `max-w-6xl` master–detail container; `data-detail-open="true"` when a job is selected (drives layout CSS in `src/styles/app.css`).
 - **List column (`#job-list-column` / `.job-shell__list`):** count badge + `<ul role="list">`; rows are the only primary click targets before selection.
 - **Job row:** title + two-line summary; selected state as above.
-- **Detail (`#job-detail-panel`):** `role="region"` **`aria-labelledby="job-detail-title"`**; inner card is **sticky** on desktop so long copy scrolls inside the column, not the whole page.
+- **Detail (`#job-detail-panel`):** `role="region"` **`aria-labelledby="job-detail-title"`**; inner card is **sticky** on desktop so long copy scrolls inside the column, not the whole page. Content order: **Worker purpose** (one-sentence single-function scope) → **Platform contract** (shared bullets from `workerPlatformContract` in `/api/jobs`) → **Description** → **Acceptance tests** (numbered mocks; must pass before deploy; CI **runner TBD**).
 - **Job count:** `badge badge-neutral badge-outline` for the “N jobs” label only.
 
 ## 6. Layout and spacing
@@ -64,3 +64,14 @@ Plain-text spec for this package’s **public HTML** (`public/index.html`) and *
 
 - “Match jobs board” → dim theme, framed shell, list + right detail, no hero logo strip.
 - “Accessibility pass” → list `role="list"`, rows `role="button"` + keyboard + `aria-selected`, detail `role="region"` + labelled title, loading `aria-live="polite"`.
+
+## 11. Worker deliverable (platform alignment)
+
+Every job is expected to ship a **Cloudflare Worker** (or one clearly bounded Worker entrypoint) that:
+
+- Takes **JSON** on documented business routes (where a body is used) and returns **JSON** with `Content-Type: application/json`.
+- Exposes **`GET /health`** returning **200** and a small JSON body with **no side effects**.
+- Implements **only** the capability described for that job—no unrelated surfaces in the same deploy.
+- **Does not deploy to production** until the job’s **acceptance tests** are **green in CI** (exact pipeline and preview URL strategy **TBD**; contract is fixed in data + UI).
+
+Canonical copy of the shared rules lives in **`WORKER_PLATFORM_CONTRACT`** in `src/jobs-data.ts` and is returned as **`workerPlatformContract`** on **`GET /api/jobs`** (and filtered `POST /api/jobs` responses).
