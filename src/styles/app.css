@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@source "../../public/**/*.html";
+@plugin "@tailwindcss/typography";
+/* prose utilities used in markup are scanned from @source html; keep invert for dark theme */
+@source inline("prose prose-invert");
+@plugin "daisyui" {
+  themes:
+    dim --default,
+    corporate;
+}

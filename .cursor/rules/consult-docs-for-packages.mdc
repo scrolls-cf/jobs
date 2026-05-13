@@ -1,0 +1,10 @@
+---
+description: Consult project docs/ when using dependencies from this directory
+alwaysApply: true
+---
+
+# Consult `docs/` for packages in this repo
+
+Before implementing or refactoring code that depends on a library or CLI present in this project’s manifest (for example `package.json`), **start from `docs/README.md`**, then read the linked digest for that dependency. If no note exists yet for that package, skim official upstream documentation and add a concise digest under `docs/` when the knowledge will be reused.
+
+This applies when adding imports, configuring tools, or changing APIs tied to those packages.

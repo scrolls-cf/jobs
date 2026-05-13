@@ -1,0 +1,26 @@
+---
+description: Authoring and placement rules for patterns/ — agent-first follow vs avoid knowledge
+alwaysApply: true
+---
+
+# `patterns/` is for agents (follow vs avoid)
+
+The `patterns/` tree is **not** general project documentation. It is a **compact playbook for AI agents** (and humans who edit agent context): **prefer / follow** in `patterns/goldpath/`, **reject / avoid** in `patterns/errors/`.
+
+## Before adding or editing pattern files
+
+1. Read [`patterns/README.md`](../../patterns/README.md) for layout, naming, and frontmatter.
+2. Read [`patterns/goldpath/README.md`](../../patterns/goldpath/README.md) or [`patterns/errors/README.md`](../../patterns/errors/README.md) for the bullet fields each entry should use.
+
+## When creating a new pattern entry
+
+- Put **recommended, doc-aligned, or repo-canonical** guidance only under **`patterns/goldpath/`**.
+- Put **wrong approaches, deprecated configs, or corrected mistakes** only under **`patterns/errors/`** — include **why** it fails and **what to do instead** (link to `goldpath/` or `docs/`).
+- Use **kebab-case** filenames; prefer one focused topic per file.
+- Keep entries **short**; link to `docs/` or official docs instead of pasting long guides.
+- Prefer **optional YAML frontmatter** on new entries: `kind` (`goldpath` or `anti-pattern`), `topics` (lowercase tokens), `date` (ISO string). This helps agents search by topic without opening every file.
+
+## Do not
+
+- Do not duplicate entire `docs/` pages into `patterns/` — extract only the decision or snippet agents need at coding time.
+- Do not log secrets, tokens, or PII in `patterns/errors/`.

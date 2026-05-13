@@ -1,0 +1,26 @@
+---
+description: Author and structure docs/ for agent retrieval (indexes, task tables, progressive disclosure)
+globs: **/docs/**/*.md
+alwaysApply: false
+---
+
+# `docs/` is agent-oriented documentation
+
+Content under `docs/` exists so **coding agents** (and humans) can **open the smallest right file** without reading everything. When you **add or edit** any markdown here:
+
+## Required shape
+
+1. **`docs/README.md` is the hub** — task → doc table, short stack bullets, links only. Do not bury the only map inside a long page.
+2. **Subfolders need their own `README.md`** — 2–5 lines of “agent navigation” (parent link + what to open next), then detail.
+3. **Progressive disclosure** — index points to digests; digests point to upstream or huge mirrors; avoid duplicating the same API list in two files.
+4. **Stable relative links** — prefer `./file.md` and `../README.md` from the same package (`matrix/` or `scaffold/`).
+
+## New files
+
+- **Name:** `kebab-case.md`; optional `*-for-agents.md` for agent-first digests (see `hono-for-agents.md`).
+- **Top of file:** one line **Purpose** or **When to read this** so an agent can bail out in 10 seconds.
+- **Large dumps:** one canonical file + in the hub README a line on **how to search** (keywords, sections), not a second full copy.
+
+## After substantive edits
+
+If the change implies reusable code shapes, follow `docs-derived-patterns.mdc` and add or update entries under `patterns/`.

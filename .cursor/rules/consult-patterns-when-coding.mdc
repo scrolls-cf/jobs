@@ -1,0 +1,14 @@
+---
+description: Consult patterns/ when writing code or using packages in this directory
+alwaysApply: true
+---
+
+# Consult `patterns/` when coding
+
+When writing or editing application code in this directory, or when using packages declared for this project:
+
+0. Read [`patterns/README.md`](../../patterns/README.md) once per task if you have not recently — it defines **follow** (`goldpath/`) vs **avoid** (`errors/`) and naming conventions.
+1. Check `patterns/errors/` for known anti-patterns to avoid duplicating past mistakes (skim filenames and optional `topics:` frontmatter when present).
+2. Check `patterns/goldpath/` for preferred examples and doc-aligned snippets before inventing new patterns.
+
+After resolving a non-trivial bug or adopting a vetted pattern, append a short entry to the appropriate folder so future sessions benefit; follow [`patterns-directory-for-agents.mdc`](./patterns-directory-for-agents.mdc).
