@@ -3,36 +3,64 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="jobs board" />
-    <title>jobs</title>
+    <meta name="description" content="scrollsmatrix jobs board" />
+    <title>jobs · scrollsmatrix</title>
     <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/app.css" />
   </head>
   <body class="bg-base-100 text-base-content antialiased">
     <main
-      class="relative flex min-h-screen flex-col items-center gap-10 overflow-hidden px-6 py-16 sm:py-20"
+      data-jobs-root
+      class="relative flex min-h-screen flex-col items-center justify-center gap-12 overflow-hidden px-6 py-16 sm:gap-14 sm:py-20"
     >
       <div
         class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_oklab,var(--color-primary)_22%,transparent),transparent_55%)]"
         aria-hidden="true"
       ></div>
 
-      <div class="relative z-10 flex w-full max-w-3xl flex-col items-center gap-8">
-        <img
-          src="/assets/logo.svg"
-          alt="jobs"
-          width="112"
-          height="112"
-          class="size-28 drop-shadow-lg sm:size-32"
-          decoding="async"
-        />
-
-        <section
-          id="job-board"
-          class="card card-border bg-base-100/80 w-full border-base-content/10 shadow-xl backdrop-blur-sm"
-          aria-label="Jobs"
+      <div class="relative z-10 flex w-full max-w-3xl flex-col items-center gap-10">
+        <header
+          class="flex flex-col items-center gap-3 text-center"
+          aria-label="scrollsmatrix jobs"
         >
-          <div class="card-body gap-4 p-5 sm:p-8">
+          <div
+            class="splash-cage relative flex h-44 w-44 items-center justify-center will-change-transform sm:h-48 sm:w-48"
+          >
+            <div
+              class="splash-ring pointer-events-none absolute inset-0 rounded-3xl border-2 border-primary/55 bg-base-100/10 shadow-[inset_0_0_48px_color-mix(in_oklab,var(--color-primary)_12%,transparent),0_0_0_1px_color-mix(in_oklab,var(--color-base-100)_40%,transparent)] will-change-transform"
+              aria-hidden="true"
+            ></div>
+            <div
+              class="splash-clip absolute inset-[3px] flex items-center justify-center overflow-hidden rounded-[calc(1.5rem-3px)] will-change-transform"
+            >
+              <img
+                src="/assets/logo.svg"
+                alt=""
+                width="112"
+                height="112"
+                class="splash-logo relative z-10 size-24 drop-shadow-[0_0_24px_color-mix(in_oklab,var(--color-primary)_30%,transparent)] will-change-transform sm:size-28"
+                decoding="async"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+          <div class="space-y-0.5">
+            <p class="text-sm font-medium lowercase tracking-wide text-base-content/80">scrollsmatrix</p>
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-primary/90">jobs</p>
+          </div>
+        </header>
+
+        <div class="relative w-full">
+          <div
+            class="pointer-events-none absolute inset-0 rounded-3xl border-2 border-primary/55 bg-base-100/10 shadow-[inset_0_0_48px_color-mix(in_oklab,var(--color-primary)_12%,transparent),0_0_0_1px_color-mix(in_oklab,var(--color-base-100)_40%,transparent)]"
+            aria-hidden="true"
+          ></div>
+          <section
+            id="job-board"
+            class="relative m-[3px] rounded-[calc(1.5rem-3px)] border border-base-content/10 bg-base-200/90 shadow-xl backdrop-blur-sm"
+            aria-label="Jobs"
+          >
+            <div class="flex flex-col gap-4 p-5 sm:p-8">
             <div class="flex justify-end">
               <span id="job-count" class="badge badge-neutral badge-outline">…</span>
             </div>
@@ -54,13 +82,16 @@
               </div>
               <div id="job-list-error" class="alert alert-error hidden text-sm" role="alert"></div>
             </div>
-          </div>
-        </section>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
 
     <dialog id="job-detail" class="modal" aria-labelledby="job-detail-title">
-      <div class="modal-box relative max-w-lg border border-base-content/10 bg-base-200 shadow-xl">
+      <div
+        class="modal-box relative max-w-lg border border-primary/25 bg-base-200 shadow-xl ring-1 ring-primary/15"
+      >
         <form method="dialog">
           <button
             type="submit"
