@@ -11,56 +11,19 @@
   <body class="bg-base-100 text-base-content antialiased">
     <main
       data-jobs-root
-      class="relative flex min-h-screen flex-col items-center justify-center gap-12 overflow-hidden px-6 py-16 sm:gap-14 sm:py-20"
+      class="min-h-screen px-4 py-6 sm:px-6 lg:px-8 lg:py-10"
+      aria-label="Jobs"
     >
       <div
-        class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_oklab,var(--color-primary)_22%,transparent),transparent_55%)]"
-        aria-hidden="true"
-      ></div>
-
-      <div class="relative z-10 flex w-full max-w-3xl flex-col items-center gap-10">
-        <header
-          class="flex flex-col items-center gap-3 text-center"
-          aria-label="scrollsmatrix jobs"
+        id="job-shell"
+        class="job-shell mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-stretch md:gap-0 md:rounded-2xl md:border md:border-base-content/10 md:bg-base-200/50 md:shadow-xl md:backdrop-blur-sm"
+        data-detail-open="false"
+      >
+        <div
+          id="job-list-column"
+          class="job-shell__list min-w-0 flex-1 md:m-[3px] md:rounded-[calc(1rem-3px)] md:border md:border-base-content/5 md:bg-base-200/80 md:p-5 md:shadow-inner lg:p-6"
         >
-          <div
-            class="splash-cage relative flex h-44 w-44 items-center justify-center will-change-transform sm:h-48 sm:w-48"
-          >
-            <div
-              class="splash-ring pointer-events-none absolute inset-0 rounded-3xl border-2 border-primary/55 bg-base-100/10 shadow-[inset_0_0_48px_color-mix(in_oklab,var(--color-primary)_12%,transparent),0_0_0_1px_color-mix(in_oklab,var(--color-base-100)_40%,transparent)] will-change-transform"
-              aria-hidden="true"
-            ></div>
-            <div
-              class="splash-clip absolute inset-[3px] flex items-center justify-center overflow-hidden rounded-[calc(1.5rem-3px)] will-change-transform"
-            >
-              <img
-                src="/assets/logo.svg"
-                alt=""
-                width="112"
-                height="112"
-                class="splash-logo relative z-10 size-24 drop-shadow-[0_0_24px_color-mix(in_oklab,var(--color-primary)_30%,transparent)] will-change-transform sm:size-28"
-                decoding="async"
-                aria-hidden="true"
-              />
-            </div>
-          </div>
-          <div class="space-y-0.5">
-            <p class="text-sm font-medium lowercase tracking-wide text-base-content/80">scrollsmatrix</p>
-            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-primary/90">jobs</p>
-          </div>
-        </header>
-
-        <div class="relative w-full">
-          <div
-            class="pointer-events-none absolute inset-0 rounded-3xl border-2 border-primary/55 bg-base-100/10 shadow-[inset_0_0_48px_color-mix(in_oklab,var(--color-primary)_12%,transparent),0_0_0_1px_color-mix(in_oklab,var(--color-base-100)_40%,transparent)]"
-            aria-hidden="true"
-          ></div>
-          <section
-            id="job-board"
-            class="relative m-[3px] rounded-[calc(1.5rem-3px)] border border-base-content/10 bg-base-200/90 shadow-xl backdrop-blur-sm"
-            aria-label="Jobs"
-          >
-            <div class="flex flex-col gap-4 p-5 sm:p-8">
+          <section id="job-board" class="flex flex-col gap-4" aria-label="Job list">
             <div class="flex justify-end">
               <span id="job-count" class="badge badge-neutral badge-outline">…</span>
             </div>
@@ -68,8 +31,9 @@
             <div id="job-list-wrap">
               <ul
                 id="job-list"
-                class="list-none divide-y divide-base-content/5 overflow-hidden rounded-box bg-base-200/80 ring-1 ring-base-content/5"
+                class="list-none divide-y divide-base-content/5 overflow-hidden rounded-box bg-base-200/80 ring-1 ring-base-content/5 md:bg-base-200/60"
                 role="list"
+                aria-label="Open jobs"
                 hidden
               ></ul>
               <div
@@ -82,46 +46,46 @@
               </div>
               <div id="job-list-error" class="alert alert-error hidden text-sm" role="alert"></div>
             </div>
-            </div>
           </section>
         </div>
+
+        <aside
+          id="job-detail-panel"
+          class="job-shell__detail mt-4 hidden min-h-0 w-full min-w-0 border-base-content/10 border-t pt-1 md:mt-0 md:border-t-0 md:border-l md:bg-base-200/40 md:pt-0"
+          aria-labelledby="job-detail-title"
+          role="region"
+        >
+          <div class="sticky top-4 flex max-h-[min(70vh,calc(100vh-2rem))] flex-col gap-3 overflow-y-auto rounded-box border border-base-content/10 bg-base-200/90 p-4 shadow-lg md:top-6 md:m-3 md:max-h-[calc(100vh-3rem)] md:rounded-xl md:p-5">
+            <div class="flex items-start justify-between gap-2">
+              <h2
+                id="job-detail-title"
+                tabindex="-1"
+                class="min-w-0 flex-1 text-base font-semibold uppercase leading-snug tracking-wide text-base-content sm:text-lg"
+              ></h2>
+              <button
+                type="button"
+                id="job-detail-close"
+                class="btn btn-sm btn-ghost shrink-0 text-base-content/70"
+                aria-label="Close job details"
+              >
+                Close
+              </button>
+            </div>
+            <div
+              id="job-detail-prose"
+              class="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-p:text-base-content/90"
+            ></div>
+          </div>
+        </aside>
       </div>
     </main>
 
-    <dialog id="job-detail" class="modal" aria-labelledby="job-detail-title">
-      <div
-        class="modal-box relative max-w-lg border border-primary/25 bg-base-200 shadow-xl ring-1 ring-primary/15"
-      >
-        <form method="dialog">
-          <button
-            type="submit"
-            class="btn btn-sm btn-circle btn-ghost text-base-content/70 absolute right-3 top-3"
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </form>
-        <h2
-          id="job-detail-title"
-          class="pr-10 text-lg font-semibold uppercase leading-snug tracking-wide text-base-content"
-        ></h2>
-        <div
-          id="job-detail-prose"
-          class="prose prose-invert prose-sm mt-4 max-w-none prose-p:leading-relaxed prose-p:text-base-content/90"
-        ></div>
-      </div>
-      <form method="dialog" class="modal-backdrop bg-base-content/50">
-        <button type="submit" class="absolute inset-0 cursor-default opacity-0" tabindex="-1">
-          Close
-        </button>
-      </form>
-    </dialog>
-
     <template id="job-row-template">
       <li
-        class="group list-none px-4 py-4 hover:bg-base-100/40 focus-visible:bg-base-100/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+        class="job-row group cursor-pointer list-none px-4 py-4 outline-none transition-colors hover:bg-base-100/40 focus-visible:bg-base-100/40 focus-visible:ring-2 focus-visible:ring-primary/40 aria-selected:bg-primary/[0.12] aria-selected:border-l-2 aria-selected:border-primary"
         role="button"
         tabindex="0"
+        aria-selected="false"
         data-job-row
       >
         <div class="flex min-w-0 flex-col gap-1.5">
@@ -135,14 +99,20 @@
     </template>
 
     <script type="module">
+      const shell = document.getElementById('job-shell')
+      const listColumn = document.getElementById('job-list-column')
       const listEl = document.getElementById('job-list')
       const countEl = document.getElementById('job-count')
       const loadingEl = document.getElementById('job-list-loading')
       const errorEl = document.getElementById('job-list-error')
       const template = document.getElementById('job-row-template')
-      const dialogEl = document.getElementById('job-detail')
-      const modalTitle = document.getElementById('job-detail-title')
-      const modalProse = document.getElementById('job-detail-prose')
+      const panel = document.getElementById('job-detail-panel')
+      const detailTitle = document.getElementById('job-detail-title')
+      const detailProse = document.getElementById('job-detail-prose')
+      const closeBtn = document.getElementById('job-detail-close')
+
+      /** @type {HTMLElement | null} */
+      let selectedRow = null
 
       function showError(message) {
         loadingEl.classList.add('hidden')
@@ -166,28 +136,51 @@
         }
       }
 
-      /** @param {{ title: string, summary: string, detail?: string }} job */
-      function openJobModal(job) {
-        modalTitle.textContent = job.title
-        const longText = job.detail?.trim() ? job.detail : job.summary
-        fillJobDetailProse(modalProse, longText)
-        dialogEl.showModal()
+      function clearSelection() {
+        const prev = selectedRow
+        if (selectedRow) {
+          selectedRow.setAttribute('aria-selected', 'false')
+          selectedRow = null
+        }
+        panel.classList.add('hidden')
+        shell.dataset.detailOpen = 'false'
+        detailTitle.textContent = ''
+        detailProse.replaceChildren()
+        prev?.focus()
       }
 
-      dialogEl.addEventListener('click', (e) => {
-        const box = dialogEl.querySelector('.modal-box')
-        if (box && !box.contains(e.target)) {
-          dialogEl.close()
+      /** @param {{ title: string, summary: string, detail?: string }} job @param {HTMLElement} li */
+      function openJobDetail(job, li) {
+        if (selectedRow && selectedRow !== li) {
+          selectedRow.setAttribute('aria-selected', 'false')
+        }
+        selectedRow = li
+        li.setAttribute('aria-selected', 'true')
+
+        detailTitle.textContent = job.title
+        const longText = job.detail?.trim() ? job.detail : job.summary
+        fillJobDetailProse(detailProse, longText)
+        panel.classList.remove('hidden')
+        shell.dataset.detailOpen = 'true'
+        detailTitle.focus({ preventScroll: false })
+      }
+
+      closeBtn.addEventListener('click', () => clearSelection())
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && shell.dataset.detailOpen === 'true') {
+          e.preventDefault()
+          clearSelection()
         }
       })
 
       function wireRow(li, job) {
-        const open = () => openJobModal(job)
-        li.addEventListener('click', open)
+        const activate = () => openJobDetail(job, li)
+        li.addEventListener('click', activate)
         li.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()
-            open()
+            activate()
           }
         })
       }
