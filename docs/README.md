@@ -15,7 +15,7 @@
 | Tailwind v4, Typography (`@tailwindcss/typography`, `prose`) | [tailwind-typography-for-agents.md](./tailwind-typography-for-agents.md) · [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography) · [npm](https://www.npmjs.com/package/@tailwindcss/typography) |
 | Tailwind + Vite (optional; not in worker-only manifest yet) | [tailwind-vite.md](./tailwind-vite.md) |
 | DaisyUI with Tailwind v4 (optional) | [daisyui.md](./daisyui.md) · [component gallery](https://daisyui.com/components/) |
-| Devscrolls default UI (components, typography, layout) | [../DESIGN.md](../DESIGN.md) · rule: [`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../.cursor/rules/follow-devscrolls-ui-foundation.mdc) |
+| Fleet-wide UI tokens / theme (edit scaffold, merge forks) | [../patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md](../patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md) |
 | Non-fleet / Stitch-style `DESIGN.md` catalogs | [design-md-for-agents.md](./design-md-for-agents.md) · [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) |
 | Pick an external skill / vendor topic | [awesome-agent-skills.md](./awesome-agent-skills.md) → broad offline search: [awesome-agent-skills-catalog-full.md](./awesome-agent-skills-catalog-full.md) |
 | Context engineering (attention, tools, memory patterns) | [context-engineering/README.md](./context-engineering/README.md) |

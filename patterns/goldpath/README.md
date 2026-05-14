@@ -6,7 +6,7 @@
 
 Append entries when you find **recommended patterns, canonical examples, or doc-aligned snippets** worth reusing in this project.
 
-**Default UI:** repo-root [`DESIGN.md`](../../DESIGN.md) + [`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../../.cursor/rules/follow-devscrolls-ui-foundation.mdc).
+**Default UI:** repo-root [`DESIGN.md`](../../DESIGN.md) + [`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../../.cursor/rules/follow-devscrolls-ui-foundation.mdc). **Fleet-wide token/theme changes:** [`fleet-ui-evolve-in-scaffold-first.md`](./fleet-ui-evolve-in-scaffold-first.md) (edit scaffold → push → merge forks).
 
 **Non-fleet / external `DESIGN.md`:** start from [`design-md-brand-ui.md`](./design-md-brand-ui.md) and the digest [`../../docs/design-md-for-agents.md`](../../docs/design-md-for-agents.md) (see [`.cursor/rules/consult-design-md-for-branding.mdc`](../../.cursor/rules/consult-design-md-for-branding.mdc)).
 
