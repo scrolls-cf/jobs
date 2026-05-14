@@ -8,6 +8,8 @@ Apps in this fleet ship with a **canonical house style**: root **`DESIGN.md`** (
 
 Use this document when you need **another** aesthetic or an **additional** Stitch-style `DESIGN.md` from outside the fleet.
 
+**Framework fit (fleet default):** stay on **DaisyUI v5 + Tailwind** primitives—minimal custom CSS, stock components where possible ([`../patterns/goldpath/daisyui-tailwind-minimal-drift.md`](../patterns/goldpath/daisyui-tailwind-minimal-drift.md); **`DESIGN.md`** non-negotiable **#10**).
+
 ## What this is
 
 **DESIGN.md** (popularized alongside **Google Stitch**) is a **plain Markdown** design brief: colors, typography, layout rules, component notes, and guardrails. Coding agents read it like a lightweight design system—no Figma export or JSON schema required.
