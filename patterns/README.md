@@ -14,6 +14,8 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 **Routine UI (default):** read repo-root **[`../DESIGN.md`](../DESIGN.md)** (fleet baseline + jobs board) and follow **[`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../.cursor/rules/follow-devscrolls-ui-foundation.mdc)** — `data-theme="devscrolls"`, DaisyUI semantics, no ad-hoc Tailwind grays for chrome. **Fleet-wide visual changes** ship from scaffold first: **[`goldpath/fleet-ui-evolve-in-scaffold-first.md`](./goldpath/fleet-ui-evolve-in-scaffold-first.md)**.
 
+**Scrollsmatrix (standalone repo, no `git merge`):** **[`goldpath/scrollsmatrix-fleet-design-sync.md`](./goldpath/scrollsmatrix-fleet-design-sync.md)**.
+
 **Non-fleet or external Stitch-style `DESIGN.md`:** read **[`../docs/design-md-for-agents.md`](../docs/design-md-for-agents.md)** and **[`goldpath/design-md-brand-ui.md`](./goldpath/design-md-brand-ui.md)**. Agent rule: [`.cursor/rules/consult-design-md-for-branding.mdc`](../.cursor/rules/consult-design-md-for-branding.mdc).
 
 ## Layout

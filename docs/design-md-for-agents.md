@@ -4,7 +4,7 @@
 
 ## Devscrolls fleet default (read first)
 
-Apps in this fleet ship with a **canonical house style**: root **`DESIGN.md`** (fleet baseline, brand personality, **scaffold-first** policy, plus jobs-board specifics here) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out. **Brand / marketing / UX-UI** work expresses creativity **within** those rails; **fleet-wide** visual changes belong in **`scrolls-cf/scaffold`** first, then merge into forks (`patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md`).
+Apps in this fleet ship with a **canonical house style**: root **`DESIGN.md`** (Devscrolls UI foundation, brand personality, **scaffold-first** evolution policy, plus **jobs-board** notes in the same file) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out. **Brand / marketing / UX-UI** work expresses creativity **within** those rails; **fleet-wide** visual changes belong in **scaffold** first, then merge into forks (`patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md`). **`scrollsmatrix`** repos that cannot merge scaffold use [`../patterns/goldpath/scrollsmatrix-fleet-design-sync.md`](../patterns/goldpath/scrollsmatrix-fleet-design-sync.md).
 
 Use this document when you need **another** aesthetic or an **additional** Stitch-style `DESIGN.md` from outside the fleet.
 
@@ -32,14 +32,10 @@ Treat every file there as **third-party inspiration** derived from public CSS; i
 
 ## How to use with this stack
 
-1. **This jobs app:** keep repo-root **`DESIGN.md`** and `public/index.html` / `src/styles/app.css` in sync; extend `DESIGN.md` when you change shipped visuals.
-2. If the user wants a specific external “vibe,” open **awesome-design-md**, choose a close match, and **copy only the `DESIGN.md`** you need (optionally note the upstream folder name in a comment or doc)—then map into our tokens, or explicitly supersede `DESIGN.md` with team approval.
+1. **This jobs app:** keep repo-root **`DESIGN.md`** aligned with **`public/index.html`** and **`src/styles/app.css`** whenever you change shipped visuals (board layout, tokens, motion).
+2. If the user wants a specific “vibe,” open **awesome-design-md**, choose a close match, and **copy only the `DESIGN.md`** you need (optionally note the upstream folder name in a comment or doc).
 3. Map tokens to implementation: Tailwind theme extension, CSS variables, or DaisyUI theme—**keep one canonical token layer** so `DESIGN.md` and code do not disagree.
 4. For motion, still follow [gsap-for-agents.md](./gsap-for-agents.md) and `patterns/goldpath/gsap-prefer-transforms.md`; `DESIGN.md` does not replace performance rules.
-
-## This app (scrollsmatrix jobs)
-
-For **this** package’s agreed look (theme, components, modal, list), read the repo-root **[`../DESIGN.md`](../DESIGN.md)** and keep HTML/CSS aligned with it.
 
 ## Repo pointer
 

@@ -25,10 +25,10 @@ Agents with **brand / marketing / UX-UI** skills own **execution inside these ra
 
 ### Where fleet rules change (scaffold first)
 
-**Canonical fleet repo:** **`scrolls-cf/scaffold`** (`DESIGN.md`, `src/styles/app.css`, shared `.cursor/rules`).
+This **`scrolls-cf/scaffold`** repo is the **source of truth** for fleet-wide look: **`DESIGN.md`**, **`src/styles/app.css`**, and shared **`.cursor/rules`** that point there.
 
 1. **Edit scaffold** (tokens, non-negotiables, new global patterns), **`npm run build:css`** when `src/styles/app.css` changes, commit, **`git push origin master`**.
-2. **Merge into each fork** (`jobs`, `repo-factory`, `scrollsmatrix`, …); resolve conflicts by keeping **product-specific** surfaces in the fork and **fleet tokens + docs** from scaffold.
+2. **Merge into each fork** (`jobs`, `repo-factory`, `scrollsmatrix`, …) on a schedule you choose; resolve conflicts by keeping **product-specific** surfaces in the fork and **fleet tokens + docs** from scaffold. **`scrollsmatrix`** checkouts that cannot `git merge` scaffold follow **`patterns/goldpath/scrollsmatrix-fleet-design-sync.md`** instead.
 3. Optional: use external skills (e.g. **[design-md](https://officialskills.sh/google-labs-code/skills/design-md)**, **[frontend-design](https://officialskills.sh/anthropics/skills/frontend-design)**) as **technique**—output must still map onto **`devscrolls`** semantics unless the product owner opts out in writing.
 
 ### Non-negotiables (agents)
@@ -42,13 +42,31 @@ Agents with **brand / marketing / UX-UI** skills own **execution inside these ra
 7. **Motion:** follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`. No layout-thrashing animations on `width`/`height`/`top`/`left`. **Jobs board:** master–detail column transitions use **flex / max-width / opacity** only; **`prefers-reduced-motion`** disables those transitions in this package’s `src/styles/app.css`.
 8. **Content:** use **`prose prose-invert`** only where long-form markdown lives; keep app chrome outside `prose`.
 
-## Brand tokens (reference)
+### Brand tokens (reference)
 
 | Role | Hex (reference) | Semantic token |
 |------|-----------------|----------------|
-| Brand gradient A (cyan) | `#7dd3fc` | **`primary`** family |
-| Brand gradient B (violet) | `#a78bfa` | **`accent`** family |
-| Canvas (dark) | cool neutrals in theme | **`base-100` … `base-content`** |
+| Brand gradient A (cyan) | `#7dd3fc` | maps to **`primary`** family |
+| Brand gradient B (violet) | `#a78bfa` | maps to **`accent`** family |
+| Canvas (dark) | derived from dim-like cool neutrals | **`base-100` … `base-content`** |
+
+Exact OKLCH values live in **`src/styles/app.css`** (`@plugin "daisyui/theme"` → `devscrolls`). **That file is the runtime source of truth**; update this table’s hex column when marketing needs a swatch card, but change tokens in CSS first.
+
+### Typography scale (logical)
+
+- **Display / hero:** `text-4xl`–`text-6xl`, `font-semibold` or `font-bold`, `tracking-tight`, `text-base-content`.
+- **Page title:** `text-2xl`–`text-3xl`, `font-semibold`.
+- **Section heading:** `text-xl`–`text-2xl`, `font-semibold`.
+- **Body:** default (`text-base`), `text-base-content/90`, relaxed leading where paragraphs exist.
+- **Meta / captions:** `text-sm`, `text-base-content/60`.
+
+### Components (defaults)
+
+- **Primary action:** `btn btn-primary`.
+- **Secondary action:** `btn btn-outline` or `btn btn-ghost` on `base-100`/`base-200`.
+- **Destructive:** `btn btn-error` (never `btn-primary` for delete).
+- **Surfaces:** `card bg-base-200` or `bg-base-100` with `border border-base-300` when separation helps.
+- **Alerts / feedback:** `alert alert-info | success | warning | error` with concise copy.
 
 ## This product — jobs board surface
 
@@ -129,10 +147,10 @@ Canonical copy of the shared rules lives in **`WORKER_PLATFORM_CONTRACT`** in `s
 
 ## When to copy an external `DESIGN.md`
 
-Only when the **product owner** asks for a **different** aesthetic. Then follow `docs/design-md-for-agents.md` and merge conflicts **explicitly** with this file and `src/styles/app.css`.
+Only when the **product owner** asks for a **different** aesthetic (another brand, white-label, or strict client guide). Then follow `docs/design-md-for-agents.md` and merge conflicts **explicitly**—do not silently fork the fleet palette.
 
 ## Revision
 
-Tweaks to the fleet look belong in `src/styles/app.css` and the **Fleet baseline** / **Brand tokens** sections here; jobs-board sections change when the board UX changes.
+Tweaks to the fleet look belong in **`src/styles/app.css`** and the **Fleet baseline** sections above; jobs-board sections change when the board UX changes.
 
-_Changelog: 2026-05-14 — Merged fleet `devscrolls` foundation with jobs board spec; replaced `dim` with `devscrolls`; aligned logo gradient with fleet. 2026-05-14 — Primary radial wash, accent kicker and detail section labels, primary-rim job count badge. 2026-05-14 — Brand personality, scaffold-first fleet workflow, merged non-negotiables from scaffold._
+_Changelog: 2026-05-14 — Merged fleet `devscrolls` foundation with jobs board spec; replaced `dim` with `devscrolls`; aligned logo gradient with fleet. 2026-05-14 — Primary radial wash, accent kicker and detail section labels, primary-rim job count badge. 2026-05-14 — Brand personality, scaffold-first fleet workflow, merged non-negotiables from scaffold. 2026-05-14 — Fleet baseline parity with scaffold: source-of-truth fleet workflow, typography scale, component defaults, brand-token table + OKLCH note, scrollsmatrix manual-sync pointer._
