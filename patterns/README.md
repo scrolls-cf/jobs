@@ -14,6 +14,8 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 **Routine UI (default):** read repo-root **[`../DESIGN.md`](../DESIGN.md)** and follow **[`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../.cursor/rules/follow-devscrolls-ui-foundation.mdc)** — `data-theme="devscrolls"`, DaisyUI semantics, no ad-hoc Tailwind grays for chrome. **Fleet-wide visual changes** ship from scaffold first: **[`goldpath/fleet-ui-evolve-in-scaffold-first.md`](./goldpath/fleet-ui-evolve-in-scaffold-first.md)**.
 
+**DaisyUI + Tailwind:** prefer stock components and utilities—**[`goldpath/daisyui-tailwind-minimal-drift.md`](./goldpath/daisyui-tailwind-minimal-drift.md)**.
+
 **Scrollsmatrix (standalone repo, no `git merge`):** **[`goldpath/scrollsmatrix-fleet-design-sync.md`](./goldpath/scrollsmatrix-fleet-design-sync.md)**.
 
 **GitHub (new fleet repos):** default **public**; **scrollsmatrix** is the **private** exception — **[`goldpath/github-fleet-repo-visibility-default.md`](./goldpath/github-fleet-repo-visibility-default.md)**.

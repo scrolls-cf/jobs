@@ -31,6 +31,7 @@ Assume **sibling directories** `scaffold/` and `scrollsmatrix/` under the same p
 | `patterns/goldpath/design-md-brand-ui.md` | same |
 | `patterns/goldpath/scrollsmatrix-fleet-design-sync.md` | same (keeps procedure identical) |
 | `patterns/goldpath/github-fleet-repo-visibility-default.md` | same |
+| `patterns/goldpath/daisyui-tailwind-minimal-drift.md` | same |
 
 ### 2. `docs/design-md-for-agents.md`
 
@@ -69,6 +70,7 @@ cp ../scaffold/patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md patterns/g
 cp ../scaffold/patterns/goldpath/design-md-brand-ui.md patterns/goldpath/
 cp ../scaffold/patterns/goldpath/scrollsmatrix-fleet-design-sync.md patterns/goldpath/
 cp ../scaffold/patterns/goldpath/github-fleet-repo-visibility-default.md patterns/goldpath/
+cp ../scaffold/patterns/goldpath/daisyui-tailwind-minimal-drift.md patterns/goldpath/
 ```
 
 Then perform **`DESIGN.md`** / **`docs/design-md-for-agents.md`** / index merges as above, **`npm run build:css`**, commit.

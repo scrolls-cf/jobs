@@ -8,6 +8,8 @@ Append entries when you find **recommended patterns, canonical examples, or doc-
 
 **Default UI:** repo-root [`DESIGN.md`](../../DESIGN.md) + [`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../../.cursor/rules/follow-devscrolls-ui-foundation.mdc). **Fleet-wide token/theme changes:** [`fleet-ui-evolve-in-scaffold-first.md`](./fleet-ui-evolve-in-scaffold-first.md) (edit scaffold → push → merge forks).
 
+**DaisyUI + Tailwind (minimal drift):** [`daisyui-tailwind-minimal-drift.md`](./daisyui-tailwind-minimal-drift.md) — reuse stock components/utilities; scoped overrides only.
+
 **Scrollsmatrix (no git merge):** after fleet changes ship from scaffold, use [`scrollsmatrix-fleet-design-sync.md`](./scrollsmatrix-fleet-design-sync.md).
 
 **GitHub repo visibility:** fleet apps from scaffold default **public**; **scrollsmatrix** alone stays **private** — [`github-fleet-repo-visibility-default.md`](./github-fleet-repo-visibility-default.md).
