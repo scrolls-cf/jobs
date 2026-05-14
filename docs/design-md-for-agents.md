@@ -8,7 +8,7 @@ Apps in this fleet ship with a **canonical house style**: root **`DESIGN.md`** (
 
 Use this document when you need **another** aesthetic or an **additional** Stitch-style `DESIGN.md` from outside the fleet.
 
-**Framework fit (fleet default):** stay on **DaisyUI v5 + Tailwind** primitives—minimal custom CSS, stock components where possible ([`../patterns/goldpath/daisyui-tailwind-minimal-drift.md`](../patterns/goldpath/daisyui-tailwind-minimal-drift.md); **`DESIGN.md`** non-negotiable **#10**).
+**Framework fit (fleet default):** stay on **DaisyUI v5 + Tailwind** primitives—minimal custom CSS, stock components where possible ([`../patterns/goldpath/daisyui-tailwind-minimal-drift.md`](../patterns/goldpath/daisyui-tailwind-minimal-drift.md), [`../patterns/goldpath/daisyui-5-form-fields-markup.md`](../patterns/goldpath/daisyui-5-form-fields-markup.md); **`DESIGN.md`** non-negotiable **#10**).
 
 ## What this is
 

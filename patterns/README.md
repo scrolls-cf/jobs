@@ -14,11 +14,9 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 **Routine UI (default):** read repo-root **[`../DESIGN.md`](../DESIGN.md)** (fleet baseline + jobs board) and follow **[`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../.cursor/rules/follow-devscrolls-ui-foundation.mdc)** — `data-theme="devscrolls"`, DaisyUI semantics, no ad-hoc Tailwind grays for chrome. **Fleet-wide visual changes** ship from scaffold first: **[`goldpath/fleet-ui-evolve-in-scaffold-first.md`](./goldpath/fleet-ui-evolve-in-scaffold-first.md)**.
 
-**Scrollsmatrix (standalone repo, no `git merge`):** **[`goldpath/scrollsmatrix-fleet-design-sync.md`](./goldpath/scrollsmatrix-fleet-design-sync.md)**.
+**DaisyUI + Tailwind (minimal drift):** **[`goldpath/daisyui-tailwind-minimal-drift.md`](./goldpath/daisyui-tailwind-minimal-drift.md)** — reuse stock components/utilities; scoped overrides only.
 
-**GitHub (new fleet repos):** default **public**; **scrollsmatrix** is the **private** exception — **[`goldpath/github-fleet-repo-visibility-default.md`](./goldpath/github-fleet-repo-visibility-default.md)**.
-
-**DaisyUI + Tailwind:** prefer stock components and utilities—**[`goldpath/daisyui-tailwind-minimal-drift.md`](./goldpath/daisyui-tailwind-minimal-drift.md)**. **Forms:** **[`goldpath/daisyui-5-form-fields-markup.md`](./goldpath/daisyui-5-form-fields-markup.md)**; avoid **[`errors/daisyui-5-legacy-form-class-names.md`](./errors/daisyui-5-legacy-form-class-names.md)** and **[`errors/daisyui-5-textarea-wrapper-ux.md`](./errors/daisyui-5-textarea-wrapper-ux.md)**.
+**DaisyUI 5 forms:** **[`goldpath/daisyui-5-form-fields-markup.md`](./goldpath/daisyui-5-form-fields-markup.md)**; avoid **[`errors/daisyui-5-legacy-form-class-names.md`](./errors/daisyui-5-legacy-form-class-names.md)** and **[`errors/daisyui-5-textarea-wrapper-ux.md`](./errors/daisyui-5-textarea-wrapper-ux.md)**.
 
 **Scrollsmatrix (standalone repo, no `git merge`):** **[`goldpath/scrollsmatrix-fleet-design-sync.md`](./goldpath/scrollsmatrix-fleet-design-sync.md)**.
 

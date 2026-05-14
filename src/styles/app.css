@@ -43,7 +43,7 @@
   --noise: 0;
 }
 
-/* Master–detail: list narrows, detail column opens (DESIGN.md §4–§6) */
+/* Master–detail: list narrows, detail column opens (DESIGN.md “This product — jobs board”, motion + layout notes) */
 @layer components {
   @media (min-width: 768px) {
     .job-shell[data-detail-open="true"] .job-shell__list {
