@@ -39,6 +39,7 @@ This **`scrolls-cf/scaffold`** repo is the **source of truth** for fleet-wide lo
 6. **Radius:** theme sets rounded selectors and boxes; do not fight it with ad-hoc `rounded-sm` on Daisy components unless fixing a clash—prefer component defaults.
 7. **Motion:** follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`. No layout-thrashing animations on `width`/`height`/`top`/`left`.
 8. **Content:** use **`prose prose-invert`** only where long-form markdown lives; keep app chrome outside `prose`.
+9. **Tool surfaces (microcopy):** internal Workers, dashboards, and **repo-factory-style** flows default to **literal, efficient labels** (`Repo name`, `Submit`)—**not** conversational onboarding, long “first slice” disclaimers, or hint paragraphs under fields. Ship **only** what the task needs; add prose when the **product spec** asks for marketing or education. **Accessibility** still requires real `<label>` / `aria-*` / errors—not filler copy.
 
 ## Brand tokens (reference)
 
@@ -74,4 +75,4 @@ Only when the **product owner** asks for a **different** aesthetic (another bran
 
 Tweaks to the fleet look belong here and in `src/styles/app.css` together; bump a short note at the bottom when you change tokens.
 
-_Changelog: 2026-05-14 — Initial Devscrolls foundation. 2026-05-14 — Brand personality pillars; scaffold-first fleet evolution; brand/UX agent ownership inside rails. 2026-05-14 — Agent guide + patterns index: scrollsmatrix manual-sync pointer._
+_Changelog: 2026-05-14 — Initial Devscrolls foundation. 2026-05-14 — Brand personality pillars; scaffold-first fleet evolution; brand/UX agent ownership inside rails. 2026-05-14 — Agent guide + patterns index: scrollsmatrix manual-sync pointer. 2026-05-14 — Non-negotiable #9: terse tool microcopy (efficient labels, no hint bloat)._
