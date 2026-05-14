@@ -16,7 +16,8 @@
 | Tailwind v4, Typography (`@tailwindcss/typography`, `prose`) | [tailwind-typography-for-agents.md](./tailwind-typography-for-agents.md) · [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography) · [npm](https://www.npmjs.com/package/@tailwindcss/typography) |
 | Tailwind + Vite (optional; not in worker-only manifest yet) | [tailwind-vite.md](./tailwind-vite.md) |
 | DaisyUI with Tailwind v4 (optional) | [daisyui.md](./daisyui.md) · [component gallery](https://daisyui.com/components/) |
-| Brand-forward UI (`DESIGN.md` samples, Stitch-style tokens) | [design-md-for-agents.md](./design-md-for-agents.md) · [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) |
+| Devscrolls default UI (components, typography, layout) | [../DESIGN.md](../DESIGN.md) · rule: [`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../.cursor/rules/follow-devscrolls-ui-foundation.mdc) |
+| Non-fleet / Stitch-style `DESIGN.md` catalogs | [design-md-for-agents.md](./design-md-for-agents.md) · [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) |
 | Pick an external skill / vendor topic | [awesome-agent-skills.md](./awesome-agent-skills.md) → broad offline search: [awesome-agent-skills-catalog-full.md](./awesome-agent-skills-catalog-full.md) |
 | Context engineering (attention, tools, memory patterns) | [context-engineering/README.md](./context-engineering/README.md) |
 
@@ -34,8 +35,8 @@ Start from [tailwind-typography-for-agents.md](./tailwind-typography-for-agents.
 - **GSAP** — browser animation (`gsap`) for `public/` client scripts; Cursor skills under `.cursor/skills/gsap-*`; [agent guide](./gsap-for-agents.md) · [greensock/gsap-skills](https://github.com/greensock/gsap-skills) · [GSAP docs](https://gsap.com/docs/v3/) · [greensock/GSAP](https://github.com/greensock/GSAP)  
 - **jose** — JWT / JWE / JWKS on Workers; [agent guide](./jose-for-agents.md) · [panva/jose](https://github.com/panva/jose)  
 - **Wrangler / Cloudflare Workers** — local dev, deploy, typegen, bindings; [agent guide](./cloudflare-workers-for-agents.md) · [CLI getting started](https://developers.cloudflare.com/workers/get-started/guide/) · [Workers llms.txt](https://developers.cloudflare.com/workers/llms.txt)  
-- **Tailwind + Vite, DaisyUI** — optional styling stack; [Typography agent guide](./tailwind-typography-for-agents.md) · [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography) · [npm](https://www.npmjs.com/package/@tailwindcss/typography)  
-- **Jobs surface / branding** — repo-root [DESIGN.md](../DESIGN.md); external references in [design-md-for-agents.md](./design-md-for-agents.md); motion and modal overrides in `src/styles/app.css`  
+- **Tailwind + Vite, DaisyUI** — optional styling stack; **fleet UI:** [`../DESIGN.md`](../DESIGN.md) + `devscrolls` theme in `src/styles/app.css`; [Typography agent guide](./tailwind-typography-for-agents.md) · [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography) · [npm](https://www.npmjs.com/package/@tailwindcss/typography)  
+- **Jobs surface** — repo-root [DESIGN.md](../DESIGN.md) (board layout, a11y, master–detail); external Stitch-style catalogs in [design-md-for-agents.md](./design-md-for-agents.md); column motion in `src/styles/app.css`  
 
 When behavior depends on a dependency, **read or extend the matching `docs/` file before guessing APIs from memory.**
 

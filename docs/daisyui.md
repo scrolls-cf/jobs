@@ -16,7 +16,7 @@ curl -fsSL "https://daisyui.com/llms.txt" -o docs/daisyui-llms.txt
 
 ## This project (scaffold)
 
-This repo is **Workers + Hono** only today; **`daisyui` is not in `package.json`**. Use this file when you add **Tailwind CSS 4** (see [`tailwind-vite.md`](./tailwind-vite.md) or the [Tailwind CLI](https://tailwindcss.com/docs/installation/tailwind-cli) path), then install DaisyUI and add `@plugin "daisyui";` to your CSS entry as in the upstream install guide.
+This repo ships **Tailwind CSS 4** + **DaisyUI 5** from **`src/styles/app.css`**. The default theme is the custom **`devscrolls`** fleet theme (see repo-root **`DESIGN.md`**). Build vendored CSS with `npm run build:css`.
 
 ## Quick rules (from upstream)
 

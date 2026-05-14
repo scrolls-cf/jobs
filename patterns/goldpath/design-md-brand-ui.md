@@ -1,6 +1,6 @@
 ---
 kind: goldpath
-topics: [design-md, branding, ui, stitch]
+topics: [design-md, branding, ui, stitch, devscrolls]
 date: "2026-05-13"
 ---
 
@@ -12,11 +12,13 @@ date: "2026-05-13"
 
 ## Snippet or summary
 
-1. Read [design-md-for-agents.md](../../docs/design-md-for-agents.md) for terminology (`AGENTS.md` vs `DESIGN.md`) and links.
-2. **In this jobs package:** read repo-root [`DESIGN.md`](../../DESIGN.md) first for Scrollsmatrix jobs UI (theme, list, modal, a11y). Extend that file when changing shipped visuals.
-3. When the user wants a recognizable **product/marketing** look without a bespoke brief, pick a **`DESIGN.md`** from [awesome-design-md](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md) and copy it into the project (commonly repo root or `docs/`).
-4. Implement against that file: semantic colors, type scale, spacing, and component states—then wire tokens into Tailwind/CSS so **code and doc stay aligned**.
+1. **Default:** follow repo-root **`DESIGN.md`** (fleet baseline + jobs board) and **`src/styles/app.css`** theme `devscrolls` — see **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`**.
+2. Read [design-md-for-agents.md](../../docs/design-md-for-agents.md) for terminology (`AGENTS.md` vs `DESIGN.md`) and links.
+3. **Opt-in only:** when the product owner wants a **non-fleet** look, pick a **`DESIGN.md`** from [awesome-design-md](https://github.com/VoltAgent/awesome-design-md/tree/main/design-md) (or author one) and copy it into the project (commonly repo root or `docs/`), reconciling tokens with the fleet baseline if both must coexist.
+4. Implement against the active brief: semantic colors, type scale, spacing, and component states—wire tokens into Tailwind/CSS so **code and doc stay aligned**.
 
 ## When to use
 
-Landing pages, dashboards, or flows where **visual consistency** matters more than default component styling. **In jobs:** start from repo-root `DESIGN.md` for the shipped board + modal. Skip when the user only needs internal tooling skinned with DaisyUI defaults and has no brand requirements.
+**Fleet default:** this jobs app — use root `DESIGN.md` + `devscrolls` theme.
+
+**This gold path (external `DESIGN.md`):** flows where an **explicit non-Devscrolls** aesthetic is required and **visual consistency** must come from a copied Stitch-style file.

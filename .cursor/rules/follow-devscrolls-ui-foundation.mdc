@@ -1,0 +1,15 @@
+---
+description: Default UI/UX for Devscrolls apps from scaffold — read DESIGN.md and use devscrolls theme tokens
+alwaysApply: true
+---
+
+# Devscrolls UI foundation (mandatory for user-visible UI)
+
+For **any** user-visible work—components, layout, typography, marketing pages, dashboards, forms, chrome—**unless** the product owner explicitly asked for a **different** brand or white-label aesthetic:
+
+1. Read **`DESIGN.md`** at the **repository root** of this package and follow its non-negotiables.
+2. Keep **`data-theme="devscrolls"`** on the document or app shell; canonical token values live in **`src/styles/app.css`** (`@plugin "daisyui/theme"`). Do not invent parallel color systems.
+3. Use **DaisyUI semantic colors** and components per `DESIGN.md`; do not default to raw Tailwind palette colors for text or surfaces.
+4. For motion, still follow **`docs/gsap-for-agents.md`** and **`patterns/goldpath/gsap-prefer-transforms.md`**.
+
+If the task is explicitly **another brand**, **client design system**, or **importing an external `DESIGN.md`**, read **`docs/design-md-for-agents.md`** and **`patterns/goldpath/design-md-brand-ui.md`** and reconcile conflicts with the product owner—do not silently override the fleet foundation.

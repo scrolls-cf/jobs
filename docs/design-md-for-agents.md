@@ -2,6 +2,12 @@
 
 **When to read this:** You are defining or implementing **marketing or product UI** where the user cares about **consistent look-and-feel** (palette, type scale, components), not only Tailwind defaults or DaisyUI themes.
 
+## Devscrolls fleet default (read first)
+
+Apps in this fleet ship with a **canonical house style**: root **`DESIGN.md`** (fleet baseline plus jobs-board specifics here) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out.
+
+Use this document when you need **another** aesthetic or an **additional** Stitch-style `DESIGN.md` from outside the fleet.
+
 ## What this is
 
 **DESIGN.md** (popularized alongside **Google Stitch**) is a **plain Markdown** design brief: colors, typography, layout rules, component notes, and guardrails. Coding agents read it like a lightweight design system—no Figma export or JSON schema required.
