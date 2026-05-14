@@ -12,7 +12,7 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 ## Design, UI, and Devscrolls branding
 
-**Routine UI (default):** read repo-root **[`../DESIGN.md`](../DESIGN.md)** (fleet baseline + jobs board) and follow **[`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../.cursor/rules/follow-devscrolls-ui-foundation.mdc)** — `data-theme="devscrolls"`, DaisyUI semantics, no ad-hoc Tailwind grays for chrome.
+**Routine UI (default):** read repo-root **[`../DESIGN.md`](../DESIGN.md)** (fleet baseline + jobs board) and follow **[`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../.cursor/rules/follow-devscrolls-ui-foundation.mdc)** — `data-theme="devscrolls"`, DaisyUI semantics, no ad-hoc Tailwind grays for chrome. **Fleet-wide visual changes** ship from scaffold first: **[`goldpath/fleet-ui-evolve-in-scaffold-first.md`](./goldpath/fleet-ui-evolve-in-scaffold-first.md)**.
 
 **Non-fleet or external Stitch-style `DESIGN.md`:** read **[`../docs/design-md-for-agents.md`](../docs/design-md-for-agents.md)** and **[`goldpath/design-md-brand-ui.md`](./goldpath/design-md-brand-ui.md)**. Agent rule: [`.cursor/rules/consult-design-md-for-branding.mdc`](../.cursor/rules/consult-design-md-for-branding.mdc).
 

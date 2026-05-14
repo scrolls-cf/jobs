@@ -4,7 +4,7 @@
 
 ## Devscrolls fleet default (read first)
 
-Apps in this fleet ship with a **canonical house style**: root **`DESIGN.md`** (fleet baseline plus jobs-board specifics here) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out.
+Apps in this fleet ship with a **canonical house style**: root **`DESIGN.md`** (fleet baseline, brand personality, **scaffold-first** policy, plus jobs-board specifics here) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out. **Brand / marketing / UX-UI** work expresses creativity **within** those rails; **fleet-wide** visual changes belong in **`scrolls-cf/scaffold`** first, then merge into forks (`patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md`).
 
 Use this document when you need **another** aesthetic or an **additional** Stitch-style `DESIGN.md` from outside the fleet.
 

@@ -3,13 +3,44 @@
 **Audience:** coding agents and humans working in this repo.  
 **Status:** fleet-aligned with the **`devscrolls`** DaisyUI theme in `src/styles/app.css`; this file also specifies the **Scrollsmatrix jobs board** surface on top of that baseline.
 
-## Fleet baseline (non-negotiables)
+## Fleet baseline
 
-1. **Theme:** **`data-theme="devscrolls"`** on `<html>`. Canonical OKLCH tokens live in `src/styles/app.css` (`@plugin "daisyui/theme"`). Do not add casual theme switchers unless the product spec requires it.
-2. **Colors:** use **DaisyUI semantic colors** only (`primary`, `accent`, `base-*`, `neutral`, `info`, `success`, `warning`, `error`, and matching `*-content`). Do **not** use raw Tailwind palette classes for text or surfaces except isolated debug or third-party embeds.
-3. **Surfaces:** most of the page is **`base-100` / `base-200` / `base-300`**; use **`primary`** for the main interactive accent (selection, focus, spinner); use **`accent`** for secondary highlights when needed. Use **`neutral`** for dense tool chrome (for example the job count badge outline).
-4. **Typography:** **system stack**; prefer **`text-base-content`** with opacity steps (`/60`, `/65`, `/90`, etc.).
-5. **Motion:** follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`. Master–detail column transitions use **flex / max-width / opacity** only; **`prefers-reduced-motion`** disables those transitions in `src/styles/app.css`.
+### Intent
+
+Ship **predictable, on-brand UI** so builders focus on behavior and data, not one-off palettes or arbitrary Tailwind color picks. Implement with **DaisyUI components + semantic tokens** wired by the **`devscrolls`** theme in `src/styles/app.css`.
+
+### Brand personality (Devscrolls)
+
+Voice the product through layout and motion, not through random color picks. Default reading:
+
+| Pillar | What it means in UI |
+|--------|---------------------|
+| **Creativity** | Clever composition, clear hierarchy, and purposeful **accent** use—not novelty palettes or one-off CSS hacks outside tokens. |
+| **Potential** | Interfaces feel **open and extensible**: breathable spacing, obvious next actions, progressive disclosure instead of clutter. |
+| **Speed** | **Fast perceived performance**: lean DOM, no decorative bloat, prefer transforms for motion (`patterns/goldpath/gsap-prefer-transforms.md`), respect `prefers-reduced-motion`. |
+| **Performance** | Ship **efficient CSS** (semantic utilities, one theme), avoid layout-thrashing animation, lazy non-critical work where the stack allows it. |
+| **Efficiency** | **Primary** draws the eye to the main job; **base-*** carries structure; copy and components stay minimal—every pixel earns its place. |
+
+Agents with **brand / marketing / UX-UI** skills own **execution inside these rails** (story, emphasis, flow, microcopy tone). They do **not** invent a parallel brand system per app.
+
+### Where fleet rules change (scaffold first)
+
+**Canonical fleet repo:** **`scrolls-cf/scaffold`** (`DESIGN.md`, `src/styles/app.css`, shared `.cursor/rules`).
+
+1. **Edit scaffold** (tokens, non-negotiables, new global patterns), **`npm run build:css`** when `src/styles/app.css` changes, commit, **`git push origin master`**.
+2. **Merge into each fork** (`jobs`, `repo-factory`, `scrollsmatrix`, …); resolve conflicts by keeping **product-specific** surfaces in the fork and **fleet tokens + docs** from scaffold.
+3. Optional: use external skills (e.g. **[design-md](https://officialskills.sh/google-labs-code/skills/design-md)**, **[frontend-design](https://officialskills.sh/anthropics/skills/frontend-design)**) as **technique**—output must still map onto **`devscrolls`** semantics unless the product owner opts out in writing.
+
+### Non-negotiables (agents)
+
+1. **Theme:** root layout uses **`data-theme="devscrolls"`** on `<html>` (or the outer app shell). Do not add casual theme switchers unless the product spec requires it.
+2. **Colors:** use **DaisyUI semantic colors** only (`primary`, `accent`, `base-*`, `neutral`, `info`, `success`, `warning`, `error`, and matching `*-content`). Do **not** use raw Tailwind palette classes for text or surfaces (`text-gray-*`, `bg-slate-*`, `text-blue-500`, etc.) except for **true** one-off debug or third-party embeds—and then isolate them.
+3. **Surfaces:** most of the page is **`base-100` / `base-200` / `base-300`**; use **`primary`** for the main CTA and key focus; use **`accent`** for secondary highlights, tags, or “interesting” affordances. Use **`neutral`** for dense tool chrome, not for marketing hero fills.
+4. **Typography:** **system UI stack** only unless a future revision of this file adds a webfont. Default body: `antialiased` on the shell; prefer **`text-base-content`** with opacity modifiers (`/70`, `/80`) over inventing new gray hex values.
+5. **Density:** default to **comfortable** spacing (`gap-4`–`gap-8` in page sections, `p-4`–`p-6` on cards). Avoid ultra-tight `gap-1` layouts for primary flows.
+6. **Radius:** theme sets rounded selectors and boxes; do not fight it with ad-hoc `rounded-sm` on Daisy components unless fixing a clash—prefer component defaults.
+7. **Motion:** follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`. No layout-thrashing animations on `width`/`height`/`top`/`left`. **Jobs board:** master–detail column transitions use **flex / max-width / opacity** only; **`prefers-reduced-motion`** disables those transitions in this package’s `src/styles/app.css`.
+8. **Content:** use **`prose prose-invert`** only where long-form markdown lives; keep app chrome outside `prose`.
 
 ## Brand tokens (reference)
 
@@ -104,4 +135,4 @@ Only when the **product owner** asks for a **different** aesthetic. Then follow 
 
 Tweaks to the fleet look belong in `src/styles/app.css` and the **Fleet baseline** / **Brand tokens** sections here; jobs-board sections change when the board UX changes.
 
-_Changelog: 2026-05-14 — Merged fleet `devscrolls` foundation with jobs board spec; replaced `dim` with `devscrolls`; aligned logo gradient with fleet. 2026-05-14 — Primary radial wash, accent kicker and detail section labels, primary-rim job count badge._
+_Changelog: 2026-05-14 — Merged fleet `devscrolls` foundation with jobs board spec; replaced `dim` with `devscrolls`; aligned logo gradient with fleet. 2026-05-14 — Primary radial wash, accent kicker and detail section labels, primary-rim job count badge. 2026-05-14 — Brand personality, scaffold-first fleet workflow, merged non-negotiables from scaffold._
