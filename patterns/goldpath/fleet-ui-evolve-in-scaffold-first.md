@@ -13,7 +13,7 @@ date: "2026-05-14"
 ## Snippet or summary
 
 1. **Canonical repo:** **`scrolls-cf/scaffold`** owns fleet **`DESIGN.md`**, **`src/styles/app.css`** (`devscrolls` theme), and shared **`.cursor/rules`** that encode brand/UX defaults.
-2. **Change workflow:** edit scaffold → **`npm run build:css`** when CSS changes → commit → **`git push origin master`** → in each fork (`jobs`, `repo-factory`, `scrollsmatrix`, …) **`git fetch`** scaffold remote → **`git merge scaffold/master`** (or `upstream/master`) → resolve conflicts favoring **product-specific** markup in the fork, **fleet tokens** from scaffold.
+2. **Change workflow:** edit scaffold → **`npm run build:css`** when CSS changes → commit → **`git push origin master`** → in each fork (`jobs`, `repo-factory`, …) **`git fetch`** scaffold remote → **`git merge scaffold/master`** (or `upstream/master`) → resolve conflicts favoring **product-specific** markup in the fork, **fleet tokens** from scaffold. **Scrollsmatrix** often cannot merge (unrelated histories): follow **[`scrollsmatrix-fleet-design-sync.md`](./scrollsmatrix-fleet-design-sync.md)** to copy the same files and merge `DESIGN.md` sections manually.
 3. **Do not** introduce a divergent palette or parallel `DESIGN.md` “v2” in a fork without either merging the same change back into scaffold or getting an explicit product opt-out (see `docs/design-md-for-agents.md`).
 
 ## When to use
