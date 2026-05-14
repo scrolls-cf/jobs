@@ -8,7 +8,7 @@ Append entries when you find **recommended patterns, canonical examples, or doc-
 
 **Default UI:** repo-root [`DESIGN.md`](../../DESIGN.md) + [`.cursor/rules/follow-devscrolls-ui-foundation.mdc`](../../.cursor/rules/follow-devscrolls-ui-foundation.mdc). **Fleet-wide token/theme changes:** [`fleet-ui-evolve-in-scaffold-first.md`](./fleet-ui-evolve-in-scaffold-first.md) (edit scaffold → push → merge forks).
 
-**DaisyUI + Tailwind (minimal drift):** [`daisyui-tailwind-minimal-drift.md`](./daisyui-tailwind-minimal-drift.md) — reuse stock components/utilities; scoped overrides only.
+**DaisyUI + Tailwind (minimal drift):** [`daisyui-tailwind-minimal-drift.md`](./daisyui-tailwind-minimal-drift.md) — reuse stock components/utilities; scoped overrides only. **Forms / textareas:** [`daisyui-5-form-fields-markup.md`](./daisyui-5-form-fields-markup.md); foot-guns [`../errors/daisyui-5-legacy-form-class-names.md`](../errors/daisyui-5-legacy-form-class-names.md), [`../errors/daisyui-5-textarea-wrapper-ux.md`](../errors/daisyui-5-textarea-wrapper-ux.md).
 
 **Scrollsmatrix (no git merge):** after fleet changes ship from scaffold, use [`scrollsmatrix-fleet-design-sync.md`](./scrollsmatrix-fleet-design-sync.md).
 

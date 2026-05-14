@@ -16,7 +16,7 @@ date: "2026-05-14"
 
 ## After every relevant scaffold push
 
-Relevant = changes to **fleet** `DESIGN.md`, **`src/styles/app.css`** (`devscrolls` theme), **`.cursor/rules`** for UI, **`patterns/goldpath`** branding entries, or **`docs/design-md-for-agents.md`** fleet paragraphs.
+Relevant = changes to **fleet** `DESIGN.md`, **`src/styles/app.css`** (`devscrolls` theme), **`.cursor/rules`** for UI, **`patterns/goldpath`** / **`patterns/errors`** DaisyUI + form UX entries, or **`docs/design-md-for-agents.md`** fleet paragraphs.
 
 Assume **sibling directories** `scaffold/` and `scrollsmatrix/` under the same parent (adjust paths if yours differ).
 
@@ -32,6 +32,9 @@ Assume **sibling directories** `scaffold/` and `scrollsmatrix/` under the same p
 | `patterns/goldpath/scrollsmatrix-fleet-design-sync.md` | same (keeps procedure identical) |
 | `patterns/goldpath/github-fleet-repo-visibility-default.md` | same |
 | `patterns/goldpath/daisyui-tailwind-minimal-drift.md` | same |
+| `patterns/goldpath/daisyui-5-form-fields-markup.md` | same |
+| `patterns/errors/daisyui-5-legacy-form-class-names.md` | same |
+| `patterns/errors/daisyui-5-textarea-wrapper-ux.md` | same |
 
 ### 2. `docs/design-md-for-agents.md`
 
@@ -71,6 +74,9 @@ cp ../scaffold/patterns/goldpath/design-md-brand-ui.md patterns/goldpath/
 cp ../scaffold/patterns/goldpath/scrollsmatrix-fleet-design-sync.md patterns/goldpath/
 cp ../scaffold/patterns/goldpath/github-fleet-repo-visibility-default.md patterns/goldpath/
 cp ../scaffold/patterns/goldpath/daisyui-tailwind-minimal-drift.md patterns/goldpath/
+cp ../scaffold/patterns/goldpath/daisyui-5-form-fields-markup.md patterns/goldpath/
+cp ../scaffold/patterns/errors/daisyui-5-legacy-form-class-names.md patterns/errors/
+cp ../scaffold/patterns/errors/daisyui-5-textarea-wrapper-ux.md patterns/errors/
 ```
 
 Then perform **`DESIGN.md`** / **`docs/design-md-for-agents.md`** / index merges as above, **`npm run build:css`**, commit.

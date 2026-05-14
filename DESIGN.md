@@ -40,7 +40,12 @@ This **`scrolls-cf/scaffold`** repo is the **source of truth** for fleet-wide lo
 7. **Motion:** follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`. No layout-thrashing animations on `width`/`height`/`top`/`left`.
 8. **Content:** use **`prose prose-invert`** only where long-form markdown lives; keep app chrome outside `prose`.
 9. **Tool surfaces (microcopy):** internal Workers, dashboards, and **repo-factory-style** flows default to **literal, efficient labels** (`Repo name`, `Submit`)—**not** conversational onboarding, long “first slice” disclaimers, or hint paragraphs under fields. Ship **only** what the task needs; add prose when the **product spec** asks for marketing or education. **Accessibility** still requires real `<label>` / `aria-*` / errors—not filler copy.
-10. **DaisyUI + Tailwind alignment:** Prefer **stock DaisyUI v5** components and documented markup over bespoke controls. Use **Tailwind utilities** for layout and spacing. **Minimize custom CSS** that duplicates or fights the plugin (radius, button variants, semantic colors). Brand should read through **`devscrolls` tokens** in `src/styles/app.css` and **composition**, not per-page re-skins. When a real framework limitation **requires** an override, keep it **narrow** (`@layer components`, tight selectors), and **document** it here or in `patterns/goldpath/` (see [`patterns/goldpath/daisyui-tailwind-minimal-drift.md`](patterns/goldpath/daisyui-tailwind-minimal-drift.md)).
+10. **DaisyUI + Tailwind alignment (priority order — do not invert):**
+    1. **Stock DaisyUI v5** components and documented markup (`btn`, `card`, `input`, `textarea`, `alert`, …).
+    2. **Tailwind utilities** for layout and spacing (`flex`, `grid`, `gap-*`, responsive prefixes).
+    3. **`devscrolls` tokens** in `src/styles/app.css` (OKLCH semantic roles) for brand—**not** per-page re-skins of every control.
+    4. **Minimal scoped CSS** in `@layer components` only when **1–3** cannot satisfy the UX (document **why** in `DESIGN.md` or `patterns/goldpath/`).  
+    Read [`patterns/goldpath/daisyui-tailwind-minimal-drift.md`](patterns/goldpath/daisyui-tailwind-minimal-drift.md) and [`patterns/goldpath/daisyui-5-form-fields-markup.md`](patterns/goldpath/daisyui-5-form-fields-markup.md); form foot-guns in [`patterns/errors/daisyui-5-legacy-form-class-names.md`](patterns/errors/daisyui-5-legacy-form-class-names.md) and [`patterns/errors/daisyui-5-textarea-wrapper-ux.md`](patterns/errors/daisyui-5-textarea-wrapper-ux.md).
 
 ## Brand tokens (reference)
 
@@ -76,4 +81,4 @@ Only when the **product owner** asks for a **different** aesthetic (another bran
 
 Tweaks to the fleet look belong here and in `src/styles/app.css` together; bump a short note at the bottom when you change tokens.
 
-_Changelog: 2026-05-14 — Initial Devscrolls foundation. 2026-05-14 — Brand personality pillars; scaffold-first fleet evolution; brand/UX agent ownership inside rails. 2026-05-14 — Agent guide + patterns index: scrollsmatrix manual-sync pointer. 2026-05-14 — Non-negotiable #9: terse tool microcopy. 2026-05-14 — Non-negotiable #10 + goldpath: minimal drift from DaisyUI + Tailwind (reuse components/utilities; scoped overrides only)._
+_Changelog: 2026-05-14 — Non-negotiable **#10** expanded: ordered stack (Daisy → Tailwind → tokens → scoped CSS); form goldpath + textarea UX errors linked. 2026-05-14 — Initial Devscrolls foundation. 2026-05-14 — Brand personality pillars; scaffold-first fleet evolution; brand/UX agent ownership inside rails. 2026-05-14 — Agent guide + patterns index: scrollsmatrix manual-sync pointer. 2026-05-14 — Non-negotiable #9: terse tool microcopy. 2026-05-14 — Non-negotiable #10 + goldpath: minimal drift from DaisyUI + Tailwind (reuse components/utilities; scoped overrides only)._
