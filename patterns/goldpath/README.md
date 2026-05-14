@@ -10,6 +10,8 @@ Append entries when you find **recommended patterns, canonical examples, or doc-
 
 **Scrollsmatrix (no git merge):** after fleet changes ship from scaffold, use [`scrollsmatrix-fleet-design-sync.md`](./scrollsmatrix-fleet-design-sync.md).
 
+**GitHub repo visibility:** fleet apps from scaffold default **public**; **scrollsmatrix** alone stays **private** — [`github-fleet-repo-visibility-default.md`](./github-fleet-repo-visibility-default.md).
+
 **Non-fleet / external `DESIGN.md`:** start from [`design-md-brand-ui.md`](./design-md-brand-ui.md) and the digest [`../../docs/design-md-for-agents.md`](../../docs/design-md-for-agents.md) (see [`.cursor/rules/consult-design-md-for-branding.mdc`](../../.cursor/rules/consult-design-md-for-branding.mdc)).
 
 ## Entry format
