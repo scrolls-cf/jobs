@@ -24,13 +24,15 @@
 ### 1. Visual theme and atmosphere
 
 - **Product:** single-page jobs board for Scrollsmatrix—**the board is the hero** (no splash logo band above it).
-- **Mood:** dark-first, developer-tool calm; **primary** accent only where it signals interactivity or selection.
+- **Mood:** dark-first, developer-tool calm; **primary** for interactive selection, loading, and row focus; **accent** (violet) for non-interactive brand chrome (board kicker, detail `h3` labels).
 - **Density:** comfortable reading; one primary surface (list + detail) inside a single framed shell on `md+`.
+- **Atmosphere:** subtle **primary** radial wash behind the shell (`color-mix` on `--color-primary`, low opacity), aligned with other Devscrolls fleet surfaces.
 
 ### 2. Color and semantic roles (jobs)
 
 - **Surfaces:** `bg-base-100` page; shell `md:border` / `md:bg-base-200/50`; list `bg-base-200/80` with `ring-1` / `divide-y`.
-- **Accent:** `primary` for spinner, selection border, focus ring, job count badge outline.
+- **Interactive chrome:** `primary` for spinner, selection border, focus ring, and row-selected fill.
+- **Brand chrome:** `accent` for the board kicker and detail panel **`h3`** section labels (not click targets).
 - **Content:** `text-base-content` hierarchy with opacity steps — no raw hex in new markup unless extending this file first.
 
 ### 3. Typography (jobs)
@@ -49,10 +51,10 @@
 ### 5. Components (jobs)
 
 - **Shell (`#job-shell`):** `max-w-6xl` master–detail container; `data-detail-open="true"` when a job is selected (drives layout CSS in `src/styles/app.css`).
-- **List column (`#job-list-column` / `.job-shell__list`):** count badge + `<ul role="list">`; rows are the only primary click targets before selection.
+- **List column (`#job-list-column` / `.job-shell__list`):** kicker (“Scrollsmatrix jobs”) in **`text-accent`**, count badge with **`badge-outline border-primary/30`**, then `<ul role="list">`; rows are the only primary click targets before selection.
 - **Job row:** title + two-line summary; selected state as above.
 - **Detail (`#job-detail-panel`):** `role="region"` **`aria-labelledby="job-detail-title"`**; inner card is **sticky** on desktop so long copy scrolls inside the column, not the whole page. Content order: **Worker purpose** → **Platform contract** (from `workerPlatformContract` in `/api/jobs`) → **Description** → **Acceptance tests** (numbered mocks; CI runner TBD).
-- **Job count:** `badge badge-neutral badge-outline` for the “N jobs” label only.
+- **Job count:** `badge badge-outline border-primary/30` (subtle **primary** rim on neutral body), not a filled marketing pill.
 
 ### 6. Layout and spacing
 
@@ -80,7 +82,7 @@
 
 ### 10. Agent prompt hints
 
-- “Match jobs board” → `devscrolls` theme, framed shell, list + right detail, no hero logo strip.
+- “Match jobs board” → `devscrolls` theme, subtle **primary** radial wash, framed shell, **accent** kicker + detail section labels, **primary** for selection/spinner/badge rim, list + right detail, no hero logo strip.
 - “Accessibility pass” → list `role="list"`, rows `role="button"` + keyboard + `aria-selected`, detail `role="region"` + labelled title, loading `aria-live="polite"`.
 
 ### 11. Worker deliverable (platform alignment)
@@ -102,4 +104,4 @@ Only when the **product owner** asks for a **different** aesthetic. Then follow 
 
 Tweaks to the fleet look belong in `src/styles/app.css` and the **Fleet baseline** / **Brand tokens** sections here; jobs-board sections change when the board UX changes.
 
-_Changelog: 2026-05-14 — Merged fleet `devscrolls` foundation with jobs board spec; replaced `dim` with `devscrolls`; aligned logo gradient with fleet._
+_Changelog: 2026-05-14 — Merged fleet `devscrolls` foundation with jobs board spec; replaced `dim` with `devscrolls`; aligned logo gradient with fleet. 2026-05-14 — Primary radial wash, accent kicker and detail section labels, primary-rim job count badge._

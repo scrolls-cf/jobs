@@ -11,12 +11,16 @@
   <body class="bg-base-100 text-base-content antialiased">
     <main
       data-jobs-root
-      class="min-h-screen px-4 py-6 sm:px-6 lg:px-8 lg:py-10"
+      class="relative min-h-screen overflow-x-hidden px-4 py-6 sm:px-6 lg:px-8 lg:py-10"
       aria-label="Jobs"
     >
       <div
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_-15%,color-mix(in_oklab,var(--color-primary)_14%,transparent),transparent_52%)]"
+        aria-hidden="true"
+      ></div>
+      <div
         id="job-shell"
-        class="job-shell mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-stretch md:gap-0 md:rounded-2xl md:border md:border-base-content/10 md:bg-base-200/50 md:shadow-xl md:backdrop-blur-sm"
+        class="job-shell relative z-10 mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-stretch md:gap-0 md:rounded-2xl md:border md:border-base-content/10 md:bg-base-200/50 md:shadow-xl md:backdrop-blur-sm"
         data-detail-open="false"
       >
         <div
@@ -24,8 +28,18 @@
           class="job-shell__list min-w-0 flex-1 md:m-[3px] md:rounded-[calc(1rem-3px)] md:border md:border-base-content/5 md:bg-base-200/80 md:p-5 md:shadow-inner lg:p-6"
         >
           <section id="job-board" class="flex flex-col gap-4" aria-label="Job list">
-            <div class="flex justify-end">
-              <span id="job-count" class="badge badge-neutral badge-outline">…</span>
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p
+                class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent/85"
+              >
+                Scrollsmatrix jobs
+              </p>
+              <div class="flex justify-end">
+                <span
+                  id="job-count"
+                  class="badge badge-outline border-primary/30 bg-base-200/80 text-base-content"
+                  >…</span>
+              </div>
             </div>
 
             <div id="job-list-wrap">
@@ -189,7 +203,7 @@
         const h3 = (label) => {
           const el = document.createElement('h3')
           el.className =
-            'mt-6 border-b border-base-content/10 pb-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-primary/90 first:mt-0'
+            'mt-6 border-b border-accent/20 pb-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent/90 first:mt-0'
           el.textContent = label
           return el
         }
