@@ -4,7 +4,7 @@
 
 ## Devscrolls fleet default (read first)
 
-Apps built from this scaffold ship with a **canonical house style**: root **`DESIGN.md`** (Devscrolls UI foundation, brand personality, **scaffold-first** evolution policy) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out. **Brand / marketing / UX-UI** work expresses creativity **within** those rails; **fleet-wide** visual changes belong in **scaffold** first, then merge into forks (`patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md`).
+Apps built from this scaffold ship with a **canonical house style**: root **`DESIGN.md`** (Devscrolls UI foundation, brand personality, **scaffold-first** evolution policy) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out. **Brand / marketing / UX-UI** work expresses creativity **within** those rails; **fleet-wide** visual changes belong in **scaffold** first, then merge into forks (`patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md`). **`scrollsmatrix`** repos that cannot merge scaffold use [`../patterns/goldpath/scrollsmatrix-fleet-design-sync.md`](../patterns/goldpath/scrollsmatrix-fleet-design-sync.md).
 
 Use this document when you need **another** aesthetic or an **additional** Stitch-style `DESIGN.md` from outside the fleet.
 
