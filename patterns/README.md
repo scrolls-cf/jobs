@@ -22,6 +22,8 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 **GitHub (new fleet repos):** default **public**; **scrollsmatrix** is the **private** exception — **[`goldpath/github-fleet-repo-visibility-default.md`](./goldpath/github-fleet-repo-visibility-default.md)**.
 
+**Build / deploy (fleet):** GitHub for **version control** only; **Cloudflare Workers Builds** watches the repo — **[`goldpath/github-vcs-cloudflare-builds.md`](./goldpath/github-vcs-cloudflare-builds.md)**.
+
 **Non-fleet or external Stitch-style `DESIGN.md`:** read **[`../docs/design-md-for-agents.md`](../docs/design-md-for-agents.md)** and **[`goldpath/design-md-brand-ui.md`](./goldpath/design-md-brand-ui.md)**. Agent rule: [`.cursor/rules/consult-design-md-for-branding.mdc`](../.cursor/rules/consult-design-md-for-branding.mdc).
 
 ## Layout

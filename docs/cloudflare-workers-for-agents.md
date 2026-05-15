@@ -32,6 +32,7 @@ This file does **not** duplicate those guides; it maps **this repo**.
 ## Related patterns (this repo)
 
 - Gold path: [`../patterns/goldpath/cloudflare-workers-wrangler-scaffold.md`](../patterns/goldpath/cloudflare-workers-wrangler-scaffold.md)  
+- Gold path (fleet CI): [`../patterns/goldpath/github-vcs-cloudflare-builds.md`](../patterns/goldpath/github-vcs-cloudflare-builds.md) — GitHub for VCS; **Workers Builds** on Cloudflare for deploy.  
 - Avoid: [`../patterns/errors/wrangler-secrets-in-config.md`](../patterns/errors/wrangler-secrets-in-config.md)
 
 ## If something is missing
