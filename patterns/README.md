@@ -16,11 +16,13 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 **DaisyUI + Tailwind (minimal drift):** **[`goldpath/daisyui-tailwind-minimal-drift.md`](./goldpath/daisyui-tailwind-minimal-drift.md)** — reuse stock components/utilities; scoped overrides only.
 
-**DaisyUI 5 forms:** **[`goldpath/daisyui-5-form-fields-markup.md`](./goldpath/daisyui-5-form-fields-markup.md)**; avoid **[`errors/daisyui-5-legacy-form-class-names.md`](./errors/daisyui-5-legacy-form-class-names.md)** and **[`errors/daisyui-5-textarea-wrapper-ux.md`](./errors/daisyui-5-textarea-wrapper-ux.md)**.
+**DaisyUI 5 forms:** **[`goldpath/daisyui-5-form-fields-markup.md`](./goldpath/daisyui-5-form-fields-markup.md)**; sad path / avoid **[`errors/daisyui-5-legacy-form-class-names.md`](./errors/daisyui-5-legacy-form-class-names.md)** and **[`errors/daisyui-5-textarea-wrapper-ux.md`](./errors/daisyui-5-textarea-wrapper-ux.md)** (indexed in **[`errors/README.md`](./errors/README.md)**).
 
 **Scrollsmatrix (standalone repo, no `git merge`):** **[`goldpath/scrollsmatrix-fleet-design-sync.md`](./goldpath/scrollsmatrix-fleet-design-sync.md)**.
 
 **GitHub (new fleet repos):** default **public**; **scrollsmatrix** is the **private** exception — **[`goldpath/github-fleet-repo-visibility-default.md`](./goldpath/github-fleet-repo-visibility-default.md)**.
+
+**Build / deploy (fleet):** GitHub for **version control** only; **Cloudflare Workers Builds** watches the repo — **[`goldpath/github-vcs-cloudflare-builds.md`](./goldpath/github-vcs-cloudflare-builds.md)**.
 
 **Non-fleet or external Stitch-style `DESIGN.md`:** read **[`../docs/design-md-for-agents.md`](../docs/design-md-for-agents.md)** and **[`goldpath/design-md-brand-ui.md`](./goldpath/design-md-brand-ui.md)**. Agent rule: [`.cursor/rules/consult-design-md-for-branding.mdc`](../.cursor/rules/consult-design-md-for-branding.mdc).
 

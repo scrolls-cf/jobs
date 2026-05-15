@@ -10,6 +10,7 @@ date: "2026-05-13"
 - **Source:** [Workers Builds — Configuration](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/) · [Build image](https://developers.cloudflare.com/workers/ci-cd/builds/build-image/) · [Custom builds (local Wrangler)](https://developers.cloudflare.com/workers/wrangler/custom-builds/)  
 - **Topic:** Workers Builds, Tailwind CLI, `package.json` scripts  
 - **Snippet or summary:**  
+  - **Fleet default:** build and deploy run on **Cloudflare** (Workers Builds watching Git), **not** GitHub Actions — see [`github-vcs-cloudflare-builds.md`](./github-vcs-cloudflare-builds.md) and [`.cursor/rules/no-github-actions-cloudflare-builds.mdc`](../../.cursor/rules/no-github-actions-cloudflare-builds.mdc).  
   - In **`package.json`**, make **`deploy`** (and usually **`dev`**) run **`npm run build`** (or your CSS script) **before** **`wrangler deploy` / `wrangler dev`**, e.g. `npm run build && wrangler deploy`.  
   - In the Cloudflare dashboard, set the **deploy command** to **`npm run deploy`** or **`npm ci && npm run deploy`** — not bare **`npx wrangler deploy`** unless you also run CSS in a dashboard **Build command**.  
   - Pin **`.nvmrc`** to a **Node major** documented for the Workers build image (e.g. **22** per build-image table), not an arbitrary bleeding-edge major, unless you have confirmed image support.  
