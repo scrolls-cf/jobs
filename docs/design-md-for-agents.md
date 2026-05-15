@@ -6,9 +6,11 @@
 
 Apps built from this scaffold ship with a **canonical house style**: root **`DESIGN.md`** (Devscrolls UI foundation, brand personality, **scaffold-first** evolution policy) and the **`devscrolls`** DaisyUI theme in **`src/styles/app.css`**. Agents must follow **`.cursor/rules/follow-devscrolls-ui-foundation.mdc`** for all routine UI unless the product owner opted out. **Brand / marketing / UX-UI** work expresses creativity **within** those rails; **fleet-wide** visual changes belong in **scaffold** first, then merge into forks (`patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md`). **`scrollsmatrix`** repos that cannot merge scaffold use [`../patterns/goldpath/scrollsmatrix-fleet-design-sync.md`](../patterns/goldpath/scrollsmatrix-fleet-design-sync.md).
 
+**Blocking UX (agents):** do not ship **modal dialogs** or **browser `alert` / `confirm` / `prompt`** for confirmations unless the task or product owner **explicitly** requests them—see root **`DESIGN.md`** non-negotiable **#11**. Inline DaisyUI **`alert …`** banners remain the default for strong feedback.
+
 Use this document when you need **another** aesthetic or an **additional** Stitch-style `DESIGN.md` from outside the fleet.
 
-**Framework fit (fleet default):** stay on **DaisyUI v5 + Tailwind** primitives—minimal custom CSS, stock components where possible ([`../patterns/goldpath/daisyui-tailwind-minimal-drift.md`](../patterns/goldpath/daisyui-tailwind-minimal-drift.md), [`../patterns/goldpath/daisyui-5-form-fields-markup.md`](../patterns/goldpath/daisyui-5-form-fields-markup.md); **`DESIGN.md`** non-negotiable **#10**). Sad-path foot-guns: [`../patterns/errors/README.md`](../patterns/errors/README.md) (Daisy/forms table).
+**Framework fit (fleet default):** stay on **DaisyUI v5 + Tailwind** primitives—minimal custom CSS, stock components where possible ([`../patterns/goldpath/daisyui-tailwind-minimal-drift.md`](../patterns/goldpath/daisyui-tailwind-minimal-drift.md), [`../patterns/goldpath/daisyui-5-form-fields-markup.md`](../patterns/goldpath/daisyui-5-form-fields-markup.md); **`DESIGN.md`** non-negotiables **#10** and **#11**). Sad-path foot-guns: [`../patterns/errors/README.md`](../patterns/errors/README.md) (Daisy/forms table).
 
 ## What this is
 
