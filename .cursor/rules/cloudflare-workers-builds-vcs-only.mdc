@@ -1,5 +1,5 @@
 ---
-description: Fleet uses GitHub for version control only; CI/build/deploy runs on Cloudflare (Workers Builds), not GitHub Actions
+description: Fleet uses GitHub for version control only; Worker build and deploy run on Cloudflare Workers Builds
 alwaysApply: true
 ---
 
@@ -7,9 +7,9 @@ alwaysApply: true
 
 In this ecosystem:
 
-1. **GitHub** — source hosting and **version control** (issues/PRs as you choose). **Do not** add **GitHub Actions** workflows (`.github/workflows/*.yml`) for build, test, or deploy of Workers unless a product owner explicitly opts out in writing.
+1. **GitHub** — source hosting and **version control** (issues/PRs as you choose). **Do not** add **hosted CI on the git provider** (repo-defined pipelines for build, test, or deploy of Workers) unless a product owner explicitly opts out in writing.
 2. **Cloudflare** — **Workers Builds** (or the dashboard **build + deploy** pipeline) watches the connected Git repository and **rebuilds / deploys Workers** when you push. Configure install command, build command, and deploy command there; keep **`npm run deploy`** (or equivalent) wired so CSS and assets build before `wrangler deploy` — see [`patterns/goldpath/workers-builds-ci-deploy-command.md`](../../patterns/goldpath/workers-builds-ci-deploy-command.md).
-3. **Agents** — when asked to “add CI”, “fix Actions”, or wire deploy secrets for Workers, default to **Cloudflare’s pipeline** and Wrangler docs, not workflow YAML on GitHub.
+3. **Agents** — when asked to add CI, fix failing checks on the git host, or wire deploy secrets for Workers, default to **Cloudflare’s pipeline** and Wrangler docs, not extra automation defined in the repository for that purpose.
 
 **Fleet rationale:** one pipeline owner (Cloudflare) avoids duplicate/conflicting automation and matches how fleet repos are already operated.
 

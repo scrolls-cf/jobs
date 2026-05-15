@@ -622,7 +622,7 @@ Official curated skills from OpenAI's skills repository.
 - **[openai/develop-web-game](https://officialskills.sh/openai/skills/develop-web-game)** - Build and test web games iteratively using Playwright with time-stepping
 - **[openai/doc](https://officialskills.sh/openai/skills/doc)** - Read, create, and edit .docx documents with formatting and layout fidelity
 - **[openai/gh-address-comments](https://officialskills.sh/openai/skills/gh-address-comments)** - Address review and issue comments on open GitHub PRs via CLI
-- **[openai/gh-fix-ci](https://officialskills.sh/openai/skills/gh-fix-ci)** - Debug and fix failing GitHub Actions PR checks using log inspection
+- **[openai/gh-fix-ci](https://officialskills.sh/openai/skills/gh-fix-ci)** - Debug and fix failing GitHub PR checks using log inspection
 - **[openai/imagegen](https://officialskills.sh/openai/skills/imagegen)** - Generate and edit images using OpenAI's Image API for projects
 - **[openai/jupyter-notebook](https://officialskills.sh/openai/skills/jupyter-notebook)** - Create clean, reproducible Jupyter notebooks for experiments and tutorials
 - **[openai/linear](https://officialskills.sh/openai/skills/linear)** - Manage issues, projects, and team workflows in Linear
