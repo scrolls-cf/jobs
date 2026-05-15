@@ -16,7 +16,7 @@ date: "2026-05-14"
 
 ## After every relevant scaffold push
 
-Relevant = changes to **fleet** `DESIGN.md`, **`src/styles/app.css`** (`devscrolls` theme), **`.cursor/rules`** for UI or fleet ops (e.g. Cloudflare vs GitHub CI), **`patterns/goldpath`** / **`patterns/errors`** DaisyUI + form UX entries, or **`docs/design-md-for-agents.md`** fleet paragraphs.
+Relevant = changes to **fleet** `DESIGN.md`, **`src/styles/app.css`** (`devscrolls` theme), **`.cursor/rules`** for UI or fleet ops (e.g. Cloudflare build pipeline vs git-host CI), **`patterns/goldpath`** / **`patterns/errors`** DaisyUI + form UX entries, or **`docs/design-md-for-agents.md`** fleet paragraphs.
 
 Assume **sibling directories** `scaffold/` and `scrollsmatrix/` under the same parent (adjust paths if yours differ).
 
@@ -25,7 +25,7 @@ Assume **sibling directories** `scaffold/` and `scrollsmatrix/` under the same p
 | Scaffold path | Scrollsmatrix path |
 | --- | --- |
 | `.cursor/rules/follow-devscrolls-ui-foundation.mdc` | same |
-| `.cursor/rules/no-github-actions-cloudflare-builds.mdc` | same |
+| `.cursor/rules/cloudflare-workers-builds-vcs-only.mdc` | same |
 | `.cursor/rules/consult-design-md-for-branding.mdc` | same |
 | `src/styles/app.css` | same |
 | `patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md` | same |
@@ -69,7 +69,7 @@ From **`scrollsmatrix/`** (parent contains `scaffold/`):
 
 ```bash
 cp ../scaffold/.cursor/rules/follow-devscrolls-ui-foundation.mdc .cursor/rules/
-cp ../scaffold/.cursor/rules/no-github-actions-cloudflare-builds.mdc .cursor/rules/
+cp ../scaffold/.cursor/rules/cloudflare-workers-builds-vcs-only.mdc .cursor/rules/
 cp ../scaffold/.cursor/rules/consult-design-md-for-branding.mdc .cursor/rules/
 cp ../scaffold/src/styles/app.css src/styles/
 cp ../scaffold/patterns/goldpath/fleet-ui-evolve-in-scaffold-first.md patterns/goldpath/
