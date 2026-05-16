@@ -1,0 +1,9 @@
+---
+description: Comments are for agents; do not repeat what lives in rules or AGENTS.md
+alwaysApply: true
+---
+
+# Comments vs rules (scaffold)
+
+- Treat **inline/repo comments** as **agent breadcrumbs** only—not prose for human maintainers when the same idea already lives in **`.cursor/rules`** or **`AGENTS.md`** (if present).
+- If **rules or `AGENTS.md` already say it**, do **not** copy that guidance into comments—agents are expected to load those files. Add a **one-line pointer** (e.g. “See `.cursor/rules/…`”) only when it saves confusion at a choke point.

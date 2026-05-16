@@ -1,0 +1,10 @@
+---
+description: Almost no code comments unless they directly help agents; no narration
+alwaysApply: true
+---
+
+# Minimal comments in code (scaffold)
+
+- **Default:** no comment—let the code and names speak.
+- **Allowed:** short comments that **steer an agent** (non-obvious invariant, “why not the obvious approach”, security footgun, link to a rule or pattern file).
+- **Avoid:** restating what the next line does, “this variable is used for X and Y”, tutorial-style blocks, or repeating docstrings the types already express.

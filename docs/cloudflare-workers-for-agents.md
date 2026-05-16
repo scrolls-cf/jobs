@@ -19,13 +19,21 @@ This file does **not** duplicate those guides; it maps **this repo**.
 | Worker implementation | `src/index.ts` (Hono + ASSETS fallback on 404) |
 | Binding types | `npm run cf-typegen` → `CloudflareBindings` (after editing `wrangler.jsonc`) |
 | Static assets | `assets` block → `public/`, binding `ASSETS` |
-| Secrets / vars | Use `[vars]` in `wrangler.jsonc` only for **non-secret** values; production secrets via `wrangler secret put …` ([Secrets](https://developers.cloudflare.com/workers/configuration/secrets/)). |
+| Secrets / vars | **`[vars]`** in `wrangler.jsonc` for **non-secret** defaults (`ENVIRONMENT`, **`CLOUDFLARE_ACCOUNT_ID`**, fleet **`GITHUB_*`**, **`SCROLLSMATRIX_PUBLIC_URL`** — prod gateway `https://scrollsmatrix.jvalamis.workers.dev`, **`SECRETS_STORE_ID`**). Production secrets: **`wrangler secret put …`** or **`secrets_store_secrets`** when you add bindings ([Secrets](https://developers.cloudflare.com/workers/configuration/secrets/)). |
+
+## Local env files (this package)
+
+- **Use only** **`.env`** (local, gitignored) and **`.env.example`** (committed template). **Do not use `.dev.vars`** — one file family keeps secrets and vars discoverable and consistent with other tools.
+- Bootstrap: `cp .env.example .env`, then fill `.env` as needed. `npm run dev` runs **`wrangler dev --env-file .env`** so Wrangler reads **`.env`**, not `.dev.vars`.
+- Never commit a filled `.env`. See [`../patterns/errors/wrangler-secrets-in-config.md`](../patterns/errors/wrangler-secrets-in-config.md).
+- **Secret names:** `snake_case` (e.g. `some_secret_variable`). The **Workers / dashboard secret name** must match the **`.env` key** — no alternate “local” name for the same secret.
+- **Fleet-wide secret names + `store_id` policy:** This package’s Worker may have **zero** `secrets_store_secrets` rows until you add them. Do **not** duplicate the full fleet list as required keys here — the **canonical name list and `store_id` guidance** live in **[`../../scrollsmatrix/docs/fleet-workers-builds.md`](../../scrollsmatrix/docs/fleet-workers-builds.md)** (monorepo path from this file). **`scaffold/.env.example`** uses empty **`KEY=`** lines (no `#` on secret keys) as stubs.
 
 ## Commands (this package)
 
 | Script | Role |
 | ------ | ---- |
-| `npm run dev` | Builds CSS then `wrangler dev` |
+| `npm run dev` | Builds CSS then `wrangler dev --env-file .env` |
 | `npm run deploy` | Builds CSS then `wrangler deploy` |
 | `npm run cf-typegen` | `wrangler types --env-interface CloudflareBindings` |
 

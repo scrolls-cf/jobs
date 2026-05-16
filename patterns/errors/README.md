@@ -8,6 +8,12 @@
 
 Append entries when you encounter **incorrect, fragile, or misleading code** in this codebase or in examples you almost copied.
 
+## Browser and gateway client (`fetch`, multi-step UX)
+
+| Sad path (`errors/`) | Gold path (`goldpath/`) |
+| --- | --- |
+| [`browser-single-fetch-fake-progress.md`](./browser-single-fetch-fake-progress.md) | [`browser-async-chaining-multi-step-ui.md`](../goldpath/browser-async-chaining-multi-step-ui.md) |
+
 ## Design and UI (DaisyUI + Tailwind + forms)
 
 | Sad path (`errors/`) | Gold path (`goldpath/`) |

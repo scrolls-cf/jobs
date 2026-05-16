@@ -18,6 +18,7 @@ node_modules/
 # env
 .env
 .env.production
+# Not used in this repo (we use .env + .env.example only); keep ignored if created by mistake.
 .dev.vars
 
 # logs

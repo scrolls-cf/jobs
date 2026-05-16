@@ -11,8 +11,8 @@ date: "2026-05-14"
 
 ## Snippet or summary
 
-1. **Default — public:** new fleet repos (scaffold forks, Workers, services like **`jobs`**, **`repo-factory`**, and future org apps) should be **Public** on GitHub unless the product owner documents a reason not to (compliance, embargoed work, or a deliberate closed beta).
-2. **Exception — scrollsmatrix:** the **scrollsmatrix** product repo stays **Private** (gateway / product surface, unrelated histories with scaffold, org choice). Do **not** treat that exception as the default for other repos.
+1. **Default — public:** new fleet repos (**repos forked from scaffold**, Workers, services like **`jobs`**, **`repo-factory`**, and future org apps) should be **Public** on GitHub unless the product owner documents a reason not to (compliance, embargoed work, or a deliberate closed beta).
+2. **Exception — scrollsmatrix:** the **scrollsmatrix** gateway repo stays **Private** (not forked from scaffold; product/org choice). Do **not** treat that exception as the default for other repos.
 3. **CLI:** prefer an explicit flag so agents do not inherit a tool default to private:
 
    ```bash

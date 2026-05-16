@@ -1,0 +1,26 @@
+---
+description: No silent fallbacks — fail fast with rich errors; defer logging until later
+alwaysApply: true
+---
+
+# No fallbacks — fail fast (scaffold)
+
+We optimize for **fast iteration and obvious failures**, not graceful degradation. **Structured error logging will come later**; until then, **do not paper over failures**.
+
+## Do
+
+- **Throw** (or let errors propagate) when something is wrong, missing, or invalid. Prefer `throw new Error('…')` with a **clear message**: what failed, where, and what was expected vs observed.
+- Use **`cause`** when wrapping: `throw new Error('…', { cause: err })` so agents see the full chain.
+- For **required** env, bindings, or data: validate early and **throw** if absent — no `process.env.X || 'default'` that hides misconfiguration.
+- Use **assertions** or narrow types for invariants instead of defensive branches that return fake “success” values.
+
+## Do not
+
+- Empty or minimal `catch` blocks, `catch { /* ignore */ }`, or catch-then-return a placeholder without rethrowing.
+- Broad `try/catch` around large regions “so the app keeps running” when the state is now undefined or unsafe.
+- **Fallback values** that mask bugs: e.g. `x ?? []` when `x` being missing is a programming error; `|| 'unknown'` for IDs the rest of the flow requires; swallowing fetch/parse errors and showing empty UI as if nothing failed.
+- **Fake progress** or silent retries without explicit product requirement (documented elsewhere).
+
+## Rationale
+
+Broken builds and runtime throws with **actionable messages** surface issues immediately for humans and agents. Hiding failures slows debugging and ships latent bugs.
