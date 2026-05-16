@@ -1,8 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "scaffold",
+  "name": "jobs",
   "main": "src/index.ts",
   "compatibility_date": "2026-05-10",
+  "workers_dev": false,
   // Account Secrets Store UUID (not a secret). Use this value for `store_id` on each `secrets_store_secrets` entry — duplicated as `vars.SECRETS_STORE_ID` for templates / `c.env`.
   "assets": {
     "directory": "./public",
