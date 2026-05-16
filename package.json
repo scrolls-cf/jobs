@@ -10,7 +10,10 @@
     "start": "node src/index.js",
     "build:css": "npx @tailwindcss/cli -i ./src/styles/app.css -o ./public/assets/app.css --minify",
     "build": "npm run build:css",
-    "dev": "npm run build:css && wrangler dev",
+    "dev": "npm run build:css && wrangler dev --env-file .env",
+    "agent:verify:build": "npm run build",
+    "agent:verify:dev": "node scripts/agent-verify-wrangler-dev.mjs",
+    "agent:verify": "npm run agent:verify:build && npm run agent:verify:dev",
     "deploy": "npm run build:css && wrangler deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
