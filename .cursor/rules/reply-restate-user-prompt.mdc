@@ -1,22 +1,22 @@
 ---
-description: Non-negotiable lead block + answer + trailing <b>cpath</b> (rules/agents shorthand, no .cursor)
+description: Non-negotiable bold four-line lead block (rules, skills, path, user prompt) then answer
 alwaysApply: true
 ---
 
 # Reply layout (scaffold)
 
-- **Start every reply** with exactly one **`<b>…</b>`** block (**four** lines inside it), then a blank line, then the body of your answer. **This block shape is non-negotiable** — do not omit, reorder, or rename these keys.
+- **Start every reply** with exactly **four consecutive lines**, each line **fully wrapped in markdown bold** (`**` at the start and end of that line only), then a blank line, then the body of your answer. **This shape is non-negotiable** — do not omit, reorder, or rename these keys.
 
-```html
-<b>rules: scaffold[, other-package-dir …]
-skills: null
-path: scaffold 2.1ms - scrollsmatrix 1.9ms
-user prompt: [one-line restatement of what they asked]</b>
+```markdown
+**rules: scaffold[, other-package-dir …]**
+**skills: null**
+**path: scaffold 2.1ms - scrollsmatrix 1.9ms**
+**user prompt: [one-line restatement of what they asked]**
 ```
 
 - **`rules:`** — Comma-separated **workspace folder names** whose `.cursor/rules` apply (always include **`scaffold`** when this file is in play; add others when their rules clearly apply).
 - **`skills:`** — If you **read or followed** an Agent Skill this turn: **`skill-name`** (or filename) and **repo-relative dir** (e.g. `scaffold/.cursor/skills/foo`). If you used **no** skills this turn, the line must be exactly **`skills: null`** (no second column, no em dash).
-- **`path:`** (inside `<b>`) — **Directory route only** — which **package roots** you spent wall time in to get context (reads, search, terminals under that cwd). **Do not** list individual filenames here; dirs + durations only. One segment per distinct top-level package dir; **merge** repeat visits into **one cumulative wall-time** per dir.
+- **`path:`** (same bold line as above) — **Directory route only** — which **package roots** you spent wall time in to get context (reads, search, terminals under that cwd). **Do not** list individual filenames here; dirs + durations only. One segment per distinct top-level package dir; **merge** repeat visits into **one cumulative wall-time** per dir.
   - **Duration (`msrules` — same everywhere):** track **real wall ms** internally, then print:
     - **Wall under 10000 ms:** **`(ms / 1000).toFixed(1)` + `ms`**. Examples: 2100 ms → **`2.1ms`**; 500 ms → **`0.5ms`**. Fleet display scale, not SI ms.
     - **Wall 10000 ms and above:** **`(ms / 10000).toFixed(1)` + `kms`** (**`1.0kms`** = 10000 ms wall). Examples: 33000 ms → **`3.3kms`**.
@@ -26,26 +26,6 @@ user prompt: [one-line restatement of what they asked]</b>
 
 - **Timing honesty:** Use **measured** elapsed time when the tool or terminal output gives it; otherwise give a **good-faith estimate** (still use **`msrules`** above).
 
-- **After `</b>`:** Answer directly. **Do not** prefix with **`Check:`**, **`Summary:`**, **`Same rules (content):`**, etc. Only expand on rules/skills/path if the user asked for an audit.
+- **After the lead block:** Answer directly. **Do not** prefix with **`Check:`**, **`Summary:`**, **`Same rules (content):`**, etc. Only expand on rules/skills/path if the user asked for an audit.
 
-- **Trivial** follow-ups (“yes”, “ok”): same **four-line** `<b>` block; if no repo dirs were used for context, use **`path: (none) —`**. **`skills:`** still **`null`** when no skills were read.
-
-## `cpath:` after your answer (non-negotiable)
-
-- **After the full substantive reply** (all paragraphs, code, lists), the **very last line** of the message must be a **second** HTML block, **only** this shape (own line):
-
-`<b>cpath: scaffold/rules 0.1ms - scrollsmatrix/rules 0.1ms</b>`
-
-- **Purpose:** **`path:`** = package dirs you roamed. **`cpath:`** = **what kinds of guidance** you used (rules, agents, or a **slow** rules file), with **`msrules`** times — **never** print **`.cursor`** in `cpath` (omit that path segment from the label).
-
-- **Segment labels (no `.cursor` ever):**
-  - **`{package}/rules`** — wall time for **`.cursor/rules`** in that package **when every individual `.mdc` you read there was under 1000 ms** wall. **Merge** those reads into **one cumulative** time per `{package}/rules`.
-  - **`{package}/rules/<filename>.mdc`** — use **only** when **that one file’s** guiding wall time is **greater than 1000 ms** (strictly over one second). Then that file gets its **own** segment with the **real filename**; do **not** also duplicate that time under a bare `{package}/rules` bucket for the same file.
-  - **`{package}/agents`** — wall time for that package’s **`AGENTS.md`** when its guiding wall time is **≤ 1000 ms**.
-  - **`{package}/AGENTS.md`** — use **only** when reading **`AGENTS.md`** in that package took **> 1000 ms** wall (filename visible because it was slow).
-
-- **Durations:** same **`msrules`** as **`path:`** (`N.Nms` under 10 s wall per segment, **`kms`** from 10 s wall).
-
-- **Order:** chronological **first use** of each segment, or if unclear, descending time.
-
-- **If nothing** guided the reply: **`<b>cpath: null</b>`** (exactly).
+- **Trivial** follow-ups (“yes”, “ok”): same **four bold lines**; if no repo dirs were used for context, use **`path: (none) —`**. **`skills:`** still **`null`** when no skills were read.
