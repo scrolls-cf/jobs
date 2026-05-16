@@ -1,0 +1,33 @@
+---
+description: ".env only; secret names = store names = snake_case; no local aliases"
+alwaysApply: true
+---
+
+# Env files (scaffold): `.env` + `.env.example` only
+
+**Single place for local secrets and non-default vars:** **`.env`** (gitignored). **`.env.example`** is the committed template (**no real secret values** — optional `#` lines only for non-key prose; see **`.env.example` format** below).
+
+## Do not
+
+- Add, document, or rely on **`.dev.vars`** in this package. Wrangler’s default local file for secrets is not part of our workflow; it splits configuration across two files and drifts from other tooling that expects `.env`.
+
+## Do
+
+- Put everything that belongs in a local env file in **`.env`** only.
+- Keep **`.env.example`** in sync when adding or renaming vars (placeholders or empty values only).
+- Run local dev with Wrangler loading **`.env`** (this repo’s `npm run dev` passes **`--env-file .env`**). If `.env` is missing, create it (`cp .env.example .env`); an empty file is enough until you need keys.
+- Production: still use **`wrangler secret put`** (or dashboard) for Worker secrets — not committed files. See [`docs/cloudflare-workers-for-agents.md`](docs/cloudflare-workers-for-agents.md).
+
+## `.env.example` format
+
+- **Secret / credential keys** (anything whose value is sensitive): list as **`canonical_secret_name=`** on its own line — **no leading `#`**. Wrong: `# devscrolls_scrollsmatrix_crypto_matrix_shared_secret=`. Right: **`devscrolls_scrollsmatrix_crypto_matrix_shared_secret=`** (empty value in the example file; real value only in **`.env`**).
+- **`#` lines** are for short file-level or non-key notes only—not for duplicating each secret name as a commented-out key.
+
+## Secret naming: one string everywhere
+
+- Use **`snake_case`** for anything sensitive or secret-ish, e.g. **`some_secret_variable`** (readable words, underscores).
+- **Same identifier in the account (e.g. Workers secret name) and in `.env`:** if Cloudflare shows **`some_super_secret_variable`**, that exact name is the **`.env` / `.env.example` key** locally. **Do not** invent a second name for the same value (e.g. `github_secret` in `.env` vs `github_secret_api_key` in the dashboard). **No “friendly” local rename** — traceability is store name → local key → docs.
+- When you add a secret, pick the **final** store name first, then use that string in **`.env.example`** (empty **`KEY=`** line) and **`.env`**.
+- **Full fleet secret name list + `store_id`:** do not grow this file into the fleet registry — see **[`scrollsmatrix/docs/fleet-workers-builds.md`](../../scrollsmatrix/docs/fleet-workers-builds.md)** when working inside the **devscrolls** monorepo (see **`scaffold/.env.example`** for uncommented **`KEY=`** stubs).
+
+Full map: [`patterns/goldpath/cloudflare-workers-wrangler-scaffold.md`](patterns/goldpath/cloudflare-workers-wrangler-scaffold.md).

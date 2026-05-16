@@ -3,17 +3,27 @@
   "name": "scaffold",
   "main": "src/index.ts",
   "compatibility_date": "2026-05-10",
+  // Account Secrets Store UUID (not a secret). Use this value for `store_id` on each `secrets_store_secrets` entry — duplicated as `vars.SECRETS_STORE_ID` for templates / `c.env`.
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
     "run_worker_first": true
   },
+  "vars": {
+    "ENVIRONMENT": "development",
+    "CLOUDFLARE_ACCOUNT_ID": "fc91bc5e5294c7fb716ee5e5be06380e",
+    "GITHUB_SOURCE_OWNER": "scrolls-cf",
+    "GITHUB_SOURCE_REPO": "scaffold",
+    "GITHUB_TARGET_ORG": "scrolls-cf",
+    "SCROLLSMATRIX_PUBLIC_URL": "https://scrollsmatrix.jvalamis.workers.dev",
+    "SECRETS_STORE_ID": "cf7f63f9d571485992997ffb96ec5075",
+  },
+  "observability": {
+    "enabled": true,
+  },
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
-  // "vars": {
-  //   "MY_VAR": "my-variable"
-  // },
   // "kv_namespaces": [
   //   {
   //     "binding": "MY_KV_NAMESPACE",

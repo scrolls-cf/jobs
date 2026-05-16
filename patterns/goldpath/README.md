@@ -10,6 +10,8 @@ Append entries when you find **recommended patterns, canonical examples, or doc-
 
 **DaisyUI + Tailwind (minimal drift):** [`daisyui-tailwind-minimal-drift.md`](./daisyui-tailwind-minimal-drift.md) — reuse stock components/utilities; scoped overrides only. **Forms / textareas:** [`daisyui-5-form-fields-markup.md`](./daisyui-5-form-fields-markup.md); foot-guns [`../errors/daisyui-5-legacy-form-class-names.md`](../errors/daisyui-5-legacy-form-class-names.md), [`../errors/daisyui-5-textarea-wrapper-ux.md`](../errors/daisyui-5-textarea-wrapper-ux.md).
 
+**Browser multi-step UI + `fetch`:** real per-step progress needs **sequential `await`s** (or streaming)—[`browser-async-chaining-multi-step-ui.md`](./browser-async-chaining-multi-step-ui.md); avoid [`../errors/browser-single-fetch-fake-progress.md`](../errors/browser-single-fetch-fake-progress.md).
+
 **Sad-path index:** tables pairing **`errors/`** → **`goldpath/`** for design and motion—[`../errors/README.md`](../errors/README.md).
 
 **Scrollsmatrix (no git merge):** after fleet changes ship from scaffold, use [`scrollsmatrix-fleet-design-sync.md`](./scrollsmatrix-fleet-design-sync.md).

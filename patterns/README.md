@@ -18,6 +18,8 @@ This directory holds **short, durable notes for AI coding agents** working in th
 
 **DaisyUI 5 forms:** **[`goldpath/daisyui-5-form-fields-markup.md`](./goldpath/daisyui-5-form-fields-markup.md)**; sad path / avoid **[`errors/daisyui-5-legacy-form-class-names.md`](./errors/daisyui-5-legacy-form-class-names.md)** and **[`errors/daisyui-5-textarea-wrapper-ux.md`](./errors/daisyui-5-textarea-wrapper-ux.md)** (indexed in **[`errors/README.md`](./errors/README.md)**).
 
+**Browser multi-step UI (`fetch`):** **[`goldpath/browser-async-chaining-multi-step-ui.md`](./goldpath/browser-async-chaining-multi-step-ui.md)**; avoid **[`errors/browser-single-fetch-fake-progress.md`](./errors/browser-single-fetch-fake-progress.md)**.
+
 **Scrollsmatrix (standalone repo, no `git merge`):** **[`goldpath/scrollsmatrix-fleet-design-sync.md`](./goldpath/scrollsmatrix-fleet-design-sync.md)**.
 
 **GitHub (new fleet repos):** default **public**; **scrollsmatrix** is the **private** exception — **[`goldpath/github-fleet-repo-visibility-default.md`](./goldpath/github-fleet-repo-visibility-default.md)**.

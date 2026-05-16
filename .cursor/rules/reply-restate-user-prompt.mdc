@@ -1,0 +1,31 @@
+---
+description: Non-negotiable bold four-line lead block (rules, skills, path, user prompt) then answer
+alwaysApply: true
+---
+
+# Reply layout (scaffold)
+
+- **Start every reply** with exactly **four consecutive lines**, each line **fully wrapped in markdown bold** (`**` at the start and end of that line only), then a blank line, then the body of your answer. **This shape is non-negotiable** — do not omit, reorder, or rename these keys.
+
+```markdown
+**rules: scaffold[, other-package-dir …]**
+**skills: null**
+**path: scaffold 2.1ms - scrollsmatrix 1.9ms**
+**user prompt: [one-line restatement of what they asked]**
+```
+
+- **`rules:`** — Comma-separated **workspace folder names** whose `.cursor/rules` apply (always include **`scaffold`** when this file is in play; add others when their rules clearly apply).
+- **`skills:`** — If you **read or followed** an Agent Skill this turn: **`skill-name`** (or filename) and **repo-relative dir** (e.g. `scaffold/.cursor/skills/foo`). If you used **no** skills this turn, the line must be exactly **`skills: null`** (no second column, no em dash).
+- **`path:`** (same bold line as above) — **Directory route only** — which **package roots** you spent wall time in to get context (reads, search, terminals under that cwd). **Do not** list individual filenames here; dirs + durations only. One segment per distinct top-level package dir; **merge** repeat visits into **one cumulative wall-time** per dir.
+  - **Duration (`msrules` — same everywhere):** track **real wall ms** internally, then print:
+    - **Wall under 10000 ms:** **`(ms / 1000).toFixed(1)` + `ms`**. Examples: 2100 ms → **`2.1ms`**; 500 ms → **`0.5ms`**. Fleet display scale, not SI ms.
+    - **Wall 10000 ms and above:** **`(ms / 10000).toFixed(1)` + `kms`** (**`1.0kms`** = 10000 ms wall). Examples: 33000 ms → **`3.3kms`**.
+  - Separate segments with **` - `**. Order by **chronology of first use** of that dir, or if unclear, by **decreasing** wall time.
+
+- **`user prompt:`** — One line: what you understood them to want.
+
+- **Timing honesty:** Use **measured** elapsed time when the tool or terminal output gives it; otherwise give a **good-faith estimate** (still use **`msrules`** above).
+
+- **After the lead block:** Answer directly. **Do not** prefix with **`Check:`**, **`Summary:`**, **`Same rules (content):`**, etc. Only expand on rules/skills/path if the user asked for an audit.
+
+- **Trivial** follow-ups (“yes”, “ok”): same **four bold lines**; if no repo dirs were used for context, use **`path: (none) —`**. **`skills:`** still **`null`** when no skills were read.
