@@ -1,6 +1,13 @@
 import { Hono } from 'hono'
+import { requireFleetGateway } from './lib/fleet-gateway/require-fleet-gateway'
 
 const app = new Hono<{ Bindings: CloudflareBindings }>()
+
+app.use('*', async (c, next) => {
+  const blocked = await requireFleetGateway(c.req.raw, c.env)
+  if (blocked) return blocked
+  await next()
+})
 
 app.get('/health', (c) => {
   return c.json({
