@@ -536,44 +536,22 @@
         })
       }
 
-      /** @param {HTMLElement} li @param {{ id: string; title: string; summary: string; body?: string; kind: string; voteScore?: number }} item */
-      function wireBacklogRow(li, item) {
-        const activate = () =>
-          openDetail(item.title, (el) => renderBacklogDetail(el, item), li, 'backlog')
-        li.addEventListener('click', activate)
-        li.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            activate()
-          }
-        })
-      }
-
-      /** @param {unknown[]} items */
-      function paintBacklogList(items) {
-        backlogCountEl.textContent = `${items.length} items`
-        backlogListEl.innerHTML = ''
-        for (const item of items) {
-          const node = backlogTemplate.content.cloneNode(true)
-          const li = node.querySelector('[data-backlog-row]')
-          li.dataset.backlogId = item.id
-          node.querySelector('[data-title]').textContent = item.title
-          node.querySelector('[data-summary]').textContent = item.summary
-          node.querySelector('[data-kind]').textContent = item.kind
-          node.querySelector('[data-score]').textContent = String(item.voteScore ?? 0)
-          wireBacklogRow(li, item)
-          backlogListEl.appendChild(li)
-        }
-        backlogLoadingEl.classList.add('hidden')
-        backlogListEl.hidden = false
-      }
+      let backlogAnimateNext = false
 
       async function loadBacklog() {
         const res = await fetch(fleetApiPath('api/backlog'))
         if (!res.ok) throw new Error(`Could not load backlog (${res.status})`)
         const data = await res.json()
         if (!Array.isArray(data.items)) throw new Error('Invalid backlog response')
-        paintBacklogList(data.items)
+        backlogCountEl.textContent = `${data.items.length} items`
+        paintBacklogList(backlogListEl, backlogTemplate, data.items, {
+          animate: backlogAnimateNext,
+          onActivate: (item, li) =>
+            openDetail(item.title, (el) => renderBacklogDetail(el, item), li, 'backlog'),
+        })
+        backlogAnimateNext = false
+        backlogLoadingEl.classList.add('hidden')
+        backlogListEl.hidden = false
       }
 
       backlogForm.addEventListener('submit', async (e) => {
