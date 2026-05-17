@@ -3,7 +3,7 @@ npm install
 npm run dev
 ```
 
-**UI / branding:** Devscrolls fleet defaults live in **[`DESIGN.md`](./DESIGN.md)** (product rules for agents) and **`src/styles/app.css`** (`devscrolls` DaisyUI theme). Rebuild CSS after token edits: `npm run build:css`.
+**UI / branding:** Fleet design lives in **[`scrolls-cf/scrollsdesigner`](https://github.com/scrolls-cf/scrollsdesigner)**. This repo gets copies via `npm run sync:fleet` there. Local rules: **[`DESIGN.md`](./DESIGN.md)** · themes in **`themes/`** · rebuild: `npm run build:css`.
 
 ```txt
 npm run deploy

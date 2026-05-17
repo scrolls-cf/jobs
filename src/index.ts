@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { requireFleetGateway } from './lib/fleet-gateway/require-fleet-gateway'
 
 import { JOBS, WORKER_PLATFORM_CONTRACT } from './jobs-data'
 import { requireFleetGateway } from './lib/fleet-gateway/require-fleet-gateway'
