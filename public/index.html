@@ -113,6 +113,8 @@
     </template>
 
     <script type="module">
+      import { fleetApiPath } from './assets/fleet-api.js'
+
       const shell = document.getElementById('job-shell')
       const listEl = document.getElementById('job-list')
       const countEl = document.getElementById('job-count')
@@ -311,7 +313,7 @@
       }
 
       try {
-        const res = await fetch('/api/jobs')
+        const res = await fetch(fleetApiPath('api/jobs'))
         if (!res.ok) throw new Error(`Could not load jobs (${res.status})`)
         const data = await res.json()
         const jobs = data.jobs
