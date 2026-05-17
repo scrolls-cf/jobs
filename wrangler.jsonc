@@ -44,13 +44,15 @@
   //     "bucket_name": "my-bucket"
   //   }
   // ],
-  // "d1_databases": [
-  //   {
-  //     "binding": "MY_DB",
-  //     "database_name": "my-database",
-  //     "database_id": ""
-  //   }
-  // ],
+  "d1_databases": [
+    {
+      "binding": "BACKLOG_DB",
+      "database_name": "jobs-backlog",
+      // Placeholder for local dev. Production: `wrangler d1 create jobs-backlog` and replace id.
+      "database_id": "8548258e-ce2e-4a4a-9ffb-9a9ffaecf850",
+      "migrations_dir": "migrations",
+    },
+  ],
   // "ai": {
   //   "binding": "AI"
   // },
