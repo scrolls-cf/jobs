@@ -1,15 +1,15 @@
+> **Synced from scrollsdesigner.** Canonical edits: `scrolls-cf/scrollsdesigner` → `npm run sync:fleet`. Product CSS: `src/styles/product.css` in this repo.
+
 # Devscrolls UI foundation (jobs)
 
-**Audience:** coding agents and humans working in this repo.  
-**Status:** fleet-aligned with the **`devscrolls`** DaisyUI theme in `src/styles/app.css`; this file also specifies the **Scrollsmatrix jobs board** surface on top of that baseline.
+**Audience:** coding agents and humans shipping any Devscrolls fleet app.  
+**Status:** canonical house style unless a product owner explicitly opts out in writing.
 
-## Fleet baseline
+## Intent
 
-### Intent
+Ship **predictable, on-brand UI** so builders focus on behavior and data, not one-off palettes or arbitrary Tailwind color picks. Implement with **DaisyUI components + semantic tokens** from **`themes/`** (built via `src/styles/app.css`). **Stay close to DaisyUI and Tailwind defaults**—reuse component APIs and layout utilities; add custom CSS only when necessary, scoped, and documented.
 
-Ship **predictable, on-brand UI** so builders focus on behavior and data, not one-off palettes or arbitrary Tailwind color picks. Implement with **DaisyUI components + semantic tokens** wired by the **`devscrolls`** theme in `src/styles/app.css`. **Stay close to DaisyUI and Tailwind defaults**—reuse component APIs and layout utilities; add custom CSS only when necessary, scoped, and documented.
-
-### Brand personality (Devscrolls)
+## Brand personality (Devscrolls)
 
 Voice the product through layout and motion, not through random color picks. Default reading:
 
@@ -23,25 +23,36 @@ Voice the product through layout and motion, not through random color picks. Def
 
 Agents with **brand / marketing / UX-UI** skills own **execution inside these rails** (story, emphasis, flow, microcopy tone). They do **not** invent a parallel brand system per app.
 
-### Where fleet rules change (scaffold first)
+## Where fleet rules change (scrollsdesigner first)
 
-This **`scrolls-cf/scaffold`** repo is the **source of truth** for fleet-wide look: **`DESIGN.md`**, **`src/styles/app.css`**, and shared **`.cursor/rules`** that point there.
+This **`scrolls-cf/scrollsdesigner`** repo is the **source of truth** for fleet-wide look: **`DESIGN.md`**, **`themes/`**, **`src/styles/`**, **`src/animations/`**, **`components/`**.
 
-1. **Edit scaffold** (tokens, non-negotiables, new global patterns), **`npm run build:css`** when `src/styles/app.css` changes, commit, **`git push origin master`**.
-2. **Merge into each repo that was forked from scaffold** (for example `jobs`, `repo-factory`, `looks1999`) on a schedule you choose; resolve conflicts by keeping **product-specific** surfaces in that repo and **fleet tokens + docs** from scaffold. **`scrollsmatrix`** is **not** forked from scaffold (separate gateway product); keep it fleet-aligned by **copying** files per [`patterns/goldpath/scrollsmatrix-fleet-design-sync.md`](./patterns/goldpath/scrollsmatrix-fleet-design-sync.md), not `git merge`.
-3. Optional: use external skills (e.g. **[design-md](https://officialskills.sh/google-labs-code/skills/design-md)**, **[frontend-design](https://officialskills.sh/anthropics/skills/frontend-design)**) as **technique**—output must still map onto **`devscrolls`** semantics unless the product owner opts out in writing.
+1. **Edit scrollsdesigner** (tokens, themes, non-negotiables, global patterns), **`npm run build:css`**, commit, push.
+2. **Sync** built CSS and docs into **`scaffold`** and apps per [`docs/sync-to-fleet.md`](./docs/sync-to-fleet.md) and [`patterns/goldpath/fleet-design-evolve-in-scrollsdesigner-first.md`](./patterns/goldpath/fleet-design-evolve-in-scrollsdesigner-first.md). **`scrollsmatrix`** is not a scaffold fork—copy per [`patterns/goldpath/scrollsmatrix-fleet-design-sync.md`](./patterns/goldpath/scrollsmatrix-fleet-design-sync.md).
+3. Optional external skills (**[design-md](https://officialskills.sh/google-labs-code/skills/design-md)**, **[frontend-design](https://officialskills.sh/anthropics/skills/frontend-design)**) are **technique only**—output must map onto fleet theme semantics unless the product owner opts out in writing.
 
-### Non-negotiables (agents)
+## Themes (pick one per app)
 
-1. **Theme:** root layout uses **`data-theme="devscrolls"`** on `<html>` (or the outer app shell). Do not add casual theme switchers unless the product spec requires it.
+| Theme | Role |
+|-------|------|
+| **`devscrolls`** | Default dark fleet shell |
+| **`devscrolls-light`** | Light marketing / docs |
+| **`devscrolls-studio`** | Creative tools, accent-forward |
+| **`devscrolls-ink`** | Dense dashboards |
+
+Set **`data-theme="<name>"`** on `<html>`. Details: [`themes/README.md`](./themes/README.md).
+
+## Non-negotiables (agents)
+
+1. **Theme:** root layout uses **`data-theme="devscrolls"`** (or another fleet theme from the table above) on `<html>`. Do not add casual theme switchers unless the product spec requires it.
 2. **Colors:** use **DaisyUI semantic colors** only (`primary`, `accent`, `base-*`, `neutral`, `info`, `success`, `warning`, `error`, and matching `*-content`). Do **not** use raw Tailwind palette classes for text or surfaces (`text-gray-*`, `bg-slate-*`, `text-blue-500`, etc.) except for **true** one-off debug or third-party embeds—and then isolate them.
 3. **Surfaces:** most of the page is **`base-100` / `base-200` / `base-300`**; use **`primary`** for the main CTA and key focus; use **`accent`** for secondary highlights, tags, or “interesting” affordances. Use **`neutral`** for dense tool chrome, not for marketing hero fills.
 4. **Typography:** **system UI stack** only unless a future revision of this file adds a webfont. Default body: `antialiased` on the shell; prefer **`text-base-content`** with opacity modifiers (`/70`, `/80`) over inventing new gray hex values.
 5. **Density:** default to **comfortable** spacing (`gap-4`–`gap-8` in page sections, `p-4`–`p-6` on cards). Avoid ultra-tight `gap-1` layouts for primary flows.
 6. **Radius:** theme sets rounded selectors and boxes; do not fight it with ad-hoc `rounded-sm` on Daisy components unless fixing a clash—prefer component defaults.
-7. **Motion:** follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`. No layout-thrashing animations on `width`/`height`/`top`/`left`. **Jobs board:** master–detail column transitions use **flex / max-width / opacity** only; **`prefers-reduced-motion`** disables those transitions in this package’s `src/styles/app.css`.
+7. **Motion:** use presets in **`src/animations/`** when possible; otherwise follow `docs/gsap-for-agents.md` and `patterns/goldpath/gsap-prefer-transforms.md`. No layout-thrashing animations on `width`/`height`/`top`/`left`.
 8. **Content:** use **`prose prose-invert`** only where long-form markdown lives; keep app chrome outside `prose`.
-9. **Tool surfaces (microcopy):** internal Workers, dashboards, **this jobs board**, and **repo-factory-style** intakes default to **literal, efficient labels**—**not** conversational onboarding, long “first slice” disclaimers, or hint paragraphs under fields. **Field labels and control chrome** (not page/section titles) stay **lowercase** unless a proper noun or acronym requires otherwise. Ship **only** what the task needs; add prose when the **product spec** asks for marketing or education. **Accessibility** still requires real `<label>` / `aria-*` / errors—not filler copy.
+9. **Tool surfaces (microcopy):** internal Workers, dashboards, and **repo-factory-style** flows default to **literal, efficient labels** (`name`, `description`, `submit`)—**not** conversational onboarding, long “first slice” disclaimers, or hint paragraphs under fields. **Field labels and control chrome** (not page/section titles) stay **lowercase** unless a proper noun or acronym requires otherwise. Ship **only** what the task needs; add prose when the **product spec** asks for marketing or education. **Accessibility** still requires real `<label>` / `aria-*` / errors—not filler copy.
 10. **DaisyUI + Tailwind alignment (priority order — do not invert):**
     1. **Stock DaisyUI v5** components and documented markup (`btn`, `card`, `input`, `textarea`, `alert`, …).
     2. **Tailwind utilities** for layout and spacing (`flex`, `grid`, `gap-*`, responsive prefixes).
@@ -50,7 +61,7 @@ This **`scrolls-cf/scaffold`** repo is the **source of truth** for fleet-wide lo
     Read [`patterns/goldpath/daisyui-tailwind-minimal-drift.md`](patterns/goldpath/daisyui-tailwind-minimal-drift.md) and [`patterns/goldpath/daisyui-5-form-fields-markup.md`](patterns/goldpath/daisyui-5-form-fields-markup.md); form foot-guns in [`patterns/errors/daisyui-5-legacy-form-class-names.md`](patterns/errors/daisyui-5-legacy-form-class-names.md) and [`patterns/errors/daisyui-5-textarea-wrapper-ux.md`](patterns/errors/daisyui-5-textarea-wrapper-ux.md).
 11. **No unsolicited blocking overlays or browser dialogs:** do **not** add **modal dialogs** (DaisyUI `modal`, full-screen interstitials used as “are you sure?”, or equivalent) or **blocking confirmation UX** via **`window.alert`**, **`window.confirm`**, or **`window.prompt`** unless the **product owner explicitly requested** that pattern in the task or spec. Prefer **inline** feedback (`alert alert-*` banners, form errors, toasts if the stack already uses them, undo on primary surfaces) so flows stay fast and on-brand. (DaisyUI **`alert`** = in-page banner; it is **not** the same as `window.alert`.)
 
-### Brand tokens (reference)
+## Brand tokens (reference)
 
 | Role | Hex (reference) | Semantic token |
 |------|-----------------|----------------|
@@ -58,9 +69,9 @@ This **`scrolls-cf/scaffold`** repo is the **source of truth** for fleet-wide lo
 | Brand gradient B (violet) | `#a78bfa` | maps to **`accent`** family |
 | Canvas (dark) | derived from dim-like cool neutrals | **`base-100` … `base-content`** |
 
-Exact OKLCH values live in **`src/styles/app.css`** (`@plugin "daisyui/theme"` → `devscrolls`). **That file is the runtime source of truth**; update this table’s hex column when marketing needs a swatch card, but change tokens in CSS first.
+Exact OKLCH values live in **`themes/*.css`**. **Those files are the runtime source of truth**; update this table’s hex column when marketing needs a swatch card, but change tokens in `themes/` first.
 
-### Typography scale (logical)
+## Typography scale (logical)
 
 - **Display / hero:** `text-4xl`–`text-6xl`, `font-semibold` or `font-bold`, `tracking-tight`, `text-base-content`.
 - **Page title:** `text-2xl`–`text-3xl`, `font-semibold`.
@@ -68,7 +79,7 @@ Exact OKLCH values live in **`src/styles/app.css`** (`@plugin "daisyui/theme"` �
 - **Body:** default (`text-base`), `text-base-content/90`, relaxed leading where paragraphs exist.
 - **Meta / captions:** `text-sm`, `text-base-content/60`.
 
-### Components (defaults)
+## Components (defaults)
 
 - **Primary action:** `btn btn-primary`.
 - **Secondary action:** `btn btn-outline` or `btn btn-ghost` on `base-100`/`base-200`.
@@ -77,89 +88,12 @@ Exact OKLCH values live in **`src/styles/app.css`** (`@plugin "daisyui/theme"` �
 - **Alerts / feedback:** `alert alert-info | warning | error` for strong block feedback; **`success`** stays a semantic token. For **inline success beside primary links** (e.g. repo-factory / scrollsmatrix gateway), use scoped **`#alert-success`** in `src/styles/app.css` instead of **`alert alert-success`** so **`primary`** links stay legible on a **base-** tinted surface.
 - **Gateway repo form:** Apps that embed **`#matrix-gateway-repo-form`** (and the field ids from `patterns/goldpath/daisyui-5-form-fields-markup.md`) inherit scoped field width, validation border/outline, and label error tint from the same CSS file.
 
-## This product — jobs board surface
-
-### 1. Visual theme and atmosphere
-
-- **Product:** single-page jobs board for Scrollsmatrix—**the board is the hero** (no splash logo band above it).
-- **Mood:** dark-first, developer-tool calm; **primary** for interactive selection, loading, and row focus; **accent** (violet) for non-interactive brand chrome (board kicker, detail `h3` labels).
-- **Density:** comfortable reading; one primary surface (list + detail) inside a single framed shell on `md+`.
-- **Atmosphere:** subtle **primary** radial wash behind the shell (`color-mix` on `--color-primary`, low opacity), aligned with other Devscrolls fleet surfaces.
-
-### 2. Color and semantic roles (jobs)
-
-- **Surfaces:** `bg-base-100` page; shell `md:border` / `md:bg-base-200/50`; list `bg-base-200/80` with `ring-1` / `divide-y`.
-- **Interactive chrome:** `primary` for spinner, selection border, focus ring, and row-selected fill.
-- **Brand chrome:** `accent` for the board kicker and detail panel **`h3`** section labels (not click targets).
-- **Content:** `text-base-content` hierarchy with opacity steps — no raw hex in new markup unless extending this file first.
-
-### 3. Typography (jobs)
-
-- **System stack:** inherited (`antialiased` on body).
-- **Hierarchy:** list titles `text-sm font-semibold uppercase tracking-wide`; detail title `text-base` / `sm:text-lg` semibold uppercase.
-- **Long copy:** `prose prose-invert prose-sm` in the detail region; paragraphs from JS stay in the prose container.
-
-### 4. Clickable targets (jobs board)
-
-- **Job rows** behave like **buttons**: `role="button"`, `tabindex="0"`, **`cursor-pointer`**, full-row hit target, clear **`hover:`** and **`focus-visible:ring-2`** (keyboard), and **`aria-selected="true"`** on the active row when a detail is open.
-- **Do not** rely on color alone for selection—pair **`aria-selected`** with visible **left border + tinted background** (`aria-selected:border-l-2`, `aria-selected:bg-primary/[…]`).
-- **Detail panel** is not a modal: no dimmed full-screen overlay. Dismiss with **Close** control and **Escape** (returns focus to the row that was selected).
-- **Close** is a real `<button type="button">` with an **`aria-label`** (or visible “Close” text) so SR users are not trapped in the region.
-
-### 5. Components (jobs)
-
-- **Shell (`#job-shell`):** `max-w-6xl` master–detail container; `data-detail-open="true"` when a job is selected (drives layout CSS in `src/styles/app.css`).
-- **List column (`#job-list-column` / `.job-shell__list`):** kicker (“Scrollsmatrix jobs”) in **`text-accent`**, count badge with **`badge-outline border-primary/30`**, then `<ul role="list">`; rows are the only primary click targets before selection.
-- **Job row:** title + two-line summary; selected state as above.
-- **Detail (`#job-detail-panel`):** `role="region"` **`aria-labelledby="job-detail-title"`**; inner card is **sticky** on desktop so long copy scrolls inside the column, not the whole page. Content order: **Worker purpose** → **Platform contract** (from `workerPlatformContract` in `/api/jobs`) → **Description** → **Acceptance tests** (numbered mocks; CI runner TBD).
-- **Job count:** `badge badge-outline border-primary/30` (subtle **primary** rim on neutral body), not a filled marketing pill.
-
-### 6. Layout and spacing
-
-- **Page:** `min-h-screen`, horizontal padding `px-4` → `sm:px-6` → `lg:px-8`, vertical `py-6` / `lg:py-10`.
-- **Master–detail (`md+`):** flex row inside the shell; with detail open, the **list column narrows** and the **detail column grows** to the right—no overlay.
-- **Small screens:** same DOM order (list, then detail); detail **stacks below** the list when open; no fake modal.
-
-### 7. Depth and motion
-
-- **Elevation:** `shadow-xl` on the shell; inner detail card uses `shadow-lg` + border for separation from the list.
-- **Motion:** `md+` uses short transitions on list **max-width / flex** when opening detail (see `.job-shell` rules in `src/styles/app.css`). Respect **`prefers-reduced-motion`**.
-
-### 8. Do and do not
-
-- **Do** use semantic Daisy classes (`btn`, `badge`, `alert`, `loading`) and theme tokens.
-- **Do** keep focus rings on rows and real buttons; keep `aria-selected` in sync with the open job.
-- **Do** update this file when changing layout, selection rules, or detail behavior.
-- **Do not** reintroduce a **blocking modal overlay** for job copy unless product explicitly changes—prefer this split view.
-- **Do not** introduce a second parallel palette without updating tokens here and in `src/styles/app.css`.
-
-### 9. Responsive behavior
-
-- **`md` (768px):** side-by-side master–detail with animated column split.
-- **Below `md`:** stacked list + detail; user scrolls to read detail; Close still clears selection.
-
-### 10. Agent prompt hints
-
-- “Match jobs board” → `devscrolls` theme, subtle **primary** radial wash, framed shell, **accent** kicker + detail section labels, **primary** for selection/spinner/badge rim, list + right detail, no hero logo strip.
-- “Accessibility pass” → list `role="list"`, rows `role="button"` + keyboard + `aria-selected`, detail `role="region"` + labelled title, loading `aria-live="polite"`.
-
-### 11. Worker deliverable (platform alignment)
-
-Every job is expected to ship a **Cloudflare Worker** (or one clearly bounded Worker entrypoint) that:
-
-- Takes **JSON** on documented business routes (where a body is used) and returns **JSON** with `Content-Type: application/json`.
-- Exposes **`GET /health`** returning **200** and a small JSON body with **no side effects**.
-- Implements **only** the capability described for that job—no unrelated surfaces in the same deploy.
-- **Does not deploy to production** until the job’s **acceptance tests** are **green in CI** (exact pipeline and preview URL strategy **TBD**; contract is fixed in data + UI).
-
-Canonical copy of the shared rules lives in **`WORKER_PLATFORM_CONTRACT`** in `src/jobs-data.ts` and is returned as **`workerPlatformContract`** on **`GET /api/jobs`** (and filtered `POST /api/jobs` responses).
-
 ## When to copy an external `DESIGN.md`
 
 Only when the **product owner** asks for a **different** aesthetic (another brand, white-label, or strict client guide). Then follow `docs/design-md-for-agents.md` and merge conflicts **explicitly**—do not silently fork the fleet palette.
 
 ## Revision
 
-Tweaks to the fleet look belong in **`src/styles/app.css`** and the **Fleet baseline** sections above; jobs-board sections change when the board UX changes.
+Tweaks to the fleet look belong here and in `src/styles/app.css` together; bump a short note at the bottom when you change tokens.
 
-_Changelog: 2026-05-16 — Merged scaffold `master` (`.nvmrc`, reply rule). 2026-05-15 — Merged **scaffold** `master` (non-negotiable **#11**, Workers Builds VCS-only). 2026-05-14 — Jobs board spec + fleet `devscrolls` foundation; pattern indexes and scrollsmatrix manual-sync pointer._
+_Changelog: 2026-05-16 — **scrollsdesigner** owns fleet design (themes/, animations/, components/); four fleet themes; sync via `docs/sync-to-fleet.md`. 2026-05-16 — **Where fleet rules change** #2: **scrollsmatrix** is not a scaffold Git fork; manual sync goldpath linked. 2026-05-15 — Non-negotiable **#11** (no modals / browser `confirm` unless requested; DaisyUI `alert` banners unchanged); **#9** lowercase tool labels; **Components** gateway **`#alert-success`** + **`#matrix-gateway-repo-form`**. 2026-05-14 — `patterns/errors/README.md`: sad-path ↔ gold-path tables (design + GSAP); cross-links in `daisyui.md`, `daisyui-tailwind-v4-config.md`, `design-md-for-agents.md`, `patterns/README.md`. 2026-05-14 — Non-negotiable **#10** expanded: ordered stack (Daisy → Tailwind → tokens → scoped CSS); form goldpath + textarea UX errors linked. 2026-05-14 — Initial Devscrolls foundation. 2026-05-14 — Brand personality pillars; scaffold-first fleet evolution; brand/UX agent ownership inside rails. 2026-05-14 — Agent guide + patterns index: scrollsmatrix manual-sync pointer. 2026-05-14 — Non-negotiable #9: terse tool microcopy. 2026-05-14 — Non-negotiable #10 + goldpath: minimal drift from DaisyUI + Tailwind (reuse components/utilities; scoped overrides only)._
