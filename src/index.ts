@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 
 import { JOBS, WORKER_PLATFORM_CONTRACT } from './jobs-data'
 import { requireFleetGateway } from './lib/fleet-gateway/require-fleet-gateway'
+import { backlog } from './routes/backlog'
 
 const jobsBoardPayload = () => ({
   jobs: JOBS,
@@ -23,6 +24,8 @@ app.get('/health', (c) => {
     runtime: 'workers',
   })
 })
+
+app.route('/api/backlog', backlog)
 
 /** Jobs plus `workerPlatformContract` (JSON I/O, /health, single-purpose, deploy gate, CI note). */
 app.get('/api/jobs', (c) => {

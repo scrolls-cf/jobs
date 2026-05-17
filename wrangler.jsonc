@@ -46,10 +46,9 @@
   // ],
   "d1_databases": [
     {
-      "binding": "BACKLOG_DB",
-      "database_name": "jobs-backlog",
-      // Placeholder for local dev. Production: `wrangler d1 create jobs-backlog` and replace id.
-      "database_id": "8548258e-ce2e-4a4a-9ffb-9a9ffaecf850",
+      "binding": "DB",
+      "database_name": "jobs",
+      "database_id": "e54f0811-2a79-4a07-9184-ae9409578049",
       "migrations_dir": "migrations",
     },
   ],

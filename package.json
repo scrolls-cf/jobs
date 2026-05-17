@@ -15,6 +15,8 @@
     "agent:verify:dev": "node scripts/agent-verify-wrangler-dev.mjs",
     "agent:verify": "npm run agent:verify:build && npm run agent:verify:dev",
     "deploy": "npm run build:css && wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply jobs --local",
+    "db:migrate:remote": "wrangler d1 migrations apply jobs --remote",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {

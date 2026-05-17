@@ -22,26 +22,147 @@
         id="job-shell"
         class="job-shell relative z-10 mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-stretch md:gap-0 md:rounded-2xl md:border md:border-base-content/10 md:bg-base-200/50 md:shadow-xl md:backdrop-blur-sm"
         data-detail-open="false"
+        data-board="backlog"
       >
         <div
           id="job-list-column"
           class="job-shell__list min-w-0 flex-1 md:m-[3px] md:rounded-[calc(1rem-3px)] md:border md:border-base-content/5 md:bg-base-200/80 md:p-5 md:shadow-inner lg:p-6"
         >
-          <section id="job-board" class="flex flex-col gap-4" aria-label="Job list">
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p
-                class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent/85"
+          <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent/85">
+              scrollsmatrix jobs
+            </p>
+            <div
+              class="tabs tabs-boxed max-w-full flex-nowrap overflow-x-auto bg-base-300/40"
+              role="tablist"
+              aria-label="board"
+            >
+              <button
+                type="button"
+                class="tab tab-sm tab-active"
+                role="tab"
+                aria-selected="true"
+                data-board-tab="backlog"
               >
-                Scrollsmatrix jobs
-              </p>
-              <div class="flex justify-end">
-                <span
-                  id="job-count"
-                  class="badge badge-outline border-primary/30 bg-base-200/80 text-base-content"
-                  >…</span>
-              </div>
+                team backlog
+              </button>
+              <button
+                type="button"
+                class="tab tab-sm"
+                role="tab"
+                aria-selected="false"
+                data-board-tab="specs"
+              >
+                worker specs
+              </button>
+            </div>
+          </div>
+
+          <section
+            id="board-backlog"
+            class="flex flex-col gap-4"
+            aria-label="Team backlog"
+            data-board-panel="backlog"
+          >
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-xs text-base-content/60">ideas, apis, and design work — ranked by vote score</p>
+              <span
+                id="backlog-count"
+                class="badge badge-outline border-accent/30 bg-base-200/80 text-base-content"
+                >…</span>
             </div>
 
+            <form id="jobs-form" class="card bg-base-100/60 border border-base-content/10">
+              <div class="card-body gap-3 p-4">
+                <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-base-content/70">
+                  add item
+                </p>
+                <label class="form-control w-full">
+                  <span class="label py-0">
+                    <span class="label-text text-base-content/80">title</span>
+                  </span>
+                  <input
+                    id="jobs-title"
+                    type="text"
+                    name="title"
+                    required
+                    autocomplete="off"
+                    class="input input-bordered w-full bg-base-200/80"
+                  />
+                </label>
+                <label class="form-control w-full">
+                  <span class="label py-0">
+                    <span class="label-text text-base-content/80">summary</span>
+                  </span>
+                  <input
+                    id="jobs-summary"
+                    type="text"
+                    name="summary"
+                    autocomplete="off"
+                    class="input input-bordered w-full bg-base-200/80"
+                  />
+                </label>
+                <label class="form-control w-full">
+                  <span class="label py-0">
+                    <span class="label-text text-base-content/80">kind</span>
+                  </span>
+                  <select id="jobs-kind" name="kind" class="select select-bordered w-full bg-base-200/80">
+                    <option value="function">function</option>
+                    <option value="api">api</option>
+                    <option value="design">design</option>
+                  </select>
+                </label>
+                <label class="form-control w-full">
+                  <span class="label py-0">
+                    <span class="label-text text-base-content/80">details</span>
+                  </span>
+                  <textarea
+                    id="jobs-body"
+                    name="body"
+                    rows="4"
+                    class="textarea textarea-bordered w-full bg-base-200/80"
+                  ></textarea>
+                </label>
+                <div class="flex justify-end">
+                  <button id="jobs-submit" type="submit" class="btn btn-primary btn-sm">save</button>
+                </div>
+                <div id="jobs-form-error" class="alert alert-error hidden text-sm" role="alert"></div>
+                <div id="jobs-form-info" class="alert alert-info hidden text-sm" role="status"></div>
+              </div>
+            </form>
+
+            <div id="backlog-list-wrap">
+              <ul
+                id="backlog-list"
+                class="list-none divide-y divide-base-content/5 overflow-hidden rounded-box bg-base-200/80 ring-1 ring-base-content/5 md:bg-base-200/60"
+                role="list"
+                aria-label="Backlog items"
+                hidden
+              ></ul>
+              <div
+                id="backlog-list-loading"
+                class="flex flex-col items-center justify-center gap-3 py-12"
+                aria-live="polite"
+              >
+                <span class="loading loading-spinner loading-lg text-primary"></span>
+                <p class="text-base-content/60 text-sm">Loading backlog…</p>
+              </div>
+              <div id="backlog-list-error" class="alert alert-error hidden text-sm" role="alert"></div>
+            </div>
+          </section>
+
+          <section
+            id="board-specs"
+            class="hidden flex-col gap-4"
+            aria-label="Worker specs"
+            data-board-panel="specs"
+          >
+            <div class="flex justify-end">
+              <span
+                id="job-count"
+                class="badge badge-outline border-primary/30 bg-base-200/80 text-base-content"
+                >…</span>
+            </div>
             <div id="job-list-wrap">
               <ul
                 id="job-list"
@@ -94,6 +215,76 @@
       </div>
     </main>
 
+    <template id="backlog-row-template">
+      <li
+        class="job-stack-row job-row group cursor-pointer list-none border-l-2 border-transparent px-4 py-4 outline-none transition-colors hover:bg-base-100/40 focus-visible:bg-base-100/40 focus-visible:ring-2 focus-visible:ring-primary/40 aria-selected:bg-primary/[0.12] aria-selected:border-primary"
+        role="button"
+        tabindex="0"
+        aria-selected="false"
+        data-backlog-row
+        data-claim-state="available"
+      >
+        <div class="flex min-w-0 items-start gap-3">
+          <div class="flex min-w-0 flex-1 flex-col gap-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <p
+                class="text-sm font-semibold uppercase leading-snug tracking-wide text-base-content"
+                data-title
+              ></p>
+              <span class="badge badge-sm badge-outline border-accent/40 text-accent" data-kind></span>
+            </div>
+            <p class="line-clamp-2 text-sm leading-snug text-base-content/65" data-summary></p>
+            <p class="font-mono text-xs text-base-content/50 empty:hidden" data-repo hidden></p>
+            <p class="font-mono text-xs text-base-content/50 empty:hidden" data-branch hidden></p>
+            <div class="flex flex-wrap items-center gap-2">
+              <span
+                class="badge badge-sm badge-outline border-base-content/20 text-base-content/70"
+                data-claim-chip
+                >available</span
+              >
+              <span
+                class="badge badge-sm badge-outline border-base-content/20 text-base-content/60 hidden"
+                data-claim-others
+                hidden
+              ></span>
+            </div>
+            <button
+              type="button"
+              class="btn btn-ghost btn-xs hidden w-fit px-0 text-base-content/70 normal-case hover:text-accent"
+              data-action-spawn-worker
+              hidden
+            >
+              start another worker
+            </button>
+          </div>
+          <div class="job-stack-vote shrink-0" aria-label="votes">
+            <button
+              type="button"
+              class="btn btn-ghost btn-xs btn-square min-h-0 h-7 w-7 text-base-content/50 hover:text-base-content"
+              aria-label="vote down"
+              data-vote-down
+            >
+              <span aria-hidden="true">−</span>
+            </button>
+            <span
+              class="font-mono text-sm tabular-nums leading-none text-base-content/80"
+              data-score
+              aria-live="polite"
+              >0</span
+            >
+            <button
+              type="button"
+              class="btn btn-ghost btn-xs btn-square min-h-0 h-7 w-7 text-base-content/50 hover:text-accent"
+              aria-label="vote up"
+              data-vote-up
+            >
+              <span aria-hidden="true">+</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </template>
+
     <template id="job-row-template">
       <li
         class="job-row group cursor-pointer list-none px-4 py-4 outline-none transition-colors hover:bg-base-100/40 focus-visible:bg-base-100/40 focus-visible:ring-2 focus-visible:ring-primary/40 aria-selected:bg-primary/[0.12] aria-selected:border-l-2 aria-selected:border-primary"
@@ -114,17 +305,31 @@
 
     <script type="module">
       import { fleetApiPath } from './assets/fleet-api.js'
+      import { paintBacklogList } from './assets/backlog-board.mjs'
 
       const shell = document.getElementById('job-shell')
+      const panel = document.getElementById('job-detail-panel')
+      const detailTitle = document.getElementById('job-detail-title')
+      const detailProse = document.getElementById('job-detail-prose')
+      const closeBtn = document.getElementById('job-detail-close')
+
+      const boardTabs = document.querySelectorAll('[data-board-tab]')
+      const boardPanels = document.querySelectorAll('[data-board-panel]')
+
+      const backlogListEl = document.getElementById('backlog-list')
+      const backlogCountEl = document.getElementById('backlog-count')
+      const backlogLoadingEl = document.getElementById('backlog-list-loading')
+      const backlogErrorEl = document.getElementById('backlog-list-error')
+      const backlogTemplate = document.getElementById('backlog-row-template')
+      const backlogForm = document.getElementById('jobs-form')
+      const backlogFormError = document.getElementById('jobs-form-error')
+      const backlogFormSuccess = document.getElementById('jobs-form-info')
+
       const listEl = document.getElementById('job-list')
       const countEl = document.getElementById('job-count')
       const loadingEl = document.getElementById('job-list-loading')
       const errorEl = document.getElementById('job-list-error')
       const template = document.getElementById('job-row-template')
-      const panel = document.getElementById('job-detail-panel')
-      const detailTitle = document.getElementById('job-detail-title')
-      const detailProse = document.getElementById('job-detail-prose')
-      const closeBtn = document.getElementById('job-detail-close')
 
       /** @type {Record<string, string> | null} */
       let workerPlatformContract = null
@@ -132,7 +337,38 @@
       /** @type {HTMLElement | null} */
       let selectedRow = null
 
-      function showError(message) {
+      /** @type {'backlog' | 'specs' | null} */
+      let detailMode = null
+
+      function setBoardTab(tab) {
+        shell.dataset.board = tab
+        boardTabs.forEach((btn) => {
+          const on = btn.getAttribute('data-board-tab') === tab
+          btn.classList.toggle('tab-active', on)
+          btn.setAttribute('aria-selected', on ? 'true' : 'false')
+        })
+        boardPanels.forEach((panelEl) => {
+          const show = panelEl.getAttribute('data-board-panel') === tab
+          panelEl.classList.toggle('hidden', !show)
+          panelEl.classList.toggle('flex', show)
+        })
+        clearSelection()
+      }
+
+      boardTabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tab = btn.getAttribute('data-board-tab')
+          if (tab === 'backlog' || tab === 'specs') setBoardTab(tab)
+        })
+      })
+
+      function showBacklogError(message) {
+        backlogLoadingEl.classList.add('hidden')
+        backlogErrorEl.textContent = message
+        backlogErrorEl.classList.remove('hidden')
+      }
+
+      function showSpecsError(message) {
         loadingEl.classList.add('hidden')
         errorEl.textContent = message
         errorEl.classList.remove('hidden')
@@ -147,10 +383,6 @@
         ciNote: 'Where tests run (TBD)',
       }
 
-      /**
-       * @param {HTMLElement} el
-       * @param {string} text
-       */
       function appendInlineWithBold(el, text) {
         const parts = text.split(/\*\*(.+?)\*\*/g)
         for (let i = 0; i < parts.length; i++) {
@@ -165,20 +397,12 @@
         }
       }
 
-      /**
-       * @param {HTMLElement} parent
-       * @param {string} text
-       */
       function appendFormattedParagraph(parent, text) {
         const p = document.createElement('p')
         appendInlineWithBold(p, text)
         parent.appendChild(p)
       }
 
-      /**
-       * @param {HTMLElement} wrap
-       * @param {string} text
-       */
       function fillParagraphsFromDetail(wrap, text) {
         const body = (text ?? '').trim()
         if (!body) return
@@ -188,20 +412,8 @@
         }
       }
 
-      /**
-       * @param {HTMLElement} container
-       * @param {{
-       *   title: string
-       *   summary: string
-       *   detail?: string
-       *   workerPurpose?: string
-       *   acceptanceTests?: { id: string; name: string; description: string }[]
-       * }} job
-       * @param {Record<string, string> | null} contract
-       */
       function renderJobDetail(container, job, contract) {
         container.replaceChildren()
-
         const h3 = (label) => {
           const el = document.createElement('h3')
           el.className =
@@ -209,10 +421,8 @@
           el.textContent = label
           return el
         }
-
         container.appendChild(h3('Worker purpose'))
         appendFormattedParagraph(container, job.workerPurpose || job.summary)
-
         if (contract && typeof contract === 'object') {
           container.appendChild(h3('Platform contract (every Worker)'))
           const ul = document.createElement('ul')
@@ -231,10 +441,8 @@
           }
           container.appendChild(ul)
         }
-
         container.appendChild(h3('Description'))
         fillParagraphsFromDetail(container, job.detail || job.summary)
-
         const tests = job.acceptanceTests
         if (Array.isArray(tests) && tests.length > 0) {
           container.appendChild(h3('Acceptance tests (must pass before deploy)'))
@@ -264,12 +472,28 @@
         }
       }
 
+      /** @param {{ title: string; summary: string; body?: string; kind: string; voteScore?: number; id: string }} item */
+      function renderBacklogDetail(container, item) {
+        container.replaceChildren()
+        const meta = document.createElement('p')
+        meta.className = 'text-xs text-base-content/60'
+        meta.textContent = `${item.kind} · score ${item.voteScore ?? 0} · id ${item.id}`
+        container.appendChild(meta)
+        const h3 = document.createElement('h3')
+        h3.className =
+          'mt-4 border-b border-accent/20 pb-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent/90'
+        h3.textContent = 'Details'
+        container.appendChild(h3)
+        fillParagraphsFromDetail(container, item.body || item.summary)
+      }
+
       function clearSelection() {
         const prev = selectedRow
         if (selectedRow) {
           selectedRow.setAttribute('aria-selected', 'false')
           selectedRow = null
         }
+        detailMode = null
         panel.classList.add('hidden')
         shell.dataset.detailOpen = 'false'
         detailTitle.textContent = ''
@@ -277,16 +501,15 @@
         prev?.focus()
       }
 
-      /** @param {object} job @param {HTMLElement} li */
-      function openJobDetail(job, li) {
+      function openDetail(title, renderFn, li, mode) {
         if (selectedRow && selectedRow !== li) {
           selectedRow.setAttribute('aria-selected', 'false')
         }
         selectedRow = li
+        detailMode = mode
         li.setAttribute('aria-selected', 'true')
-
-        detailTitle.textContent = job.title
-        renderJobDetail(detailProse, job, workerPlatformContract)
+        detailTitle.textContent = title
+        renderFn(detailProse)
         panel.classList.remove('hidden')
         shell.dataset.detailOpen = 'true'
         detailTitle.focus({ preventScroll: false })
@@ -302,7 +525,8 @@
       })
 
       function wireRow(li, job) {
-        const activate = () => openJobDetail(job, li)
+        const activate = () =>
+          openDetail(job.title, (el) => renderJobDetail(el, job, workerPlatformContract), li, 'specs')
         li.addEventListener('click', activate)
         li.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -312,21 +536,94 @@
         })
       }
 
-      try {
+      /** @param {HTMLElement} li @param {{ id: string; title: string; summary: string; body?: string; kind: string; voteScore?: number }} item */
+      function wireBacklogRow(li, item) {
+        const activate = () =>
+          openDetail(item.title, (el) => renderBacklogDetail(el, item), li, 'backlog')
+        li.addEventListener('click', activate)
+        li.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            activate()
+          }
+        })
+      }
+
+      /** @param {unknown[]} items */
+      function paintBacklogList(items) {
+        backlogCountEl.textContent = `${items.length} items`
+        backlogListEl.innerHTML = ''
+        for (const item of items) {
+          const node = backlogTemplate.content.cloneNode(true)
+          const li = node.querySelector('[data-backlog-row]')
+          li.dataset.backlogId = item.id
+          node.querySelector('[data-title]').textContent = item.title
+          node.querySelector('[data-summary]').textContent = item.summary
+          node.querySelector('[data-kind]').textContent = item.kind
+          node.querySelector('[data-score]').textContent = String(item.voteScore ?? 0)
+          wireBacklogRow(li, item)
+          backlogListEl.appendChild(li)
+        }
+        backlogLoadingEl.classList.add('hidden')
+        backlogListEl.hidden = false
+      }
+
+      async function loadBacklog() {
+        const res = await fetch(fleetApiPath('api/backlog'))
+        if (!res.ok) throw new Error(`Could not load backlog (${res.status})`)
+        const data = await res.json()
+        if (!Array.isArray(data.items)) throw new Error('Invalid backlog response')
+        paintBacklogList(data.items)
+      }
+
+      backlogForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        backlogFormError.classList.add('hidden')
+        backlogFormSuccess.classList.add('hidden')
+        const fd = new FormData(backlogForm)
+        const title = String(fd.get('title') ?? '').trim()
+        const summary = String(fd.get('summary') ?? '').trim()
+        const body = String(fd.get('body') ?? '').trim()
+        const kind = String(fd.get('kind') ?? 'function')
+        if (!title) return
+        const res = await fetch(fleetApiPath('api/backlog'), {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            title,
+            summary: summary || title,
+            body,
+            kind,
+          }),
+        })
+        const data = await res.json().catch(() => ({}))
+        if (!res.ok) {
+          backlogFormError.textContent =
+            typeof data.error === 'string' ? data.error : `Save failed (${res.status})`
+          backlogFormError.classList.remove('hidden')
+          return
+        }
+        backlogForm.reset()
+        backlogFormSuccess.textContent = 'saved.'
+        backlogFormSuccess.classList.remove('hidden')
+        backlogAnimateNext = true
+        await loadBacklog()
+      })
+
+      let specsLoaded = false
+      async function loadSpecs() {
+        if (specsLoaded) return
         const res = await fetch(fleetApiPath('api/jobs'))
         if (!res.ok) throw new Error(`Could not load jobs (${res.status})`)
         const data = await res.json()
         const jobs = data.jobs
         if (!Array.isArray(jobs)) throw new Error('Invalid response')
-
         workerPlatformContract =
           data.workerPlatformContract && typeof data.workerPlatformContract === 'object'
             ? data.workerPlatformContract
             : null
-
         countEl.textContent = `${jobs.length} jobs`
         listEl.innerHTML = ''
-
         for (const job of jobs) {
           const node = template.content.cloneNode(true)
           const li = node.querySelector('[data-job-row]')
@@ -336,11 +633,25 @@
           wireRow(li, job)
           listEl.appendChild(li)
         }
-
         loadingEl.classList.add('hidden')
         listEl.hidden = false
+        specsLoaded = true
+      }
+
+      boardTabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (btn.getAttribute('data-board-tab') === 'specs') {
+            loadSpecs().catch((err) => {
+              showSpecsError(err instanceof Error ? err.message : 'Something went wrong')
+            })
+          }
+        })
+      })
+
+      try {
+        await loadBacklog()
       } catch (e) {
-        showError(e instanceof Error ? e.message : 'Something went wrong')
+        showBacklogError(e instanceof Error ? e.message : 'Something went wrong')
       }
     </script>
   </body>
